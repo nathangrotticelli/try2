@@ -1,0 +1,61 @@
+
+
+{% extends "layout.html" %}
+{% block content %}
+  <h1> All of Your Events in One Place</h1>
+  <!-- <h2> {{title}}</h2> -->
+
+  <a href="/personalEventDisplay">Your custom {{schoolName}}event display.</a>
+
+  <h3>Events from My Friends:</h3>
+  <ol>
+  {% for friend in friends %}
+  	<li>{{loop.key}}</li><br>
+  	<ul>
+  		{% for info in friend %}
+  			{% if (loop.key == "cover") %}
+  				<img src="{{info}}" height='-100px' width='-100px'>
+  				{% else %}
+  				<ul><li>{{info}}
+  					</li><br>
+  				</ul>
+  				{% endif %}
+  		{% endfor%}
+  	</ul>
+  {% endfor %}
+	</ol>
+
+
+
+<!--   <ol>
+  {% for friend in friends %}
+  	<li>{{loop.key}}</li><br>
+  		{% for info in friend %}
+  			{% if (loop.key == "cover") %}
+  				<img src="{{info}}" height='-100px' width='-100px'>
+  				{% else %}
+  				<ul><li>{{info}}
+  					</li><br>
+  				</ul>
+  				{% endif %}
+  		{% endfor%}
+  {% endfor %}
+	</ol>
+ -->
+
+
+
+<!-- <h3>My Events:</h3>
+<ol>
+   {% for event in myEvents %}
+  	<li>{{loop.key}}</li><br>
+  	<ul>
+  		{% for info in event %}
+  			<li>{{info}}</li><br>
+  		{% endfor%}
+  	</ul>
+  {% endfor %} -->
+<!--  <li>	<img src= "{{event}}" alt="If you can see this, then there is no cover photo for this event." height="-50px" width="85%"></li><br> -->
+  </ol>
+
+{% endblock %}

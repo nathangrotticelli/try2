@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1> Sorry, we aren't sure that you are a {{schoolName}} student. Please enter your school email to verify, or try to login again below.</h1>
+<!--   <h2> {{title}}</h2> -->
+<form action="/loginTry2" method='post'>
+  Email: <input type="text" name="name"><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+  <a href="/">Try again?</a>
+
+
+{% endblock %}

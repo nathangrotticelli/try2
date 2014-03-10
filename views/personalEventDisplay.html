@@ -1,0 +1,38 @@
+
+
+{% extends "layout.html" %}
+{% block content %}
+  <h1> Welcome to the {{school}} U Nightlife App</h1>
+  <h2> {{title}}</h2>
+
+  <a href="/allEvents">View All of Your/Your Friends Events Past and Present!</a>
+
+  <h3>Your Events Display:</h3>
+  <ol>
+  {% for friend in friends %}
+  	<li>{{loop.key}}</li><br>
+  		{% for info in friend %}
+  			{% if (loop.key == "cover") %}
+  				<img src="{{info}}" height='-100px' width='-100px'>
+  				{% else %}
+  				<ul><li>{{info}}
+  					</li><br>
+  				</ul>
+  				{% endif %}
+  		{% endfor%}
+  {% endfor %}
+	</ol>
+<!-- <h3>My Events:</h3>
+<ol>
+   {% for event in myEvents %}
+  	<li>{{loop.key}}</li><br>
+  	<ul>
+  		{% for info in event %}
+  			<li>{{info}}</li><br>
+  		{% endfor%}
+  	</ul>
+  {% endfor %}
+<!--  <li>	<img src= "{{event}}" alt="If you can see this, then there is no cover photo for this event." height="-50px" width="85%"></li><br> -->
+<!--   </ol> --> -->
+
+{% endblock %}

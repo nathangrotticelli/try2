@@ -1,0 +1,34 @@
+
+
+{% extends "layout.html" %}
+{% block content %}
+  <h1> Welcome to the Binghamton U Nightlife App</h1>
+  <h2> {{title}}</h2>
+
+  <a href="/allEvents">To All Your Events!</a>
+
+  <h3>Events from My Friends:</h3>
+  <ol>
+  {% for friend in friends %}
+  	<li>{{loop.key}}</li><br>
+  	<ul>
+  		{% for info in friend %}
+  			<li>{{info}}</li><br>
+  		{% endfor%}
+  	</ul>
+  {% endfor %}
+	</ol>
+<!-- <h3>My Events:</h3>
+<ol>
+   {% for event in myEvents %}
+  	<li>{{loop.key}}</li><br>
+  	<ul>
+  		{% for info in event %}
+  			<li>{{info}}</li><br>
+  		{% endfor%}
+  	</ul>
+  {% endfor %}
+<!--  <li>	<img src= "{{event}}" alt="If you can see this, then there is no cover photo for this event." height="-50px" width="85%"></li><br> -->
+  </ol> -->
+
+{% endblock %}
