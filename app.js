@@ -54,29 +54,50 @@ app.get('/denied', function(req, res){
 var regExNums = /[0-9]/g;
 
 app.post('/loginTry2', function(req, res){
- var loginTryEmail = req.body.name;
- loginTryEmail = loginTryEmail.toLowerCase();
- // console.log(loginTryEmail);
- // loginTryEmail = "N@BINGHAMTON.EDU"
- if (loginTryEmail.indexOf(emailEnding)>-1&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>18&&regExNums.test(loginTryEmail)&&loginTryEmail.indexOf(' ')<0){
- 	schoolFriendCount=301;
- 	res.redirect('/personalEventDisplay');
- }
- else{
- 	res.redirect('/denied');
- }
+	 var loginTryEmail = req.body.name;
+	 // console.log(loginTryEmail);
+	 loginTryEmail = loginTryEmail.toLowerCase();
+	 // console.log(loginTryEmail);
+	 // loginTryEmail = "N@BINGHAMTON.EDU"
+	 // console.log(schoolItem['emailLength']);
+	 // console.log(schoolItem.schoolFriendMin);
+	 // console.log(schoolItem.emailEnding);
+	 // console.log(loginTryEmail.length);
+	 schoolItem.emailLength = 10;
+	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'){
+			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
+			 		schoolFriendCount=301;
+			 		res.redirect('/personalEventDisplay');
+			 	}
+			 	else{
+			 		res.redirect('/denied');
+			 	}
+	 }
+	 // &&loginTryEmail.indexOf(' ')<0
+	 //&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)
+
+	 else {
+		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
+			 	schoolFriendCount=301;
+			 	res.redirect('/personalEventDisplay');
+			  }
+		 	else{
+		 		res.redirect('/denied');
+		 	}
+	 }
 
 });
 
 app.get('/Login2', function(req, res){
-  res.render("Login2");
+  res.render("Login2",{schoolName: schoolItem.schoolName});
 });
 
 app.get('/location/:locationID', function(req, res){
 	var locationID = req.params.locationID
 	School.findOne({_id: locationID}, function(err, school){
 		schoolItem = school;
-		// console.log(schoolItem);
+		// console.log(locationID);
+		console.log(schoolItem.inspect());
 		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
 		// ,{schoolName: schoolItem.schoolName}
@@ -101,12 +122,13 @@ app.get('/location/:locationID', function(req, res){
 // });
 
 app.get('/personalEventDisplay', function(req, res) {
+		// console.log(schoolFriendCount);
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
 			// console.log(yourEvents);
 			}
 		else{
-			res.render('Login2');}
+			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
 
 
@@ -114,7 +136,7 @@ app.get('/allEvents', function(req, res) {
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 				res.render('allEvents', {friends: listOfAllEvents})}
 		else{
-			res.render('Login2');}
+			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
 
 // app.get('/UserHasLoggedIn', function(req, res) {
@@ -188,10 +210,10 @@ app.get('/auth/facebook', function(req, res) {
 
 
 
+//cover not working for some reason
 
-
-		graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-
+		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 
 //friend checker
    		result.friends.data.forEach(function(friend){
@@ -243,6 +265,7 @@ app.get('/auth/facebook', function(req, res) {
 	 	 			// console.log(startDay);
 
 	 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+	 	 				// console.log(singleEvent.picture);
 	 	 				if (singleEvent.cover){
 							listOfAllEvents[singleEvent.name] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
 							// console.log(singleEvent.cover.source);
@@ -309,7 +332,7 @@ app.get('/auth/facebook', function(req, res) {
 							yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
 						}
 						if (listOfAllEvents[allEventsInAnArray[i]].location){
-							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolName)>-1){
+							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolTown)>-1){
 								yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
 							}
 						}
