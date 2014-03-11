@@ -96,11 +96,13 @@ app.get('/Login2', function(req, res){
 });
 
 app.get('/location/:locationID', function(req, res){
-	var locationID = req.params.locationID
-	School.findOne({_id: locationID}, function(err, school){
+	var locationID = req.params.locationID.toString();
+
+	// console.log(locationID);
+	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
 		// console.log(locationID);
-		console.log(schoolItem);
+		// console.log(schoolItem);
 		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
 		// ,{schoolName: schoolItem.schoolName}
