@@ -15,6 +15,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
+var User = require('./models')["User"];
 
 // {
 //     client_id:      '1474435556106076'
@@ -99,7 +100,7 @@ app.get('/location/:locationID', function(req, res){
 	School.findOne({_id: locationID}, function(err, school){
 		schoolItem = school;
 		// console.log(locationID);
-
+		console.log(schoolItem);
 		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
 		// ,{schoolName: schoolItem.schoolName}
@@ -123,9 +124,34 @@ app.get('/location/:locationID', function(req, res){
 //   res.render("Login");
 // });
 
+
+// //userProfId = result.id;
+// 			userGender = result.gender;
+// 			userEmail = result.email.toLowerCase();
+// 			schoolFriendCount = 0;
+// 			firstNameLetter = result.name[0].toLowerCase();
+
+
+
 app.get('/personalEventDisplay', function(req, res) {
 		// console.log(schoolFriendCount);
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
+			if(!user){
+					var user = new User({ firstNameLetter: firstNameLetter,
+					  schoolFriendCount: schoolFriendCount,
+					  userProfId: userProfId,
+					  userGender: userGender,
+					  userEmail: userEmail,
+					  personalEvents: {},
+					  allEvents: {},
+					  school: schoolItem.schoolName});
+
+ 		 	}
+ 		//  	user.save(function (err, fluffy) {
+			//   if (err) return console.error(err);
+			//   // console.log(user.userEmail);
+			// });
+ 		 	// console.log(user);
 			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
 			// console.log(yourEvents);
 			}

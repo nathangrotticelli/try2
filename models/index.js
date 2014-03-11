@@ -47,5 +47,6 @@ var School = mongoose.model('School', schoolSchema);
 // exports.Binghamton = mongoose.model('Binghamton', binghamtonSchema);
 
 module.exports = {
-  School: School
+  School: School,
+  User: User
 }
