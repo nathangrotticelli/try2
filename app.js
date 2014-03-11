@@ -102,7 +102,7 @@ app.get('/location/:locationID', function(req, res){
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
 		// console.log(locationID);
-		// console.log(schoolItem);
+		console.log(schoolItem);
 		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
 		// ,{schoolName: schoolItem.schoolName}
