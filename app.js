@@ -187,7 +187,8 @@ app.get('/personalEventDisplay', function(req, res) {
 
 app.get('/allEvents', function(req, res) {
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-				res.render('allEvents', {friends: user.allEvents})}
+			// console.log()
+				res.render('allEvents', {friends: listOfAllEvents})}
 		else{
 			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
