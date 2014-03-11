@@ -137,6 +137,7 @@ app.get('/location/:locationID', function(req, res){
 
 app.get('/personalEventDisplay', function(req, res) {
 		// console.log(schoolFriendCount);
+		console.log('made it to ped');
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 			if(!user){
 					var user = new User({ firstNameLetter: firstNameLetter,
@@ -153,7 +154,7 @@ app.get('/personalEventDisplay', function(req, res) {
 			//   if (err) return console.error(err);
 			//   // console.log(user.userEmail);
 			// });
- 		 	// console.log(user);
+ 		 	console.log('here');
 			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
 			// console.log(yourEvents);
 			}
@@ -184,6 +185,8 @@ app.get('/auth/facebook', function(req, res) {
 
   // we don't have a code yet
   // so we'll redirect to the oauth dialog
+
+  console.log('now im here');
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
         "client_id":     conf.client_id
@@ -216,6 +219,7 @@ app.get('/auth/facebook', function(req, res) {
      // console.log(graph.get("/me?fields=id"));
      // userProfId = "";
      // userGender = "";
+     console.log('ive made it here');
      graph.get("/me",function(err,result) {
 			userProfId = result.id;
 			userGender = result.gender;
@@ -397,7 +401,7 @@ app.get('/auth/facebook', function(req, res) {
 
 // , myEvents: myEventInfo}, myEvents: myEventInfo} ## for use my personal events data
 
-
+console.log('all da way here');
 			res.redirect('/personalEventDisplay');
 	 	 // res.render('index', {friends: eachFriend, myEvents: myEvents});
 		});//end of get auth
