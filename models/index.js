@@ -25,7 +25,9 @@ var schoolSchema = new Schema({
   schoolLongMax: String,
   schoolLongMin: String,
   schoolLatMax: String,
-  schoolLatMin: String
+  schoolLatMin: String,
+  schoolTown: String,
+  emailLength: Number
 });
 
 // var binghamtonSchema = new schoolSchema({

@@ -59,11 +59,13 @@ app.post('/loginTry2', function(req, res){
 	 loginTryEmail = loginTryEmail.toLowerCase();
 	 // console.log(loginTryEmail);
 	 // loginTryEmail = "N@BINGHAMTON.EDU"
-	 // console.log(schoolItem['emailLength']);
+	 // console.log(schoolItem.inspect());
+	 // console.log(schoolItem.emailLength);
 	 // console.log(schoolItem.schoolFriendMin);
 	 // console.log(schoolItem.emailEnding);
 	 // console.log(loginTryEmail.length);
-	 schoolItem.emailLength = 10;
+
+	 // schoolItem.emailLength = 10;
 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
 			 		schoolFriendCount=301;
@@ -208,7 +210,9 @@ app.get('/auth/facebook', function(req, res) {
 
 // events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")),
 
-
+// graph.get("1424263346?fields=friends.fields(events.fields(picture))", function(err,res1){
+// 	console.log(res1.friends.data[0].picture.data.url);
+// });
 
 //cover not working for some reason
 
@@ -256,6 +260,10 @@ app.get('/auth/facebook', function(req, res) {
 
 
 	 	 		setEventsList = friend.events.data.map(function(singleEvent){
+
+	 	 // 			setEventsPics = {
+	 	 // 				listOfAllEvents[singleEvent.name] = {cover:
+				// }
 
 	 	 				// 	listOfAllEvents[singleEvent.name][location]='"Location: "+singleEvent.location'
 	 	 				// }
