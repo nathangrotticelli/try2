@@ -12,9 +12,10 @@ var userSchema = new Schema({
   schoolFriendCount: String,
   userProfId: String,
   userGender: String,
+  userName: String,
   userEmail: String,
-  personalEvents: Object,
-  allEvents: Object,
+  personalEvents: {},
+  allEvents: {},
   school: String
 });
 
@@ -27,8 +28,13 @@ var schoolSchema = new Schema({
   schoolLatMax: String,
   schoolLatMin: String,
   schoolTown: String,
+  schoolEvents: {},
   emailLength: Number
 });
+
+// var eventsSchema = new Schema ({
+
+// })
 
 // var binghamtonSchema = new schoolSchema({
 // 	schoolLongMax:'-75.4',

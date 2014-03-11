@@ -101,8 +101,9 @@ app.get('/location/:locationID', function(req, res){
 	// console.log(locationID);
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
+
 		// console.log(locationID);
-		console.log(schoolItem);
+		// console.log(schoolItem.schoolEvents);
 		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
 		// ,{schoolName: schoolItem.schoolName}
@@ -134,30 +135,51 @@ app.get('/location/:locationID', function(req, res){
 // 			firstNameLetter = result.name[0].toLowerCase();
 
 
+				// var allEventKeysInAnArray = Object.keys(listOfAllEvents);
+				// var yourEventKeysInAnArray = Object.keys(yourEvents).forEach(function(eventKey){eventKey.replace(".","_");});
+
+				// console.log(yourEventKeysInAnArray);
+
+				// cleanAllEvents = allEventKeysInAnArray.forEach(function(eventKey){
+				// 	eventKey.replace(".","_");
+				// });
+				// cleanYourEvents = yourEventKeysInAnArray.forEach(function(eventKey){
+				// 	eventKey.replace(".","_");
+				// });
+								// for(var index in yourEvents) { var attr = object[index];
+				// 	console.log(attr);
+				// }
+				// friendlyEvents = yourEvents.forEach(function(eventKey){
+				// 	console.log(eventKey);
+				// })
+
 
 app.get('/personalEventDisplay', function(req, res) {
 		// console.log(schoolFriendCount);
-		console.log('made it to ped');
+		// console.log('made it to ped');
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-			if(!user){
-					var user = new User({ firstNameLetter: firstNameLetter,
+		 	if(!user){
+					var user = new User({
+
+						firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
 					  userProfId: userProfId,
+					  userName: userName,
 					  userGender: userGender,
 					  userEmail: userEmail,
-					  personalEvents: {},
-					  allEvents: {},
+					  personalEvents: yourEvents,
+					  allEvents: listOfAllEvents,
 					  school: schoolItem.schoolName});
+					// console.log(user.yourEvents);
+					user.save(function (err, person) {
+			  		if (err){ return console.error(err);}
+					});
+				}
 
- 		 	}
- 		//  	user.save(function (err, fluffy) {
-			//   if (err) return console.error(err);
-			//   // console.log(user.userEmail);
-			// });
- 		 	console.log('here');
-			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
+ 		 	// console.log(user);
+			res.render('personalEventDisplay', {friends: user.personalEvents, school: schoolItem.schoolName});
 			// console.log(yourEvents);
-			}
+		}
 		else{
 			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
@@ -165,7 +187,7 @@ app.get('/personalEventDisplay', function(req, res) {
 
 app.get('/allEvents', function(req, res) {
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-				res.render('allEvents', {friends: listOfAllEvents})}
+				res.render('allEvents', {friends: user.allEvents})}
 		else{
 			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
@@ -186,7 +208,7 @@ app.get('/auth/facebook', function(req, res) {
   // we don't have a code yet
   // so we'll redirect to the oauth dialog
 
-  console.log('now im here');
+  // console.log('now im here');
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
         "client_id":     conf.client_id
@@ -219,9 +241,10 @@ app.get('/auth/facebook', function(req, res) {
      // console.log(graph.get("/me?fields=id"));
      // userProfId = "";
      // userGender = "";
-     console.log('ive made it here');
+     // console.log('ive made it here');
      graph.get("/me",function(err,result) {
 			userProfId = result.id;
+			userName = result.name;
 			userGender = result.gender;
 			userEmail = result.email.toLowerCase();
 			schoolFriendCount = 0;
@@ -307,22 +330,22 @@ app.get('/auth/facebook', function(req, res) {
 	 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 	 	 				// console.log(singleEvent.picture);
 	 	 				if (singleEvent.cover){
-							listOfAllEvents[singleEvent.name] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
+							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
 							// console.log(singleEvent.cover.source);
 						}
 						else{
-							listOfAllEvents[singleEvent.name] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
+							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
 						}
 						// else{
 						// 	listOfAllEvents[singleEvent.name] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, description:"Event Description: " + singleEvent.description};}
 
 						if (singleEvent.location){
-	 	 					listOfAllEvents[singleEvent.name]['location']="Location: "+singleEvent.location;
+	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['location']="Location: "+singleEvent.location;
 	 	 					// console.log(singleEvent.name);
 	 	 				}
 	 	 				if (singleEvent.venue){
-	 	 					listOfAllEvents[singleEvent.name]['longitude']="Longitude: "+singleEvent.venue.longitude;
-	 	 					listOfAllEvents[singleEvent.name]['latitude']="Latitude: "+singleEvent.venue.latitude;
+	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['longitude']="Longitude: "+singleEvent.venue.longitude;
+	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['latitude']="Latitude: "+singleEvent.venue.latitude;
 
 	 	 					// console.log(singleEvent.name);
 	 	 				}
@@ -351,13 +374,23 @@ app.get('/auth/facebook', function(req, res) {
 				yourEvents = {};
 				var allEventsInAnArray = Object.keys(listOfAllEvents);
 
+
+				if (!schoolItem.schoolEvents){
+					schoolItem.schoolEvents = {};
+				}
+				else{
+					var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
+					for (i=0;i<schoolEventsInAnArray.length;i++){
+						yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+					}
+				}
+
 				for (i=0;i<allEventsInAnArray.length;i++){
 					// startMonth = listOfAllEvents[allEventsInAnArray[i]].begins.split('-')[1];
 					// startDay = listOfAllEvents[allEventsInAnArray[i]].begins.split('-')[2].split('T')[0];
 					// console.log(startDay);
 
 ////////////
-
 					if (listOfAllEvents[allEventsInAnArray[i]].imGoing||listOfAllEvents[allEventsInAnArray[i]].maybeGoing){
 						yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
 						// console.log(listOfAllEvents[allEventsInAnArray[i]]);
@@ -370,14 +403,20 @@ app.get('/auth/facebook', function(req, res) {
 						//this is the only specific to bing parts
 						if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){
 							yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+							schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
 						}
 						if (listOfAllEvents[allEventsInAnArray[i]].location){
 							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolTown)>-1){
 								yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+								schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
 							}
 						}
 					}
 				}
+			schoolItem.save(function (err, person) {
+			  if (err){ return console.error(err);}
+			  else{console.log(person);}
+			});
 				// console.log(bingEvents);
 
 // &&startMonth>=currentMonth&&startDay>=currentDay
@@ -401,7 +440,8 @@ app.get('/auth/facebook', function(req, res) {
 
 // , myEvents: myEventInfo}, myEvents: myEventInfo} ## for use my personal events data
 
-console.log('all da way here');
+// console.log('all da way here');
+		// console.log(listOfAllEvents);
 			res.redirect('/personalEventDisplay');
 	 	 // res.render('index', {friends: eachFriend, myEvents: myEvents});
 		});//end of get auth
@@ -430,3 +470,8 @@ console.log('all da way here');
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+
+
+

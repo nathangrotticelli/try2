@@ -22,7 +22,9 @@ console.log("Inserting data");
 				  schoolName: 'Binghamton',
 				  schoolTown: 'Binghamton',
 				  emailEnding: '@binghamton.edu',
-				  emailLength: 18 });
+				  emailLength: 18,
+				  schoolEvents: {} });
+
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -32,7 +34,8 @@ console.log("Inserting data");
 							});
 
 				var school = new School({
-				  schoolLongMax : "-76.8", schoolLongMin : "-77.3", schoolLatMax : "39.1", schoolLatMin : "38.4", schoolFriendMin : 60, schoolName : "George Washington University", schoolTown : "District of Columbia", emailEnding : "@gwu.edu", emailLength : 11 });
+				  schoolLongMax : "-76.8", schoolLongMin : "-77.3", schoolLatMax : "39.1", schoolLatMin : "38.4", schoolFriendMin : 60, schoolName : "George Washington University", schoolTown : "District of Columbia",schoolEvents: {}, emailEnding : "@gwu.edu", emailLength : 11 });
+
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
 							  else{
@@ -40,7 +43,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-74.8", schoolLongMin : "-75.4", schoolLatMax : "42.7", schoolLatMin : "42.1", schoolFriendMin : 60, schoolName : "Oneonta", schoolTown : "Oneonta", emailEnding : "@suny.oneonta.edu", emailLength : 20 });
+				var school = new School({schoolLongMax : "-74.8", schoolLongMin : "-75.4", schoolLatMax : "42.7", schoolLatMin : "42.1", schoolFriendMin : 60, schoolName : "Oneonta",schoolEvents: {}, schoolTown : "Oneonta", emailEnding : "@suny.oneonta.edu", emailLength : 20 });
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -49,7 +52,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-80.9", schoolLongMin : "-81.6", schoolLatMax : "28.9", schoolLatMin : "28.3", schoolFriendMin : 60, schoolName : "Central Florida", schoolTown : "Orlando", emailEnding : "@knights.ucf.edu", emailLength : 19});
+				var school = new School({schoolLongMax : "-80.9", schoolLongMin : "-81.6", schoolLatMax : "28.9", schoolLatMin : "28.3", schoolFriendMin : 60,schoolEvents: {}, schoolName : "Central Florida", schoolTown : "Orlando", emailEnding : "@knights.ucf.edu", emailLength : 19});
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -58,7 +61,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-84.22", schoolLongMin : "-84.64", schoolLatMax : "43", schoolLatMin : "42.55", schoolFriendMin : 60, schoolName : "Michigan State", schoolTown : "East Lansing", emailEnding : "@msu.edu", emailLength : 11 });
+				var school = new School({schoolLongMax : "-84.22", schoolLongMin : "-84.64", schoolLatMax : "43", schoolLatMin : "42.55", schoolFriendMin : 60,schoolEvents: {}, schoolName : "Michigan State", schoolTown : "East Lansing", emailEnding : "@msu.edu", emailLength : 11 });
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -67,7 +70,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-83.45", schoolLongMin : "-83.95", schoolLatMax : "42.5", schoolLatMin : "42", schoolFriendMin : 60, schoolName : "University of Michigan", schoolTown : "Ann Arbor", emailEnding : "@umich.edu", emailLength : 13});
+				var school = new School({schoolLongMax : "-83.45", schoolLongMin : "-83.95", schoolLatMax : "42.5", schoolLatMin : "42", schoolFriendMin : 60,schoolEvents: {}, schoolName : "University of Michigan", schoolTown : "Ann Arbor", emailEnding : "@umich.edu", emailLength : 13});
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -76,7 +79,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 60, schoolName : "Central Michigan", schoolTown : "Mt Pleasant", emailEnding : "@umich.edu", emailLength : 13});
+				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 60,schoolEvents: {}, schoolName : "Central Michigan", schoolTown : "Mt Pleasant", emailEnding : "@umich.edu", emailLength : 13});
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -85,7 +88,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-157.6", schoolLongMin : "-158", schoolLatMax : "21.49", schoolLatMin : "21.05", schoolFriendMin : 30, schoolName : "University of Hawaii", schoolTown : "Manoa", emailEnding : "@hawaii.edu", emailLength : 14 });
+				var school = new School({schoolLongMax : "-157.6", schoolLongMin : "-158", schoolLatMax : "21.49", schoolLatMin : "21.05", schoolFriendMin : 30,schoolEvents: {}, schoolName : "University of Hawaii", schoolTown : "Manoa", emailEnding : "@hawaii.edu", emailLength : 14 });
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
@@ -94,7 +97,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({ schoolLongMax : "-88", schoolLongMin : "-88.5", schoolLatMax : "40.5", schoolLatMin : "39.8", schoolFriendMin : 60, schoolName : "University of Illinois at Urbana-Champaign", schoolTown : "Champaign", emailEnding : "@illinois.edu", emailLength : 15 });
+				var school = new School({ schoolLongMax : "-88", schoolLongMin : "-88.5", schoolLatMax : "40.5", schoolLatMin : "39.8", schoolFriendMin : 60,schoolEvents: {}, schoolName : "University of Illinois at Urbana-Champaign", schoolTown : "Champaign", emailEnding : "@illinois.edu", emailLength : 15 });
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
 							  else{
