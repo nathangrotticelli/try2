@@ -12,7 +12,7 @@ School.remove({}, function(err) {
 
 console.log("Inserting data");
 
-// var schoolUpload = function(){
+// var schoolUpload = (function(){
 				var school = new School({
 				  schoolLongMax: '-75.4',
 				  schoolLongMin: '-76.1',
@@ -102,13 +102,13 @@ console.log("Inserting data");
 							  if (err){ return console.error(err);}
 							  else{
 							  	console.log('saved: UI');
-							  	process.exit();
+							  	setTimeout(process.exit,3000);
+
 							  	// School.findOne({schoolName: 'University of Illinois at Urbana-Champaign'},function(req,res){
 										// 	console.log(res)
 										// });
 							  }
 							});
-
 				// 	School.findOne({schoolName: 'Binghamton'},function(req,res){
 				// 	console.log(res)
 				// });
@@ -121,5 +121,7 @@ console.log("Inserting data");
 // });
 
 });
+// schoolUpload();
+// });
 
 

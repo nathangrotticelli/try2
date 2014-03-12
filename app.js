@@ -39,6 +39,105 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+var today = new Date();
+var currentDay = today.getDate();
+var currentMonth = today.getMonth()+1; //January is 0
+var currentYear = today.getFullYear();
+yourEvents = {};
+
+//populates your events and school events from your facebook events pulled 2
+	var popYoursAndSchoolEvents = function(result){
+						result.events.data.forEach(function(event){
+						// console.log(event);
+								startMonth = event.start_time.split('-')[1];
+				 	 			startDay = event.start_time.split('-')[2].split('T')[0];
+				 	 			startYear = event.start_time.split('-')[0];
+				 	 			// console.log(startDay);
+
+				 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+									if (event.venue.longitude){
+										longValue = event.venue.longitude;
+										latValue = event.venue.latitude;
+										// console.log(latValue);
+
+										if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){
+											yourEvents[event.name.replace(/\./g,"")] = event;
+											schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+										}
+										else{
+											yourEvents[event.name.replace(/\./g,"")] = event;
+										}
+									}
+									else if (event.location){
+										if (event.location.indexOf(schoolItem.schoolTown)>-1){
+												yourEvents[event.name.replace(/\./g,"")] = event;
+												schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+										}
+										else{
+												yourEvents[event.name.replace(/\./g,"")] = event;
+										}
+									}
+									else{
+										yourEvents[event.name.replace(/\./g,"")] = event;
+									}
+							}
+					});
+				console.log('School Events Populated');
+				}
+
+//checks friend education count
+var friendChecker = function(){
+
+			result.friends.data.forEach(function(friend){
+     		if (friend.education){
+     			friend.education.forEach(function(schoolObj){
+     				// console.log(schoolObj);
+     				if(schoolObj.school){
+     					// console.log(schoolObj.school.name);
+	     				if (schoolObj.school.name.indexOf('Binghamton')>-1){
+	     					// console.log("Bing friend found");
+	     					// console.log(friend.name);
+	     					schoolFriendCount++;
+	     				}
+	     			}
+     			});}
+     	});
+}
+     		// console.log(schoolFriendCount);
+
+//adds from school events to your events 1
+	var pullSchoolEventsFunc = function(){
+						// yourEvents = {};
+						if (!schoolItem.schoolEvents){
+							schoolItem.schoolEvents = {};
+						}
+						else{
+							// startMonth = singleEvent.start_time.split('-')[1];
+			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
+			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
+							var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
+							console.log(schoolItem.schoolEvents[schoolEventsInAnArray[1]]);
+							// console.log(schoolEventsInAnArray);
+							for (i=0;i<schoolEventsInAnArray.length;i++){
+								// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
+									//startMonth = event.start_time.split('-')[1];
+				 	 			// startDay = event.start_time.split('-')[2].split('T')[0];
+				 	 			// startYear = event.start_time.split('-')[0];
+				 	 			if(schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time){
+										var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[1];;
+										var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[2].split('T')[0];
+						 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[0];
+						 	 			// console.log(startDay);
+						 	 			// console.log(currentYear);
+										if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+											yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+										}
+							}
+						}
+					}
+			}
+
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -156,8 +255,12 @@ app.get('/location/:locationID', function(req, res){
 
 
 app.get('/personalEventDisplay', function(req, res) {
-		// console.log(schoolFriendCount);
+			// console.log(user.schoolFriendCount);
 		// console.log('made it to ped');
+							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+								console.log('School Events Saved');
+							});
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 		 	// console.log({firstNameLetter: firstNameLetter,
 				// 	  schoolFriendCount: schoolFriendCount,
@@ -173,6 +276,7 @@ app.get('/personalEventDisplay', function(req, res) {
 // 					  allEvents: listOfAllEvents,
 // allEvents: listOfAllEvents,
 // userEmail: userEmail,
+			pullSchoolEventsFunc();
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
@@ -223,7 +327,11 @@ app.get('/allEvents', function(req, res) {
 
 
 app.get('/auth/facebook', function(req, res) {
-
+// 	var options = {
+//     timeout:  3000
+//   , pool:     { maxSockets:  Infinity }
+//   , headers:  { connection:  "keep-alive" }
+// };
   // we don't have a code yet
   // so we'll redirect to the oauth dialog
 
@@ -255,22 +363,26 @@ app.get('/auth/facebook', function(req, res) {
   	}, function (err, facebookRes) {
   		// console.log(err);
 
-    // console.log(facebookRes)
+    // console.log('here');
      graph.setAccessToken(facebookRes.access_token);
+     // console.log(app_secret);
+     graph.setAppSecret(conf.client_secret);
+     // graph.setOptions(options);
+     // console.log('now here');
      // console.log(graph.get("/me?fields=id"));
      // userProfId = "";
      // userGender = "";
      // console.log('ive made it here');
      graph.get("/me",function(err,result) {
 			userProfId = result.id;
-			console.log(facebookRes.access_token);
+			// console.log(facebookRes.access_token);
 			userName = result.name;
 			userGender = result.gender;
 			if(result.email){
 				userEmail = result.email.toLowerCase();
 			}
 			schoolFriendCount = 0;
-			console.log(result.name)
+			// console.log(result.name)
 			firstNameLetter = result.name[0].toLowerCase();
 			// friendMinimum = schoolFriendMin;
 
@@ -297,29 +409,56 @@ app.get('/auth/facebook', function(req, res) {
 
 //cover not working for some reason
 //cover,privacy,education,
+// ,maybe.user("+userProfId+"), attending.user(" +userProfId+")
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-	graph.get("/me?fields=friends.fields(events.fields(description,start_time,location,name,venue))", function(err, result) {
-		// console.log(JSON.stringify(result));
-//friend checker
-   		result.friends.data.forEach(function(friend){
-     		if (friend.education){
-     			friend.education.forEach(function(schoolObj){
-     				// console.log(schoolObj);
-     				if(schoolObj.school){
-     					// console.log(schoolObj.school.name);
-	     				if (schoolObj.school.name.indexOf(schoolItem.schoolName)>-1){
-	     					// console.log("Bing friend found");
-	     					// console.log(friend.name);
-	     					schoolFriendCount++;
-	     				}
-	     			}
-     			});}
-     	});
-     		// console.log(schoolFriendCount);
-
-// fb graph query: 1424263346?fields=events.fields(cover,privacy,name,location,start_time,description,venue),friends.fields(events.fields(description,start_time,location,name,privacy,venue))
-// console.log(result);
+	graph.get("/me?fields=friends.fields(events.fields(description,cover,start_time,location,name,venue))", function(err, result) {
+		result.friends=undefined;
+		// console.log('here');
+		//first set yourEvents with school events, then yourEvents stuff
+		if(!result.friends){
+			// console.log('shouldnt be here');
+			User.findOne({userProfId: userProfId}, function(err, user){
+				if (user){
+					console.log('User Exists');
+					schoolFriendCount=301;
+					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
+							result=result;
+							popYoursAndSchoolEvents(result);
+							// console.log('here11');
+							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+								console.log('School Events Saved');
+							});
+							// console.log(result+'result 1');
+						})
+					// console.log('User Exists');
+				}
+				else{
+					console.log('User does not Exist');
+					graph.get("/me?fields=friends.fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
+						result=result;
+						friendChecker();
+						popYoursAndSchoolEvents(result);
+						School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+						{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+						console.log('School Events Updated');
+						});
+						})
+				}
+			});
+		}//end of if original query didnt work
+		else{
+			User.findOne({userProfId: userProfId}, function(err, user){
+				if (!user){
+					graph.get("/me?fields=friends.fields(education)",function(err,result){
+						friendChecker();
+					});
+				}
+				else{
+					schoolFriendCount=301;
+				}
+			});
 
 	 	 var friends = result.friends.data.filter(function(friend){
 	 	 		if (friend.events){
@@ -328,10 +467,6 @@ app.get('/auth/facebook', function(req, res) {
 	 	 });
 	 	 // var eachFriend = {};
 	 	 listOfAllEvents = {};
-		 var today = new Date();
-		 var currentDay = today.getDate();
-		 var currentMonth = today.getMonth()+1; //January is 0
-		 var currentYear = today.getFullYear();
 
 	 		friends.forEach(function(friend){
 
@@ -354,15 +489,17 @@ app.get('/auth/facebook', function(req, res) {
 	 	 			startYear = singleEvent.start_time.split('-')[0];
 	 	 			// console.log(startDay);
 
+//beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1],
+
 	 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 	 	 				// console.log(singleEvent.picture);
 	 	 				if (singleEvent.cover){
-							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
+							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy,start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
 							// console.log(singleEvent.cover.source);
 						}
 						//privacy: "Privacy: "+singleEvent.privacy,, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,
 						else{
-							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = { begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description};
+							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = { start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description};
 						}
 						// else{
 						// 	listOfAllEvents[singleEvent.name] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, description:"Event Description: " + singleEvent.description};}
@@ -381,12 +518,12 @@ app.get('/auth/facebook', function(req, res) {
 	 	 				// 	listOfAllEvents[singleEvent.name]['cover']=singleEvent.cover.source;
 	 	 				// 	// console.log(singleEvent.name);
 	 	 				// }
-	 	 			}}
-						);
+	 	 			}});
+
 // console.log(eventsInfo);
 
  			// eachFriend[friend.id] = oneFriendsEvents;
-	 	 	});//end of friends.map
+	 	 	//end of friends.map
 
 	 		// console.log(eachEvent);
 
@@ -399,31 +536,17 @@ app.get('/auth/facebook', function(req, res) {
 //below is the binghamton filter
 
 
-				yourEvents = {};
+
 				var allEventsInAnArray = Object.keys(listOfAllEvents);
-
-
-				if (!schoolItem.schoolEvents){
-					schoolItem.schoolEvents = {};
-				}
-				else{
-					// startMonth = singleEvent.start_time.split('-')[1];
-	 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
-	 	 	// 		startYear = singleEvent.start_time.split('-')[0];
-					var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
-					// console.log(schoolEventsInAnArray);
-					for (i=0;i<schoolEventsInAnArray.length;i++){
-						// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
-						var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[1];
-						var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[2];
-		 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[0];
-		 	 			// console.log(startDay);
-		 	 			// console.log(currentYear);
-						if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
-							yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+				// yourEvents = {};
+						if (!schoolItem.schoolEvents){
+							schoolItem.schoolEvents = {};
 						}
-					}
-				}
+						else{}
+							// startMonth = singleEvent.start_time.split('-')[1];
+			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
+			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
+							// var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
 
 				for (i=0;i<allEventsInAnArray.length;i++){
 					// startMonth = listOfAllEvents[allEventsInAnArray[i]].begins.split('-')[1];
@@ -453,6 +576,9 @@ app.get('/auth/facebook', function(req, res) {
 						}
 					}
 				}
+			});
+		console.log('School Events Populated');
+		}
 // //User.findOneAndUpdate({userProfId: userProfId},
 // 		 				{firstNameLetter: firstNameLetter,
 // 					  schoolFriendCount: schoolFriendCount,
@@ -465,10 +591,7 @@ app.get('/auth/facebook', function(req, res) {
 // 					  school: schoolItem.schoolName},
 // 					  {upsert: true},
 
-				School.findOneAndUpdate({schoolName: schoolItem.schoolName},
-					{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
-						console.log('School Events Updated');
-					});
+
 
 			// schoolItem.save(function (err, person) {
 			//   if (err){ return console.error(err);}
@@ -500,6 +623,7 @@ app.get('/auth/facebook', function(req, res) {
 // console.log('all da way here');
 		// console.log(listOfAllEvents);
 			res.redirect('/personalEventDisplay');
+
 	 	 // res.render('index', {friends: eachFriend, myEvents: myEvents});
 		});//end of get auth
 // res.redirect('/allEvents');
