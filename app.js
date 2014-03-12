@@ -295,7 +295,7 @@ app.get('/auth/facebook', function(req, res) {
 
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-
+		console.log(result+'not result data')
 //friend checker
    		result.friends.data.forEach(function(friend){
      		if (friend.education){
