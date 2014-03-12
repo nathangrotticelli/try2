@@ -45,8 +45,15 @@ var currentMonth = today.getMonth()+1; //January is 0
 var currentYear = today.getFullYear();
 yourEvents = {};
 
+
 //populates your events and school events from your facebook events pulled 2
-	var popYoursAndSchoolEvents = function(result){
+	var popYoursAndSchoolEvents = function(result,callback){
+						if(!schoolItem.schoolEvents){
+							schoolItem.schoolEvents = {};
+						}
+						if(!yourEvents){
+							yourEvents = {};
+						}
 						result.events.data.forEach(function(event){
 						// console.log(event);
 								startMonth = event.start_time.split('-')[1];
@@ -55,6 +62,7 @@ yourEvents = {};
 				 	 			// console.log(startDay);
 
 				 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+
 									if (event.venue.longitude){
 										longValue = event.venue.longitude;
 										latValue = event.venue.latitude;
@@ -68,7 +76,7 @@ yourEvents = {};
 											yourEvents[event.name.replace(/\./g,"")] = event;
 										}
 									}
-									else if (event.location){
+									if (event.location){
 										if (event.location.indexOf(schoolItem.schoolTown)>-1){
 												yourEvents[event.name.replace(/\./g,"")] = event;
 												schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
@@ -77,12 +85,18 @@ yourEvents = {};
 												yourEvents[event.name.replace(/\./g,"")] = event;
 										}
 									}
+									if (event.cover){
+										yourEvents[event.name.replace(/\./g,"")] = event;
+				 	 					yourEvents[event.name.replace(/\./g,"")]['cover']=event.cover.source;
+				 	 					// console.log(singleEvent.name);
+				 	 				}
 									else{
 										yourEvents[event.name.replace(/\./g,"")] = event;
 									}
 							}
 					});
 				console.log('School Events Populated');
+				callback();
 				}
 
 //checks friend education count
@@ -257,6 +271,7 @@ app.get('/location/:locationID', function(req, res){
 app.get('/personalEventDisplay', function(req, res) {
 			// console.log(user.schoolFriendCount);
 		// console.log('made it to ped');
+		setTimeout(console.log('time'),2000);
 							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
 							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
 								console.log('School Events Saved');
@@ -277,6 +292,7 @@ app.get('/personalEventDisplay', function(req, res) {
 // allEvents: listOfAllEvents,
 // userEmail: userEmail,
 			pullSchoolEventsFunc();
+
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
@@ -412,8 +428,9 @@ app.get('/auth/facebook', function(req, res) {
 // ,maybe.user("+userProfId+"), attending.user(" +userProfId+")
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-	graph.get("/me?fields=friends.fields(events.fields(description,cover,start_time,location,name,venue))", function(err, result) {
-		result.friends=undefined;
+			// console.log(res);
+	graph.get("/me?fields=friends.fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+		// result.friends=undefined;
 		// console.log('here');
 		//first set yourEvents with school events, then yourEvents stuff
 		if(!result.friends){
@@ -423,13 +440,15 @@ app.get('/auth/facebook', function(req, res) {
 					console.log('User Exists');
 					schoolFriendCount=301;
 					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
-							result=result;
-							popYoursAndSchoolEvents(result);
+							// result=result;
+							popYoursAndSchoolEvents(result,function(){
+									res.redirect('personalEventDisplay');
+							 });
 							// console.log('here11');
-							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
-							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
-								console.log('School Events Saved');
-							});
+							// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+							// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+							// 	console.log('School Events Saved');
+							// });
 							// console.log(result+'result 1');
 						})
 					// console.log('User Exists');
@@ -439,11 +458,13 @@ app.get('/auth/facebook', function(req, res) {
 					graph.get("/me?fields=friends.fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 						result=result;
 						friendChecker();
-						popYoursAndSchoolEvents(result);
-						School.findOneAndUpdate({schoolName: schoolItem.schoolName},
-						{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
-						console.log('School Events Updated');
-						});
+						popYoursAndSchoolEvents(result,function(){
+								res.redirect('personalEventDisplay');
+							 });
+						// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+						// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+						// 	console.log('School Events Updated');
+						// });
 						})
 				}
 			});
@@ -576,8 +597,10 @@ app.get('/auth/facebook', function(req, res) {
 						}
 					}
 				}
+				console.log('School Events Populated');
+
 			});
-		console.log('School Events Populated');
+			res.redirect('/personalEventDisplay');
 		}
 // //User.findOneAndUpdate({userProfId: userProfId},
 // 		 				{firstNameLetter: firstNameLetter,
@@ -622,7 +645,7 @@ app.get('/auth/facebook', function(req, res) {
 
 // console.log('all da way here');
 		// console.log(listOfAllEvents);
-			res.redirect('/personalEventDisplay');
+
 
 	 	 // res.render('index', {friends: eachFriend, myEvents: myEvents});
 		});//end of get auth
