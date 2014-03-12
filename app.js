@@ -263,13 +263,14 @@ app.get('/auth/facebook', function(req, res) {
      // console.log('ive made it here');
      graph.get("/me",function(err,result) {
 			userProfId = result.id;
+			console.log(userProfId);
 			userName = result.name;
 			userGender = result.gender;
 			if(result.email){
 				userEmail = result.email.toLowerCase();
 			}
 			schoolFriendCount = 0;
-			console.log(result.name+'not name error')
+			console.log(result.name)
 			firstNameLetter = result.name[0].toLowerCase();
 			// friendMinimum = schoolFriendMin;
 
@@ -292,9 +293,9 @@ app.get('/auth/facebook', function(req, res) {
 // });
 
 //cover not working for some reason
-
+//maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+	graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue))", function(err, result) {
 		// console.log(JSON.stringify(result));
 //friend checker
    		result.friends.data.forEach(function(friend){
