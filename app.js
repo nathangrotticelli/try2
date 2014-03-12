@@ -158,7 +158,7 @@ app.get('/location/:locationID', function(req, res){
 app.get('/personalEventDisplay', function(req, res) {
 		// console.log(schoolFriendCount);
 		// console.log('made it to ped');
-		if(schoolFriendCount>=schoolItem.schoolFriendMin||user.userEmail.indexOf(schoolItem.emailEnding)>-1){
+		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 		 	// console.log({firstNameLetter: firstNameLetter,
 				// 	  schoolFriendCount: schoolFriendCount,
 				// 	  userProfId: userProfId,
@@ -204,7 +204,7 @@ app.get('/personalEventDisplay', function(req, res) {
 
 
 app.get('/allEvents', function(req, res) {
-		if(schoolFriendCount>=schoolItem.schoolFriendMin||user.userEmail.indexOf(schoolItem.emailEnding)>-1){
+		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 			// console.log()
 				res.render('allEvents', {friends: listOfAllEvents})}
 		else{
