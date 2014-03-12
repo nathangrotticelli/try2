@@ -101,7 +101,7 @@ yourEvents = {};
 				}
 
 //checks friend education count
-var friendChecker = function(){
+var friendChecker = function(result){
 
 			result.friends.data.forEach(function(friend){
      		if (friend.education){
@@ -170,7 +170,7 @@ var regExNums = /[0-9]/g;
 
 app.post('/loginTry2', function(req, res){
 	 var loginTryEmail = req.body.name;
-	 // console.log(loginTryEmail);
+	 console.log(loginTryEmail);
 	 loginTryEmail = loginTryEmail.toLowerCase();
 	 // console.log(loginTryEmail);
 	 // loginTryEmail = "N@BINGHAMTON.EDU"
@@ -458,7 +458,7 @@ app.get('/auth/facebook', function(req, res) {
 					console.log('User does not Exist');
 					graph.get("/me?fields=friends.fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 						result=result;
-						friendChecker();
+						friendChecker(result);
 						popYoursAndSchoolEvents(result,function(){
 								res.redirect('personalEventDisplay');
 							 });
@@ -479,8 +479,9 @@ app.get('/auth/facebook', function(req, res) {
 				}
 				else{
 					console.log('1st query worked, scanning education');
-					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,result){
+					graph.get("/me?fields=friends.limit(300).fields(education)",function(err,result){
 						console.log('got to friend checker');
+						console.log(result);
 						friendChecker(result);
 					});
 				}
