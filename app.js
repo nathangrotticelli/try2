@@ -293,9 +293,10 @@ app.get('/auth/facebook', function(req, res) {
 // });
 
 //cover not working for some reason
+//cover,
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-	graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue))", function(err, result) {
+	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,privacy,venue))", function(err, result) {
 		// console.log(JSON.stringify(result));
 //friend checker
    		result.friends.data.forEach(function(friend){
