@@ -17,6 +17,7 @@ var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
 var User = require('./models')["User"];
 
+//fff
 // {
 //     client_id:      '1474435556106076'
 //   , client_secret:  '00afc8e4df8e0f46ce547c59bf67378b'
