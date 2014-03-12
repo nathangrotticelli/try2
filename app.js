@@ -444,10 +444,27 @@ app.get('/auth/facebook', function(req, res) {
 						}
 					}
 				}
-			schoolItem.save(function (err, person) {
-			  if (err){ return console.error(err);}
-			  // else{console.log(person);}
-			});
+// //User.findOneAndUpdate({userProfId: userProfId},
+// 		 				{firstNameLetter: firstNameLetter,
+// 					  schoolFriendCount: schoolFriendCount,
+// 					  userProfId: userProfId,
+// 					  userName: userName,
+// 					  personalEvents: yourEvents,
+// 					  userGender: userGender,
+// 					  userEmail: userEmail,
+
+// 					  school: schoolItem.schoolName},
+// 					  {upsert: true},
+
+				School.findOneAndUpdate({schoolName: schoolItem.schoolName},
+					{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
+						console.log('School Events Updated');
+					});
+
+			// schoolItem.save(function (err, person) {
+			//   if (err){ return console.error(err);}
+			//   // else{console.log(person);}
+			// });
 				// console.log(bingEvents);
 
 // &&startMonth>=currentMonth&&startDay>=currentDay
