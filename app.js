@@ -101,6 +101,7 @@ app.get('/location/:locationID', function(req, res){
 	// console.log(locationID);
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
+		console.log(schoolItem.schoolEvents);
 
 		// console.log(locationID);
 		// console.log(schoolItem.schoolEvents);
@@ -405,7 +406,6 @@ app.get('/auth/facebook', function(req, res) {
 					for (i=0;i<schoolEventsInAnArray.length;i++){
 						// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
 						var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[1];
-
 						var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[2];
 		 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[0];
 		 	 			// console.log(startDay);
