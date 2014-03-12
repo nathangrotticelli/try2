@@ -101,7 +101,7 @@ app.get('/location/:locationID', function(req, res){
 	// console.log(locationID);
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
-		console.log(schoolItem.schoolEvents);
+		console.log(schoolItem);
 
 		// console.log(locationID);
 		// console.log(schoolItem.schoolEvents);
@@ -269,6 +269,7 @@ app.get('/auth/facebook', function(req, res) {
 				userEmail = result.email.toLowerCase();
 			}
 			schoolFriendCount = 0;
+			console.log(result.name+'not name error')
 			firstNameLetter = result.name[0].toLowerCase();
 			// friendMinimum = schoolFriendMin;
 
