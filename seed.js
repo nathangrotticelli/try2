@@ -79,7 +79,7 @@ console.log("Inserting data");
 							  }
 							});
 
-				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 60,schoolEvents: {}, schoolName : "Central Michigan", schoolTown : "Mt Pleasant", emailEnding : "@umich.edu", emailLength : 13});
+				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 60,schoolEvents: {}, schoolName : "Central Michigan", schoolTown : "Mt Pleasant", emailEnding : "@cmich.edu", emailLength : 13});
 
 				school.save(function (err, saved) {
 							  if (err){ return console.error(err);}
