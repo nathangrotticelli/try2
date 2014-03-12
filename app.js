@@ -263,7 +263,7 @@ app.get('/auth/facebook', function(req, res) {
      // console.log('ive made it here');
      graph.get("/me",function(err,result) {
 			userProfId = result.id;
-			console.log(userProfId);
+			console.log(facebookRes.access_token);
 			userName = result.name;
 			userGender = result.gender;
 			if(result.email){
