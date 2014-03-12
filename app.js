@@ -163,7 +163,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/denied', function(req, res){
-  res.render("denied");
+  res.render("denied",{schoolName: schoolItem.schoolName});
 });
 
 var regExNums = /[0-9]/g;
@@ -181,7 +181,7 @@ app.post('/loginTry2', function(req, res){
 	 // console.log(loginTryEmail.length);
 
 	 // schoolItem.emailLength = 10;
-	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'){
+	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
 			 		schoolFriendCount=301;
 			 		res.redirect('/personalEventDisplay');
