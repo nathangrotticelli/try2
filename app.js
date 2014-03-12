@@ -274,6 +274,9 @@ app.get('/auth/facebook', function(req, res) {
 			firstNameLetter = result.name[0].toLowerCase();
 			// friendMinimum = schoolFriendMin;
 
+//CAAU8ZCceQ31wBAOmmTcy08idNK7MBsGZA8BeYHsOsyy1bAQ8Epxd6Cn4cZBPHMPFroJ3p0ZAzlexPW5YsrUdZBkh7Yh3ZC2ImUZBnaZC89jU1DWH7Uue7m6FZAoPwRceQZAfn2EbQtxRsbdX4CALd7oHZAAnCpZAhpARCPkfhVRQfy7ZAAfa5g2NSEr9e
+
+//1375623240
 
 			// graph.get("/me?fields=friends.fields(education,name)", function(err,result) {
 
@@ -293,10 +296,10 @@ app.get('/auth/facebook', function(req, res) {
 // });
 
 //cover not working for some reason
-//cover,privacy,
+//cover,privacy,education,
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,venue))", function(err, result) {
+	graph.get("/me?fields=friends.fields(events.fields(description,start_time,location,name,venue))", function(err, result) {
 		// console.log(JSON.stringify(result));
 //friend checker
    		result.friends.data.forEach(function(friend){
@@ -357,8 +360,9 @@ app.get('/auth/facebook', function(req, res) {
 							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
 							// console.log(singleEvent.cover.source);
 						}
+						//privacy: "Privacy: "+singleEvent.privacy,, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,
 						else{
-							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
+							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = { begins: "Event Starts: "+singleEvent.start_time, beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1], description:"Event Description: " + singleEvent.description};
 						}
 						// else{
 						// 	listOfAllEvents[singleEvent.name] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, description:"Event Description: " + singleEvent.description};}
