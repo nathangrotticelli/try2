@@ -265,7 +265,9 @@ app.get('/auth/facebook', function(req, res) {
 			userProfId = result.id;
 			userName = result.name;
 			userGender = result.gender;
-			userEmail = result.email.toLowerCase();
+			if(result.Email){
+				userEmail = result.email.toLowerCase();
+			}
 			schoolFriendCount = 0;
 			firstNameLetter = result.name[0].toLowerCase();
 			// friendMinimum = schoolFriendMin;
