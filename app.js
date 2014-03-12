@@ -430,7 +430,7 @@ app.get('/auth/facebook', function(req, res) {
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 			// console.log(res);
-	graph.get("/me?fields=friends.fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+	graph.get("/me?fields=friends.limit(500).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 		// result.friends=undefined;
 		// console.log('here');
 		//first set yourEvents with school events, then yourEvents stuff
@@ -475,9 +475,10 @@ app.get('/auth/facebook', function(req, res) {
 
 				if(user&&user.school==schoolItem.schoolName){
 					schoolFriendCount=301;
-					console.log('User exists and 1st query worked')
+					console.log('User exists and 1st query worked');
 				}
 				else{
+					console.log('1st query worked, scanning education');
 					graph.get("/me?fields=friends.fields(education)",function(err,result){
 						friendChecker();
 					});
