@@ -265,7 +265,7 @@ app.get('/auth/facebook', function(req, res) {
 			userProfId = result.id;
 			userName = result.name;
 			userGender = result.gender;
-			if(result.Email){
+			if(result.email){
 				userEmail = result.email.toLowerCase();
 			}
 			schoolFriendCount = 0;
