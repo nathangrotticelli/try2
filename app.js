@@ -479,7 +479,8 @@ app.get('/auth/facebook', function(req, res) {
 				}
 				else{
 					console.log('1st query worked, scanning education');
-					graph.get("/me?fields=friends.limit(800).fields(education)",function(err,result){
+					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,result){
+						console.log('got to friend checker');
 						friendChecker(result);
 					});
 				}
