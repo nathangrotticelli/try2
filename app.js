@@ -158,26 +158,43 @@ app.get('/personalEventDisplay', function(req, res) {
 		// console.log(schoolFriendCount);
 		// console.log('made it to ped');
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-		 	if(!user){
-					var user = new User({
+		 	// console.log({firstNameLetter: firstNameLetter,
+				// 	  schoolFriendCount: schoolFriendCount,
+				// 	  userProfId: userProfId,
+				// 	  userName: userName,
+				// 	  userGender: userGender,
+				// 	  userEmail: userEmail,
+				// 	  personalEvents: yourEvents,
+				// 	  allEvents: listOfAllEvents,
+				// 	  school: schoolItem.schoolName});
 
-						firstNameLetter: firstNameLetter,
+// personalEvents: yourEvents,
+// 					  allEvents: listOfAllEvents,
+// allEvents: listOfAllEvents,
+		 	User.findOneAndUpdate({userProfId: userProfId},
+		 				{firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
 					  userProfId: userProfId,
 					  userName: userName,
+					  personalEvents: yourEvents,
 					  userGender: userGender,
 					  userEmail: userEmail,
-					  personalEvents: yourEvents,
-					  allEvents: listOfAllEvents,
-					  school: schoolItem.schoolName});
+
+					  school: schoolItem.schoolName},
+					  {upsert: true},
+					  function(err,res){
+					  	if(err){console.log(err.message)}
+					  	else{console.log("User Updated");}
+					  	// console.log(res);
+					  });
 					// console.log(user.yourEvents);
-					user.save(function (err, person) {
-			  		if (err){ return console.error(err);}
-					});
-				}
+					// user.save(function (err, person) {
+			  // 		if (err){ return console.error(err);}
+					// });
+
 
  		 	// console.log(user);
-			res.render('personalEventDisplay', {friends: user.personalEvents, school: schoolItem.schoolName});
+			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
 			// console.log(yourEvents);
 		}
 		else{
@@ -380,9 +397,22 @@ app.get('/auth/facebook', function(req, res) {
 					schoolItem.schoolEvents = {};
 				}
 				else{
+					// startMonth = singleEvent.start_time.split('-')[1];
+	 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
+	 	 	// 		startYear = singleEvent.start_time.split('-')[0];
 					var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
+					// console.log(schoolEventsInAnArray);
 					for (i=0;i<schoolEventsInAnArray.length;i++){
-						yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+						// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
+						var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[1];
+
+						var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[2];
+		 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay.split(' ')[2].split('-')[0];
+		 	 			// console.log(startDay);
+		 	 			// console.log(currentYear);
+						if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+							yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+						}
 					}
 				}
 
@@ -416,7 +446,7 @@ app.get('/auth/facebook', function(req, res) {
 				}
 			schoolItem.save(function (err, person) {
 			  if (err){ return console.error(err);}
-			  else{console.log(person);}
+			  // else{console.log(person);}
 			});
 				// console.log(bingEvents);
 

@@ -15,7 +15,6 @@ var userSchema = new Schema({
   userName: String,
   userEmail: String,
   personalEvents: {},
-  allEvents: {},
   school: String
 });
 
