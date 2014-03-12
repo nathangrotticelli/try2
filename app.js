@@ -437,7 +437,7 @@ app.get('/auth/facebook', function(req, res) {
 		if(!result.friends){
 			// console.log('shouldnt be here');
 			User.findOne({userProfId: userProfId}, function(err, user){
-				if (user){
+				if (user&&user.school==schoolItem.schoolName){
 					console.log('User Exists');
 					schoolFriendCount=301;
 					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
@@ -472,14 +472,17 @@ app.get('/auth/facebook', function(req, res) {
 		}//end of if original query didnt work
 		else{
 			User.findOne({userProfId: userProfId}, function(err, user){
-				if (!user){
+
+				if(user&&user.school==schoolItem.schoolName){
+					schoolFriendCount=301;
+					console.log('User exists and 1st query worked')
+				}
+				else{
 					graph.get("/me?fields=friends.fields(education)",function(err,result){
 						friendChecker();
 					});
 				}
-				else{
-					schoolFriendCount=301;
-				}
+
 			});
 
 	 	 var friends = result.friends.data.filter(function(friend){
@@ -598,7 +601,7 @@ app.get('/auth/facebook', function(req, res) {
 						}
 					}
 				}
-				console.log('School Events Populated');
+				console.log('School Event Populated');
 
 			});
 			res.redirect('/personalEventDisplay');
