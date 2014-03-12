@@ -172,6 +172,7 @@ app.get('/personalEventDisplay', function(req, res) {
 // personalEvents: yourEvents,
 // 					  allEvents: listOfAllEvents,
 // allEvents: listOfAllEvents,
+// userEmail: userEmail,
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
@@ -179,7 +180,6 @@ app.get('/personalEventDisplay', function(req, res) {
 					  userName: userName,
 					  personalEvents: yourEvents,
 					  userGender: userGender,
-					  userEmail: userEmail,
 
 					  school: schoolItem.schoolName},
 					  {upsert: true},
@@ -295,7 +295,7 @@ app.get('/auth/facebook', function(req, res) {
 
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 	graph.get("/me?fields=friends.fields(education,events.fields(description,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-		console.log(JSON.stringify(result));
+		// console.log(JSON.stringify(result));
 //friend checker
    		result.friends.data.forEach(function(friend){
      		if (friend.education){
