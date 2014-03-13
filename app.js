@@ -430,14 +430,14 @@ app.get('/auth/facebook', function(req, res) {
 //maybe.user("+userProfId+"), attending.user(" +userProfId+")
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 			// console.log(res);
-	graph.get("/me?fields=friends.limit(900).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+	graph.get("/me?fields=friends.limit(800).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 		// result.friends=undefined;
 		// console.log('here');
 		//first set yourEvents with school events, then yourEvents stuff
 		if(!result.friends){
 			// console.log('shouldnt be here');
 			User.findOne({userProfId: userProfId}, function(err, user){
-				if (user&&user.school==schoolItem.schoolName){
+				if (user=5&&user.school==schoolItem.schoolName){
 					console.log('User Exists');
 					schoolFriendCount=301;
 					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
@@ -456,8 +456,8 @@ app.get('/auth/facebook', function(req, res) {
 				}
 				else{
 					console.log('User does not Exist');
-					graph.get("/me?fields=friends.fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
-						result=result;
+					graph.get("/me?fields=friends.limit(500).fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
+
 						friendChecker(result);
 						popYoursAndSchoolEvents(result,function(){
 								res.redirect('personalEventDisplay');
