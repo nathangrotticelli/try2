@@ -48,7 +48,8 @@ yourEvents = {};
 
 
 //populates your events and school events from your facebook events pulled 2
-	var popYoursAndSchoolEvents = function(result,callback){
+	var popYoursAndSchoolEvents = function(result){
+						console.log('starting pop yours');
 						if(!schoolItem.schoolEvents){
 							schoolItem.schoolEvents = {};
 						}
@@ -63,8 +64,8 @@ yourEvents = {};
 				 	 			// console.log(startDay);
 
 				 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
-
-									if (event.venue.longitude){
+				 	 				if(event.venue){
+				 	 					if (event.venue.longitude){
 										longValue = event.venue.longitude;
 										latValue = event.venue.latitude;
 										// console.log(latValue);
@@ -77,6 +78,8 @@ yourEvents = {};
 											yourEvents[event.name.replace(/\./g,"")] = event;
 										}
 									}
+				 	 			}
+
 									if (event.location){
 										if (event.location.indexOf(schoolItem.schoolTown)>-1){
 												yourEvents[event.name.replace(/\./g,"")] = event;
@@ -97,7 +100,7 @@ yourEvents = {};
 							}
 					});
 				console.log('School Events Populated');
-				callback();
+				// callback();
 				}
 
 //checks friend education count
@@ -117,6 +120,9 @@ var friendChecker = function(result){
 	     			}
      			});}
      	});
+console.log(schoolFriendCount);
+// callback();
+// callback();
 }
      		// console.log(schoolFriendCount);
 
@@ -180,7 +186,7 @@ app.post('/loginTry2', function(req, res){
 	 // console.log(schoolItem.schoolFriendMin);
 	 // console.log(schoolItem.emailEnding);
 	 // console.log(loginTryEmail.length);
-
+	 console.log(schoolItem);
 	 // schoolItem.emailLength = 10;
 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
@@ -273,11 +279,12 @@ app.get('/location/:locationID', function(req, res){
 app.get('/personalEventDisplay', function(req, res) {
 			// console.log(user.schoolFriendCount);
 		// console.log('made it to ped');
-		setTimeout(console.log('time'),2000);
+
 							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
 							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
 								console.log('School Events Saved');
 							});
+		console.log(schoolItem.schoolFriendMin);
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
 		 	// console.log({firstNameLetter: firstNameLetter,
 				// 	  schoolFriendCount: schoolFriendCount,
@@ -399,6 +406,9 @@ app.get('/auth/facebook', function(req, res) {
 			if(result.email){
 				userEmail = result.email.toLowerCase();
 			}
+			else{
+				userEmail = 'none';
+			}
 			schoolFriendCount = 0;
 			// console.log(result.name)
 			firstNameLetter = result.name[0].toLowerCase();
@@ -443,9 +453,9 @@ app.get('/auth/facebook', function(req, res) {
 					schoolFriendCount=301;
 					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 							// result=result;
-							popYoursAndSchoolEvents(result,function(){
-									res.redirect('personalEventDisplay');
-							 });
+							popYoursAndSchoolEvents(result);
+								setTimeout(res.redirect('personalEventDisplay'),3400);
+
 							// console.log('here11');
 							// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
 							// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
@@ -460,9 +470,11 @@ app.get('/auth/facebook', function(req, res) {
 					graph.get("/me?fields=friends.limit(350).fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 
 						friendChecker(result);
-						popYoursAndSchoolEvents(result,function(){
-								res.redirect('personalEventDisplay');
-							 });
+						// setTimeout(console.log('time'),9000);
+							popYoursAndSchoolEvents(result);
+							setTimeout(res.redirect('personalEventDisplay'),3400);
+
+
 						// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
 						// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
 						// 	console.log('School Events Updated');
@@ -472,18 +484,23 @@ app.get('/auth/facebook', function(req, res) {
 			});
 		}//end of if original query didnt work
 		else{
+			// popYoursAndSchoolEvents(result);
 			User.findOne({userProfId: userProfId}, function(err, user){
 
 				if(user&&user.school==schoolItem.schoolName){
 					schoolFriendCount=301;
 					console.log('User exists and 1st query worked');
+
+					setTimeout(res.redirect('personalEventDisplay'),3400);
+					// redirectMe = 'yes';
 				}
 				else{
 					console.log('1st query worked, scanning education');
 					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,result){
 						console.log('got to friend checker');
-						console.log(result);
+						// console.log(result);
 						friendChecker(result);
+						setTimeout(res.redirect('personalEventDisplay'),3400);
 					});
 				}
 
@@ -605,10 +622,11 @@ app.get('/auth/facebook', function(req, res) {
 						}
 					}
 				}
-				console.log('School Event Populated');
+				// console.log('School Event Populated');
 
 			});
-			res.redirect('/personalEventDisplay');
+
+			// res.redirect('/personalEventDisplay');
 		}
 // //User.findOneAndUpdate({userProfId: userProfId},
 // 		 				{firstNameLetter: firstNameLetter,
