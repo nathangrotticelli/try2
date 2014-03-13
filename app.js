@@ -53,9 +53,10 @@ yourEvents = {};
 						if(!schoolItem.schoolEvents){
 							schoolItem.schoolEvents = {};
 						}
-						if(!yourEvents){
-							yourEvents = {};
-						}
+						// if(!yourEvents){
+						// 	yourEvents = {};
+						// }
+						yourEvents = {};
 						result.events.data.forEach(function(event){
 						// console.log(event);
 								startMonth = event.start_time.split('-')[1];
@@ -138,7 +139,7 @@ console.log(schoolFriendCount);
 			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
 			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
 							var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
-							console.log(schoolEventsInAnArray);
+							 // nArray);
 							// console.log(schoolEventsInAnArray);
 							for (i=0;i<schoolEventsInAnArray.length;i++){
 								// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
@@ -151,6 +152,7 @@ console.log(schoolFriendCount);
 						 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[0];
 						 	 			// console.log(startDay);
 						 	 			// console.log(currentYear);
+						 	 			console.log(schoolItem.schoolEvents);
 										if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 											yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
 										}
@@ -191,6 +193,7 @@ app.post('/loginTry2', function(req, res){
 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
 			 		schoolFriendCount=301;
+			 		pullSchoolEventsFunc();
 			 		res.redirect('/personalEventDisplay');
 			 	}
 			 	else{
@@ -300,7 +303,7 @@ app.get('/personalEventDisplay', function(req, res) {
 // 					  allEvents: listOfAllEvents,
 // allEvents: listOfAllEvents,
 // userEmail: userEmail,
-			pullSchoolEventsFunc();
+			// pullSchoolEventsFunc();
 
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
@@ -314,7 +317,7 @@ app.get('/personalEventDisplay', function(req, res) {
 					  {upsert: true},
 					  function(err,res){
 					  	if(err){console.log(err.message)}
-					  	else{console.log("User Updated");}
+					  	else{console.log("User Updated: "+userName);}
 					  	// console.log(res);
 					  });
 					// console.log(user.yourEvents);
@@ -442,7 +445,7 @@ app.get('/auth/facebook', function(req, res) {
 		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
 			// console.log(res);
 	graph.get("/me?fields=friends.limit(700).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-		// result.friends=undefined;
+		result.friends=undefined;
 		// console.log('here');
 		//first set yourEvents with school events, then yourEvents stuff
 		if(!result.friends){
@@ -454,6 +457,7 @@ app.get('/auth/facebook', function(req, res) {
 					graph.get("/me?fields=events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 							// result=result;
 							popYoursAndSchoolEvents(result);
+							pullSchoolEventsFunc();
 								setTimeout(res.redirect('personalEventDisplay'),3400);
 
 							// console.log('here11');
@@ -472,6 +476,7 @@ app.get('/auth/facebook', function(req, res) {
 						friendChecker(result);
 						// setTimeout(console.log('time'),9000);
 							popYoursAndSchoolEvents(result);
+							pullSchoolEventsFunc();
 							setTimeout(res.redirect('personalEventDisplay'),3400);
 
 
