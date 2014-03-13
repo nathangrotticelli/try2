@@ -127,11 +127,12 @@ var friendChecker = function(result){
 							schoolItem.schoolEvents = {};
 						}
 						else{
+							// console.log(scc)
 							// startMonth = singleEvent.start_time.split('-')[1];
 			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
 			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
 							var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
-							console.log(schoolItem.schoolEvents[schoolEventsInAnArray[1]]);
+							console.log(schoolEventsInAnArray);
 							// console.log(schoolEventsInAnArray);
 							for (i=0;i<schoolEventsInAnArray.length;i++){
 								// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
