@@ -17,16 +17,6 @@ var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
 var User = require('./models')["User"];
 
-//fff
-// {
-//     client_id:      '1474435556106076'
-//   , client_secret:  '00afc8e4df8e0f46ce547c59bf67378b'
-//   , scope:          'user_events, email, user_location,friends_events,friends_education_history'
-//   , redirect_uri:   'http://localhost:3000/auth/facebook'
-//   // , token: 'CAACEdEose0cBAJTrpLg7je3fbqs1Qo5OwFetvNnTzkPYLWZCcjceOWJGqD9uk7u5YuO7HPmAyuLiZBa04Dir0hm8jl4GCbPjzAR5wxuLncsO4fdoA2Ykct1KZAGqSitqofFfNnhF0gVtBBg1zCZAXLlxwPTZChsUAUtmo3iaTLAT90ZCx5c2hnsxCojGErSgAZD'
-
-// };
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -47,30 +37,73 @@ var currentYear = today.getFullYear();
 
 
 
+//populates yourEvents for successful 1st queries
+var eventPopulater = function(listOfAllEvents){
+			//start of pull from school events
+				if (!schoolItem.schoolEvents){
+					schoolItem.schoolEvents = {};
+				}
+				else{
+					var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
+					for (i=0;i<schoolEventsInAnArray.length;i++){
+		 	 			if(schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time){
+
+								var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[1];;
+								var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[2].split('T')[0];
+				 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[0];
+
+								if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
+									yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
+								}
+						 }
+					}
+				}//end of school event pull
+				//start of pull from fb result
+				var allEventsInAnArray = Object.keys(listOfAllEvents);
+
+				for (i=0;i<allEventsInAnArray.length;i++){
+					if (listOfAllEvents[allEventsInAnArray[i]].attending||listOfAllEvents[allEventsInAnArray[i]].maybe){
+						yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+					}
+					if (listOfAllEvents[allEventsInAnArray[i]].longitude){
+						longValue = listOfAllEvents[allEventsInAnArray[i]].longitude.split(' ')[1];
+						latValue = listOfAllEvents[allEventsInAnArray[i]].latitude.split(' ')[1];
+						//defining long and lat values
+
+						if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){//if close to school
+
+							yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+							schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+						}
+						if (listOfAllEvents[allEventsInAnArray[i]].location){
+							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolTown)>-1){//if close to school
+								yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+								schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+							}
+						}
+					}
+				}
+
+		}
+
 //populates your events and school events from your facebook events pulled 2
-	var popYoursAndSchoolEvents = function(result){
-						console.log(result);
-						console.log('starting pop yours');
+var popYoursAndSchoolEvents = function(result){
+						console.log('starting to populate with user pulled data');
 						if(!schoolItem.schoolEvents){
 							schoolItem.schoolEvents = {};
 						}
-						// if(!yourEvents){
-						// 	yourEvents = {};
-						// }
-						yourEvents = {};
 						result.events.data.forEach(function(event){
 						// console.log(event);
 								startMonth = event.start_time.split('-')[1];
 				 	 			startDay = event.start_time.split('-')[2].split('T')[0];
 				 	 			startYear = event.start_time.split('-')[0];
-				 	 			// console.log(startDay);
+
 
 				 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 				 	 				if(event.venue){
 				 	 					if (event.venue.longitude){
 										longValue = event.venue.longitude;
 										latValue = event.venue.latitude;
-										// console.log(latValue);
 
 										if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){
 											yourEvents[event.name.replace(/\./g,"")] = event;
@@ -94,7 +127,6 @@ var currentYear = today.getFullYear();
 									if (event.cover){
 										yourEvents[event.name.replace(/\./g,"")] = event;
 				 	 					yourEvents[event.name.replace(/\./g,"")]['cover']=event.cover.source;
-				 	 					// console.log(singleEvent.name);
 				 	 				}
 									else{
 										yourEvents[event.name.replace(/\./g,"")] = event;
@@ -102,7 +134,7 @@ var currentYear = today.getFullYear();
 							}
 					});
 				console.log('School Events Populated');
-				// callback();
+
 				}
 
 //checks friend education count
@@ -111,49 +143,28 @@ var friendChecker = function(result){
 			result.friends.data.forEach(function(friend){
      		if (friend.education){
      			friend.education.forEach(function(schoolObj){
-     				// console.log(schoolObj);
      				if(schoolObj.school){
-     					// console.log(schoolObj.school.name);
 	     				if (schoolObj.school.name.indexOf('Binghamton')>-1){
-	     					// console.log("Bing friend found");
-	     					// console.log(friend.name);
 	     					schoolFriendCount++;
 	     				}
 	     			}
      			});}
      	});
-console.log(schoolFriendCount);
-// callback();
-// callback();
+	console.log(schoolFriendCount);
 }
-     		// console.log(schoolFriendCount);
 
 //adds from school events to your events 1
 	var pullSchoolEventsFunc = function(){
-						// yourEvents = {};
 						if (!schoolItem.schoolEvents){
 							schoolItem.schoolEvents = {};
 						}
 						else{
-							// console.log(scc)
-							// startMonth = singleEvent.start_time.split('-')[1];
-			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
-			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
 							var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
-							 // nArray);
-							// console.log(schoolEventsInAnArray);
 							for (i=0;i<schoolEventsInAnArray.length;i++){
-								// console.log(schoolItem.schoolEvents[schoolEventsInAnArray[i]].beginDay);
-									//startMonth = event.start_time.split('-')[1];
-				 	 			// startDay = event.start_time.split('-')[2].split('T')[0];
-				 	 			// startYear = event.start_time.split('-')[0];
 				 	 			if(schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time){
 										var startMonth = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[1];;
 										var startDay = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[2].split('T')[0];
 						 	 			var startYear = schoolItem.schoolEvents[schoolEventsInAnArray[i]].start_time.split('-')[0];
-						 	 			// console.log(startDay);
-						 	 			// console.log(currentYear);
-						 	 			console.log(schoolItem.schoolEvents);
 										if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 											yourEvents[schoolEventsInAnArray[i]] = schoolItem.schoolEvents[schoolEventsInAnArray[i]];
 										}
@@ -182,15 +193,6 @@ app.post('/loginTry2', function(req, res){
 	 var loginTryEmail = req.body.name;
 	 console.log(loginTryEmail);
 	 loginTryEmail = loginTryEmail.toLowerCase();
-	 // console.log(loginTryEmail);
-	 // loginTryEmail = "N@BINGHAMTON.EDU"
-	 // console.log(schoolItem.inspect());
-	 // console.log(schoolItem.emailLength);
-	 // console.log(schoolItem.schoolFriendMin);
-	 // console.log(schoolItem.emailEnding);
-	 // console.log(loginTryEmail.length);
-	 console.log(schoolItem);
-	 // schoolItem.emailLength = 10;
 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
 			 		schoolFriendCount=301;
@@ -201,8 +203,6 @@ app.post('/loginTry2', function(req, res){
 			 		res.redirect('/denied');
 			 	}
 	 }
-	 // &&loginTryEmail.indexOf(' ')<0
-	 //&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)
 
 	 else {
 		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
@@ -223,88 +223,22 @@ app.get('/Login2', function(req, res){
 app.get('/location/:locationID', function(req, res){
 	var locationID = req.params.locationID.toString();
 	yourEvents = {};
-	// console.log(locationID);
+	listOfAllEvents = {};
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
 		console.log(schoolItem);
-
-		// console.log(locationID);
-		// console.log(schoolItem.schoolEvents);
-		// res.send(200);
 		res.render("Login",{schoolName: schoolItem.schoolName});
-		// ,{schoolName: schoolItem.schoolName}
+
 	});
 });
-	// schoolLongMax = '-75.4';
-	// schoolLongMin = '-76.1';
-	// schoolLatMax = '42.4';
-	// schoolLatMin = '41.7';
-	// schoolFriendMin = 60;
-	// schoolName = 'Binghamton';
-	// emailEnding = '@binghamton.edu';
-	// console.log(schoolItem);
-	// models.School.find(function(err, result){
-	// 	console.log(result);
-	// });
-
-// , {schoolName: schoolName}
-
-// app.get('/michLogin', function(req, res){
-//   res.render("Login");
-// });
-
-
-// //userProfId = result.id;
-// 			userGender = result.gender;
-// 			userEmail = result.email.toLowerCase();
-// 			schoolFriendCount = 0;
-// 			firstNameLetter = result.name[0].toLowerCase();
-
-
-				// var allEventKeysInAnArray = Object.keys(listOfAllEvents);
-				// var yourEventKeysInAnArray = Object.keys(yourEvents).forEach(function(eventKey){eventKey.replace(".","_");});
-
-				// console.log(yourEventKeysInAnArray);
-
-				// cleanAllEvents = allEventKeysInAnArray.forEach(function(eventKey){
-				// 	eventKey.replace(".","_");
-				// });
-				// cleanYourEvents = yourEventKeysInAnArray.forEach(function(eventKey){
-				// 	eventKey.replace(".","_");
-				// });
-								// for(var index in yourEvents) { var attr = object[index];
-				// 	console.log(attr);
-				// }
-				// friendlyEvents = yourEvents.forEach(function(eventKey){
-				// 	console.log(eventKey);
-				// })
-
 
 app.get('/personalEventDisplay', function(req, res) {
-			// console.log(user.schoolFriendCount);
-		// console.log('made it to ped');
-
 							School.findOneAndUpdate({schoolName: schoolItem.schoolName},
 							{schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
 								console.log('School Events Saved');
 							});
 		console.log(schoolItem.schoolFriendMin);
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-		 	// console.log({firstNameLetter: firstNameLetter,
-				// 	  schoolFriendCount: schoolFriendCount,
-				// 	  userProfId: userProfId,
-				// 	  userName: userName,
-				// 	  userGender: userGender,
-				// 	  userEmail: userEmail,
-				// 	  personalEvents: yourEvents,
-				// 	  allEvents: listOfAllEvents,
-				// 	  school: schoolItem.schoolName});
-
-// personalEvents: yourEvents,
-// 					  allEvents: listOfAllEvents,
-// allEvents: listOfAllEvents,
-// userEmail: userEmail,
-			// pullSchoolEventsFunc();
 
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
@@ -319,17 +253,10 @@ app.get('/personalEventDisplay', function(req, res) {
 					  function(err,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+userName);}
-					  	// console.log(res);
 					  });
-					// console.log(user.yourEvents);
-					// user.save(function (err, person) {
-			  // 		if (err){ return console.error(err);}
-					// });
 
-
- 		 	// console.log(user);
 			res.render('personalEventDisplay', {friends: yourEvents, school: schoolItem.schoolName});
-			// console.log(yourEvents);
+
 		}
 		else{
 			res.render('Login2',{schoolName: schoolItem.schoolName});}
@@ -338,33 +265,13 @@ app.get('/personalEventDisplay', function(req, res) {
 
 app.get('/allEvents', function(req, res) {
 		if(schoolFriendCount>=schoolItem.schoolFriendMin||userEmail.indexOf(schoolItem.emailEnding)>-1){
-			// console.log()
 				res.render('allEvents', {friends: listOfAllEvents})}
 		else{
 			res.render('Login2',{schoolName: schoolItem.schoolName});}
 	});
 
-// app.get('/UserHasLoggedIn', function(req, res) {
-//   res.render("index", { title: "Logged In" });
-// });
-
-
-
-
-
-
-
-
 app.get('/auth/facebook', function(req, res) {
-// 	var options = {
-//     timeout:  3000
-//   , pool:     { maxSockets:  Infinity }
-//   , headers:  { connection:  "keep-alive" }
-// };
-  // we don't have a code yet
-  // so we'll redirect to the oauth dialog
 
-  // console.log('now im here');
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
         "client_id":     conf.client_id
@@ -379,7 +286,7 @@ app.get('/auth/facebook', function(req, res) {
       res.send('access denied');
     }
     return;
-  	}
+  }
 
   // code is set
   // we'll send that and get the access token
@@ -390,21 +297,11 @@ app.get('/auth/facebook', function(req, res) {
     , "code":           req.query.code
 
   	}, function (err, facebookRes) {
-  		// console.log(err);
-
-    // console.log('here');
      graph.setAccessToken(facebookRes.access_token);
-     // console.log(app_secret);
      graph.setAppSecret(conf.client_secret);
-     // graph.setOptions(options);
-     // console.log('now here');
-     // console.log(graph.get("/me?fields=id"));
-     // userProfId = "";
-     // userGender = "";
-     // console.log('ive made it here');
-     graph.get("/me",function(err,result) {
+
+    graph.get("/me",function(err,result) {
 			userProfId = result.id;
-			// console.log(facebookRes.access_token);
 			userName = result.name;
 			userGender = result.gender;
 			if(result.email){
@@ -414,294 +311,113 @@ app.get('/auth/facebook', function(req, res) {
 				userEmail = 'none';
 			}
 			schoolFriendCount = 0;
-			// console.log(result.name)
 			firstNameLetter = result.name[0].toLowerCase();
-			// friendMinimum = schoolFriendMin;
 
-//CAAU8ZCceQ31wBAOmmTcy08idNK7MBsGZA8BeYHsOsyy1bAQ8Epxd6Cn4cZBPHMPFroJ3p0ZAzlexPW5YsrUdZBkh7Yh3ZC2ImUZBnaZC89jU1DWH7Uue7m6FZAoPwRceQZAfn2EbQtxRsbdX4CALd7oHZAAnCpZAhpARCPkfhVRQfy7ZAAfa5g2NSEr9e
-
-//1375623240
-
-			// graph.get("/me?fields=friends.fields(education,name)", function(err,result) {
-
-
-
-
-//this graph .get below needs a dynamic user
-// var userID = '1424263346'
-// var userID = '/me';
-// userEmail="ngrotti1@binghamton.edu"
-// console.log(userEmail);
-
-// events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")),
-
-// graph.get("1424263346?fields=friends.fields(events.fields(picture))", function(err,res1){
-// 	console.log(res1.friends.data[0].picture.data.url);
-// });
-
-//cover not working for some reason
-//cover,privacy,education,
-// ,maybe.user("+userProfId+"), attending.user(" +userProfId+")
-//maybe.user("+userProfId+"), attending.user(" +userProfId+")
-		// graph.get("/me?fields=friends.fields(education,events.fields(description,cover,start_time,location,name,privacy,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
-			// console.log(res);
-	graph.get("/me?fields=friends.limit(630).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, result) {
+	graph.get("/me?fields=friends.limit(700).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
 		// result.friends=undefined;
-		// console.log('here');
-		//first set yourEvents with school events, then yourEvents stuff
-		if(!result.friends){
-			// console.log('shouldnt be here');
-			User.findOne({userProfId: userProfId}, function(err, user){
-				if (user&&user.school==schoolItem.schoolName){
-					console.log('First query didnt work, User Exists');
-					schoolFriendCount=301;
-					graph.get("/me?fields=events.limit(400).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
-							// result=result;
-							popYoursAndSchoolEvents(result);
-							pullSchoolEventsFunc();
-								setTimeout(res.redirect('personalEventDisplay'),3400);
 
-							// console.log('here11');
-							// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
-							// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
-							// 	console.log('School Events Saved');
-							// });
-							// console.log(result+'result 1');
-						})
-					// console.log('User Exists');
-				}
-				else{
-					console.log('first query didnt work, User does not Exist');
-					graph.get("/me?fields=friends.limit(250).fields(education),events.limit(250).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
-							popYoursAndSchoolEvents(result);
-							friendChecker(result);
-						// setTimeout(console.log('time'),9000);
+		if(!firstQresult.friends){//if the first query broke/did not work
 
+			User.findOne({userProfId: userProfId}, function(err, user){//look for the user
+
+				if (user&&user.school==schoolItem.schoolName){//if user is already existing
+					console.log('First query didnt work, User Exists');//skip education process, events, then display
+
+					schoolFriendCount=301;//allow entrance
+									//find their own events with a smaller query
+					graph.get("/me?fields=events.limit(400).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,smallResult){
+
+							popYoursAndSchoolEvents(smallResult);
 							pullSchoolEventsFunc();
 							setTimeout(res.redirect('personalEventDisplay'),3400);
+						})
+				}
+				else{//user does not exist
+					console.log('first query didnt work, User does not Exist');
 
-
-						// School.findOneAndUpdate({schoolName: schoolItem.schoolName},
-						// {schoolEvents:schoolItem.schoolEvents},{upsert: true},function(req,res){
-						// 	console.log('School Events Updated');
-						// });
+					graph.get("/me?fields=friends.limit(250).fields(education),events.limit(250).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,queryResult){//do education and event grab
+							popYoursAndSchoolEvents(queryResult);
+							pullSchoolEventsFunc();
+							friendChecker(queryResult);
+							setTimeout(res.redirect('personalEventDisplay'),3400);
 						})
 				}
 			});
 		}//end of if original query didnt work
-		else{
-			// popYoursAndSchoolEvents(result);
-			User.findOne({userProfId: userProfId}, function(err, user){
+		else{//if original query did work
+			User.findOne({userProfId: userProfId}, function(err, user){//search for user
 
-				if(user&&user.school==schoolItem.schoolName){
-					schoolFriendCount=301;
+				if(user&&user.school==schoolItem.schoolName){//if user exists
+					schoolFriendCount=301;//allow access
 					console.log('User exists and 1st query worked');
-
-					setTimeout(res.redirect('personalEventDisplay'),3400);
 					// redirectMe = 'yes';
 				}
-				else{
+				else{//if user doesnt exist
 					console.log('1st query worked, user doesnt exist, starting to scan education');
-					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,result){
+					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,eduResult){
+
 						console.log('got to friend checker');
-						// console.log(result);
-						friendChecker(result);
-						setTimeout(res.redirect('personalEventDisplay'),3400);
-					});
-				}
 
-			});
-
-	 	 var friends = result.friends.data.filter(function(friend){
-	 	 		if (friend.events){
-	 	 			return true;
-	 	 		}
-	 	 });
-	 	 // var eachFriend = {};
-	 	 listOfAllEvents = {};
-
-	 		friends.forEach(function(friend){
-
-	 	 		// oneFriendsEvents = friend.events.data.map(function(singleEvent){
-
-	 	 		// 	// console.log(startDay);
-		 	 	// 		return(singleEvent.name);});
+						friendChecker(eduResult);
 
 
-	 	 		setEventsList = friend.events.data.map(function(singleEvent){
+					});//end of education query
+				}//else end of if user doesnt exist and 1st query worked
 
-	 	 // 			setEventsPics = {
-	 	 // 				listOfAllEvents[singleEvent.name] = {cover:
-				// }
+//proceed to put all events into an object with event names being the keys
+	 var friends = firstQresult.friends.data.filter(function(friend){
+ 	 		if (friend.events){
+ 	 			return true;
+ 	 		}
+ 	 });
 
-	 	 				// 	listOfAllEvents[singleEvent.name][location]='"Location: "+singleEvent.location'
-	 	 				// }
+	friends.forEach(function(friend){
+
+		setEventsList = friend.events.data.map(function(singleEvent){
+
 					startMonth = singleEvent.start_time.split('-')[1];
 	 	 			startDay = singleEvent.start_time.split('-')[2].split('T')[0];
 	 	 			startYear = singleEvent.start_time.split('-')[0];
-	 	 			// console.log(startDay);
 
-//beginDay: "Event Date: "+singleEvent.start_time.split('T')[0],beginTime: "Event Time: "+singleEvent.start_time.split('T')[1],
+ 		// 		if (singleEvent.cover){
+								// 	listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy,start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
+
+								// }
+
 
 	 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
-	 	 				// console.log(singleEvent.picture);
-	 	 				if (singleEvent.cover){
-							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy,start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
-							// console.log(singleEvent.cover.source);
-						}
-						//privacy: "Privacy: "+singleEvent.privacy,, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,
-						else{
-							listOfAllEvents[singleEvent.name.replace(/\./g,"")] = { start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description};
-						}
-						// else{
-						// 	listOfAllEvents[singleEvent.name] = {privacy: "Privacy: "+singleEvent.privacy, begins: "Event Starts: "+singleEvent.start_time, description:"Event Description: " + singleEvent.description};}
+			 	 		listOfAllEvents[singleEvent.name.replace(/\./g,"")] = singleEvent;
+			 	 				if (singleEvent.venue){
+			 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['longitude']="Longitude: "+singleEvent.venue.longitude;
+			 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['latitude']="Latitude: "+singleEvent.venue.latitude;
+			 	 				}
+			 	 				if (singleEvent.cover){
+			 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['cover'] = singleEvent.cover.source;
+			 	 				}
 
-						if (singleEvent.location){
-	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['location']="Location: "+singleEvent.location;
-	 	 					// console.log(singleEvent.name);
-	 	 				}
-	 	 				if (singleEvent.venue){
-	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['longitude']="Longitude: "+singleEvent.venue.longitude;
-	 	 					listOfAllEvents[singleEvent.name.replace(/\./g,"")]['latitude']="Latitude: "+singleEvent.venue.latitude;
-
-	 	 					// console.log(singleEvent.name);
-	 	 				}
-	 	 				// if (singleEvent.cover){
-	 	 				// 	listOfAllEvents[singleEvent.name]['cover']=singleEvent.cover.source;
-	 	 				// 	// console.log(singleEvent.name);
-	 	 				// }
-	 	 			}});
-
-// console.log(eventsInfo);
-
- 			// eachFriend[friend.id] = oneFriendsEvents;
-	 	 	//end of friends.map
-
-	 		// console.log(eachEvent);
-
-			// myEvents = result.events.data.map(function(myEvent){
-			// 	console.log(myEvent.cover);
-			// 	if(myEvent.cover){
-			// 		return myEvent.cover.source;
-			// 	}
-
-//below is the binghamton filter
+ 	 			}//end of date check
+ 	 		});//set events list
+		});//friends.forEach
+			eventPopulater(listOfAllEvents);
 
 
-
-				var allEventsInAnArray = Object.keys(listOfAllEvents);
-				// yourEvents = {};
-						if (!schoolItem.schoolEvents){
-							schoolItem.schoolEvents = {};
-						}
-						else{}
-							// startMonth = singleEvent.start_time.split('-')[1];
-			 	 	// 		startDay = singleEvent.start_time.split('-')[2].split('T')[0];
-			 	 	// 		startYear = singleEvent.start_time.split('-')[0];
-							// var schoolEventsInAnArray = Object.keys(schoolItem.schoolEvents);
-
-				for (i=0;i<allEventsInAnArray.length;i++){
-					// startMonth = listOfAllEvents[allEventsInAnArray[i]].begins.split('-')[1];
-					// startDay = listOfAllEvents[allEventsInAnArray[i]].begins.split('-')[2].split('T')[0];
-					// console.log(startDay);
-
-////////////
-					if (listOfAllEvents[allEventsInAnArray[i]].imGoing||listOfAllEvents[allEventsInAnArray[i]].maybeGoing){
-						yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-						// console.log(listOfAllEvents[allEventsInAnArray[i]]);
-						// console.log(listOfAllEvents[allEventsInAnArray[i]].imGoing);
-					}
-					if (listOfAllEvents[allEventsInAnArray[i]].longitude){
-						longValue = listOfAllEvents[allEventsInAnArray[i]].longitude.split(' ')[1];
-						latValue = listOfAllEvents[allEventsInAnArray[i]].latitude.split(' ')[1];
-
-						//this is the only specific to bing parts
-						if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){
-							yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-							schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-						}
-						if (listOfAllEvents[allEventsInAnArray[i]].location){
-							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolTown)>-1){
-								yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-								schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-							}
-						}
-					}
-				}
-				// console.log('School Event Populated');
-
-			});
-
-			// res.redirect('/personalEventDisplay');
-		}
-// //User.findOneAndUpdate({userProfId: userProfId},
-// 		 				{firstNameLetter: firstNameLetter,
-// 					  schoolFriendCount: schoolFriendCount,
-// 					  userProfId: userProfId,
-// 					  userName: userName,
-// 					  personalEvents: yourEvents,
-// 					  userGender: userGender,
-// 					  userEmail: userEmail,
-
-// 					  school: schoolItem.schoolName},
-// 					  {upsert: true},
+		});//user.findone end
+	}//end of else from query 1 succeeding
 
 
+	// oneFriendsEvents = friend.events.data.map(function(singleEvent){
 
-			// schoolItem.save(function (err, person) {
-			//   if (err){ return console.error(err);}
-			//   // else{console.log(person);}
-			// });
-				// console.log(bingEvents);
+ 	// eachFriend[friend.id] = oneFriendsEvents;
 
-// &&startMonth>=currentMonth&&startDay>=currentDay
+			setTimeout(res.redirect('personalEventDisplay'),3400);
 
-			//  	var myEventInfo = {};
-			// 	myEvents = result.events.data.map(function(myEvent){
+					});//end of graph.get(first query)
 
-			// 	if(myEvent.cover&&myEvent.venue){
-			// 		myEventInfo[myEvent.name] = {cover:"Cover Photo: "+myEvent.cover.source, longitude: "Longitude: "+myEvent.venue.longitude,latitude: "latitude: "+myEvent.venue.latitude, maybeGoing: myEvent.maybe,imGoing: myEvent.attending, privacy: "Privacy: "+myEvent.privacy, begins: "Event Starts: "+myEvent.start_time, description:"Event Description: " + myEvent.description};
-			// 		// console.log(myEventInfo[myEvent.name]);
-			// 	}
-			// 	else if(myEvent.venue) {
-			// 		myEventInfo[myEvent.name] = {longitude: "Longitude: "+myEvent.venue.longitude,latitude: "latitude: "+myEvent.venue.latitude, maybeGoing: myEvent.maybe,imGoing: myEvent.attending, privacy: "Privacy: "+myEvent.privacy, begins: "Event Starts: "+myEvent.start_time, description:"Event Description: " + myEvent.description};
-			// 	}
-			// 	else{
-			// 		myEventInfo[myEvent.name] = {privacy: "Privacy: "+myEvent.privacy,maybeGoing: myEvent.maybe,imGoing: myEvent.attending, begins: "Event Starts: "+myEvent.start_time, description:"Event Description: " + myEvent.description};
-			// 	}
+ 			});//graph.get(me) end
 
-			// });
+	}); //graph.authorize end
+}); //end of /auth/facebook
 
-
-// , myEvents: myEventInfo}, myEvents: myEventInfo} ## for use my personal events data
-
-// console.log('all da way here');
-		// console.log(listOfAllEvents);
-
-
-	 	 // res.render('index', {friends: eachFriend, myEvents: myEvents});
-		});//end of get auth
-// res.redirect('/allEvents');
-
-// else{
-// 	// window.alert('Sorry, this section is for Binghamton students only');
-// 	res.redirect("/bingLogin2");
-// 	// res.redirect("/denied");
-// }
-// res.redirect('/UserHasLoggedIn');
- });//end of callback
-// });
-}); //end of get me
-}); //end of authentication
-
-// user gets sent here after being authorized
-
-
-// app.get('/showResult', function(req,res){
-// 	res.render("index", {title: req})
-// });
-
-// app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
