@@ -452,7 +452,7 @@ app.get('/auth/facebook', function(req, res) {
 			// console.log('shouldnt be here');
 			User.findOne({userProfId: userProfId}, function(err, user){
 				if (user&&user.school==schoolItem.schoolName){
-					console.log('User Exists');
+					console.log('First query didnt work, User Exists');
 					schoolFriendCount=301;
 					graph.get("/me?fields=events.limit(400).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 							// result=result;
@@ -470,12 +470,12 @@ app.get('/auth/facebook', function(req, res) {
 					// console.log('User Exists');
 				}
 				else{
-					console.log('User does not Exist');
-					graph.get("/me?fields=friends.limit(350).fields(education),events.fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
-
-						friendChecker(result);
-						// setTimeout(console.log('time'),9000);
+					console.log('first query didnt work, User does not Exist');
+					graph.get("/me?fields=friends.limit(250).fields(education),events.limit(250).fields(cover,privacy,name,location,start_time,description,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+"))",function(err,result){
 							popYoursAndSchoolEvents(result);
+							friendChecker(result);
+						// setTimeout(console.log('time'),9000);
+
 							pullSchoolEventsFunc();
 							setTimeout(res.redirect('personalEventDisplay'),3400);
 
@@ -500,7 +500,7 @@ app.get('/auth/facebook', function(req, res) {
 					// redirectMe = 'yes';
 				}
 				else{
-					console.log('1st query worked, scanning education');
+					console.log('1st query worked, user doesnt exist, starting to scan education');
 					graph.get("/me?fields=friends.limit(500).fields(education)",function(err,result){
 						console.log('got to friend checker');
 						// console.log(result);
