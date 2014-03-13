@@ -472,7 +472,7 @@ app.get('/auth/facebook', function(req, res) {
 		}//end of if original query didnt work
 		else{
 			User.findOne({userProfId: userProfId}, function(err, user){
-
+				user=undefined;
 				if(user&&user.school==schoolItem.schoolName){
 					schoolFriendCount=301;
 					console.log('User exists and 1st query worked');
