@@ -196,7 +196,7 @@ app.post('/loginTry2', function(req, res){
 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
 			 		schoolFriendCount=301;
-			 		pullSchoolEventsFunc();
+			 		// pullSchoolEventsFunc();
 			 		res.redirect('/personalEventDisplay');
 			 	}
 			 	else{
@@ -314,7 +314,7 @@ app.get('/auth/facebook', function(req, res) {
 			firstNameLetter = result.name[0].toLowerCase();
 
 	graph.get("/me?fields=friends.limit(700).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
-		// result.friends=undefined;
+		firstQresult.friends=undefined;
 
 		if(!firstQresult.friends){//if the first query broke/did not work
 
@@ -329,7 +329,7 @@ app.get('/auth/facebook', function(req, res) {
 
 							popYoursAndSchoolEvents(smallResult);
 							pullSchoolEventsFunc();
-							setTimeout(res.redirect('personalEventDisplay'),3400);
+							setTimeout(function() { res.redirect('personalEventDisplay'); },3400);
 						})
 				}
 				else{//user does not exist
@@ -339,8 +339,8 @@ app.get('/auth/facebook', function(req, res) {
 							popYoursAndSchoolEvents(queryResult);
 							pullSchoolEventsFunc();
 							friendChecker(queryResult);
-							setTimeout(res.redirect('personalEventDisplay'),3400);
-						})
+							setTimeout(function() { res.redirect('personalEventDisplay'); },3400);
+					})
 				}
 			});
 		}//end of if original query didnt work
@@ -379,12 +379,6 @@ app.get('/auth/facebook', function(req, res) {
 	 	 			startDay = singleEvent.start_time.split('-')[2].split('T')[0];
 	 	 			startYear = singleEvent.start_time.split('-')[0];
 
- 		// 		if (singleEvent.cover){
-								// 	listOfAllEvents[singleEvent.name.replace(/\./g,"")] = {cover: singleEvent.cover.source, privacy: "Privacy: "+singleEvent.privacy,start_time:singleEvent.start_time, description:"Event Description: " + singleEvent.description, imGoing: singleEvent.attending, maybeGoing: singleEvent.maybe,};
-
-								// }
-
-
 	 	 		if (startMonth>=currentMonth&&startDay>=currentDay&&startYear>=currentYear){
 			 	 		listOfAllEvents[singleEvent.name.replace(/\./g,"")] = singleEvent;
 			 	 				if (singleEvent.venue){
@@ -402,14 +396,11 @@ app.get('/auth/facebook', function(req, res) {
 
 
 		});//user.findone end
+			setTimeout(function() {res.redirect('personalEventDisplay') },3400);
 	}//end of else from query 1 succeeding
 
 
-	// oneFriendsEvents = friend.events.data.map(function(singleEvent){
 
- 	// eachFriend[friend.id] = oneFriendsEvents;
-
-			setTimeout(res.redirect('personalEventDisplay'),3400);
 
 					});//end of graph.get(first query)
 
@@ -424,6 +415,9 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 
+	// oneFriendsEvents = friend.events.data.map(function(singleEvent){
+
+ 	// eachFriend[friend.id] = oneFriendsEvents;
 
 
 
