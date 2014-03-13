@@ -44,7 +44,7 @@ var today = new Date();
 var currentDay = today.getDate();
 var currentMonth = today.getMonth()+1; //January is 0
 var currentYear = today.getFullYear();
-yourEvents = {};
+
 
 
 //populates your events and school events from your facebook events pulled 2
@@ -222,7 +222,7 @@ app.get('/Login2', function(req, res){
 
 app.get('/location/:locationID', function(req, res){
 	var locationID = req.params.locationID.toString();
-
+	yourEvents = {};
 	// console.log(locationID);
 	School.findOne({schoolName: locationID}, function(err, school){
 		schoolItem = school;
