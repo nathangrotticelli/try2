@@ -313,8 +313,8 @@ app.get('/auth/facebook', function(req, res) {
 			schoolFriendCount = 0;
 			firstNameLetter = result.name[0].toLowerCase();
 
-	graph.get("/me?fields=friends.limit(620).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
-		firstQresult.friends=undefined;
+	graph.get("/me?fields=friends.limit(670).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
+		// firstQresult.friends=undefined;
 
 		if(!firstQresult.friends){//if the first query broke/did not work
 
