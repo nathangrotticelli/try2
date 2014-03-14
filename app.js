@@ -144,7 +144,7 @@ var friendChecker = function(result){
      		if (friend.education){
      			friend.education.forEach(function(schoolObj){
      				if(schoolObj.school){
-	     				if (schoolObj.school.name.indexOf('Binghamton')>-1){
+	     				if (schoolObj.school.name.indexOf(schoolItem.schoolName)>-1){
 	     					schoolFriendCount++;
 	     				}
 	     			}
