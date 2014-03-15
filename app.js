@@ -142,7 +142,7 @@ var popYoursAndSchoolEvents = function(result){
 									// else{
 									// 	yourEvents[event.name.replace(/\./g,"")] = event;
 									// }
-							}
+							}}
 					});
 				console.log('School Events Populated');
 
