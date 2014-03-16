@@ -73,12 +73,16 @@ var eventPopulater = function(listOfAllEvents){
 						if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){//if close to school
 
 							yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-							schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+							if(listOfAllEvents[allEventsInAnArray[i]].privacy!='SECRET'){
+								schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+							}
 						}
 						if (listOfAllEvents[allEventsInAnArray[i]].location){
 							if (listOfAllEvents[allEventsInAnArray[i]].location.indexOf(schoolItem.schoolTown)>-1){//if close to school
 								yourEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
-								schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+								if(listOfAllEvents[allEventsInAnArray[i]].privacy!='SECRET'){
+									schoolItem.schoolEvents[allEventsInAnArray[i]] = listOfAllEvents[allEventsInAnArray[i]];
+								 }
 							}
 						}
 					}
@@ -107,30 +111,37 @@ var popYoursAndSchoolEvents = function(result){
 
 										if (longValue<=schoolItem.schoolLongMax&&longValue>=schoolItem.schoolLongMin&&latValue<=schoolItem.schoolLatMax&&latValue>=schoolItem.schoolLatMin){
 											yourEvents[event.name.replace(/\./g,"")] = event;
-											schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+											if(event.privacy!='SECRET'){
+												schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+											}
 										}
-										else{
-											yourEvents[event.name.replace(/\./g,"")] = event;
-										}
+										// else{
+										// 	yourEvents[event.name.replace(/\./g,"")] = event;
+										// }
 									}
 				 	 			}
 
-									if (event.location){
+								if (event.location){
 										if (event.location.indexOf(schoolItem.schoolTown)>-1){
 												yourEvents[event.name.replace(/\./g,"")] = event;
-												schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+												if(event.privacy!='SECRET'){
+													schoolItem.schoolEvents[event.name.replace(/\./g,"")] = event;
+												}
 										}
-										else{
-												yourEvents[event.name.replace(/\./g,"")] = event;
-										}
-									}
-									if (event.cover){
-										yourEvents[event.name.replace(/\./g,"")] = event;
+										// else{
+										// 		yourEvents[event.name.replace(/\./g,"")] = event;
+										// }
+								}
+								if (event.cover){
+										// yourEvents[event.name.replace(/\./g,"")] = event;
 				 	 					yourEvents[event.name.replace(/\./g,"")]['cover']=event.cover.source;
-				 	 				}
-									else{
-										yourEvents[event.name.replace(/\./g,"")] = event;
-									}
+				 	 					if(event.privacy!='SECRET'){
+												schoolItem.schoolEvents[event.name.replace(/\./g,"")]['cover']=event.cover.source;
+										}
+				 	 			}
+									// else{
+									// 	yourEvents[event.name.replace(/\./g,"")] = event;
+									// }
 							}
 					});
 				console.log('School Events Populated');
@@ -312,8 +323,8 @@ app.get('/auth/facebook', function(req, res) {
 			}
 			schoolFriendCount = 0;
 			firstNameLetter = result.name[0].toLowerCase();
-
-	graph.get("/me?fields=friends.limit(670).fields(events.fields(description,cover,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
+//first query
+	graph.get("/me?fields=friends.limit(670).fields(events.fields(description,cover,privacy,start_time,location,name,venue,maybe.user("+userProfId+"), attending.user(" +userProfId+")))", function(err, firstQresult) {
 		// firstQresult.friends=undefined;
 
 		if(!firstQresult.friends){//if the first query broke/did not work

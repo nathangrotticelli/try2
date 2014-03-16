@@ -1,13 +1,12 @@
-models = require('./models');
+// models = require('./models');
 
-// var User = models.User;
-var School = models.School;
+// var School = models.School;
 
 
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
 // School.remove({}, function(err) {
-   console.log('collection removed')
+//    console.log('collection removed')
 
 
 console.log("Inserting data");
@@ -103,22 +102,9 @@ process.exit();
 // 							  else{
 // 							  	console.log('saved: UI');
 // 							  	setTimeout(process.exit,3000);
-
-// 							  	// School.findOne({schoolName: 'University of Illinois at Urbana-Champaign'},function(req,res){
-// 										// 	console.log(res)
-// 										// });
 // 							  }
 // 							});
-// 				// 	School.findOne({schoolName: 'Binghamton'},function(req,res){
-// 				// 	console.log(res)
-// 				// });
 
-// // console.log("Control-C to quit");
-// // };
-
-// // schoolUpload(function(req,res){
-// // 	console.log('done');
-// // });
 
 // });
 // schoolUpload();
