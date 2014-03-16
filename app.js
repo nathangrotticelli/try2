@@ -35,6 +35,18 @@ var currentDay = today.getDate();
 var currentMonth = today.getMonth()+1; //January is 0
 var currentYear = today.getFullYear();
 
+//calculates age
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 
 
 //populates yourEvents for successful 1st queries
@@ -255,6 +267,7 @@ app.get('/personalEventDisplay', function(req, res) {
 		 				{firstNameLetter: firstNameLetter,
 					  schoolFriendCount: schoolFriendCount,
 					  userProfId: userProfId,
+					  userAge: userAge,
 					  userName: userName,
 					  personalEvents: yourEvents,
 					  userGender: userGender,
@@ -315,6 +328,7 @@ app.get('/auth/facebook', function(req, res) {
 			userProfId = result.id;
 			userName = result.name;
 			userGender = result.gender;
+			userAge = getAge(result.birthday);
 			if(result.email){
 				userEmail = result.email.toLowerCase();
 			}

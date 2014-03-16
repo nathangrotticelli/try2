@@ -11,6 +11,7 @@ var userSchema = new Schema({
   firstNameLetter: String,
   schoolFriendCount: String,
   userProfId: String,
+  userAge: Number,
   userGender: String,
   userName: String,
   userEmail: String,
