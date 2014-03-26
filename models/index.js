@@ -19,6 +19,22 @@ var userSchema = new Schema({
   school: String
 });
 
+//event schema
+
+//name of the event is the key
+//description: string
+// cover: string(image source url)
+// privacy: string (OPEN,SECRET)
+// start_time: string (2014-03-22T21:00:00-0400')
+// location: string (65 Front Street Binghamton NY')
+// name: string (Awesome Frat Party!)
+// venue: object (includes venue info including long, lat)
+// id: number (facebook event id i believe)
+// longitude: string ("Longitude: (val)")
+// latitude: string ("Latitude: (val)")
+
+
+
 var schoolSchema = new Schema({
   emailEnding: String,
   schoolFriendMin: Number,
