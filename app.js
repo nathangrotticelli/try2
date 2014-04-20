@@ -312,27 +312,26 @@ School.findOne({schoolName: 'Binghamton'}, function(err, school){
 var regExNums = /[0-9]/g;
 
 app.post('/userPost',function(req,res){
-			console.log(req);
-			console.log(req.body);
-			console.log(req.body.userName);
-			console.log(req.userName);
+			// console.log(req);
+			// console.log(req.body);
+			// console.log(req.body.userName);
+			User.findOneAndUpdate({userProfId: req.body.userProfId},
+		 				{firstNameLetter: req.body.firstNameLetter,
+					  schoolFriendCount: req.body.schoolFriendCount,
+					  userProfId: req.body.userProfId,
+					  userAge: req.body.userAge,
+					  userName: req.body.userName,
+					  personalEvents: req.body.yourEvents,
+					  userGender: req.body.userGender,
+					  userEmail: req.body.userEmail},
+					  {upsert: true},
+					  function(err,res){
+					  	if(err){console.log(err.message)}
+					  	else{console.log("User Updated: "+req.body.userName);}
+					  });
 
 			res.json({success:'Worked!'});
-		 	// User.findOneAndUpdate({userProfId: req.userProfId},
-		 	// 			{firstNameLetter: firstNameLetter,
-				// 	  schoolFriendCount: schoolFriendCount,
-				// 	  userProfId: userProfId,
-				// 	  userAge: userAge,
-				// 	  userName: userName,
-				// 	  personalEvents: yourEvents,
-				// 	  userGender: userGender,
-				// 	  userEmail: userEmail,
-				// 	  school: schoolItem.schoolName},
-				// 	  {upsert: true},
-				// 	  function(err,res){
-				// 	  	if(err){console.log(err.message)}
-				// 	  	else{console.log("User Updated: "+userName);}
-				// 	  });
+		 	//
 
 });
 
