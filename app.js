@@ -312,7 +312,10 @@ School.findOne({schoolName: 'Binghamton'}, function(err, school){
 var regExNums = /[0-9]/g;
 
 app.post('/userPost',function(req,res){
-			console.log('message good: '+JSON.stringify(req));
+			console.log(req);
+			console.log(req.body);
+			console.log(req.body.userName);
+			console.log(req.userName);
 
 			res.json({success:'Worked!'});
 		 	// User.findOneAndUpdate({userProfId: req.userProfId},
