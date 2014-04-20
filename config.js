@@ -12,7 +12,7 @@ module.exports =
 
     client_id:      '1474435556106076'
   , client_secret:  '00afc8e4df8e0f46ce547c59bf67378b'
-  , scope:          'user_events, email,user_about_me,user_friends,friends_events,friends_education_history,friends_actions.news,friends_activities,basic_info'
+  , scope:          'user_events, email,user_about_me,friends_events,friends_education_history,friends_actions.news,friends_activities'
   , redirect_uri: red_uri
 
 };

@@ -311,6 +311,26 @@ School.findOne({schoolName: 'Binghamton'}, function(err, school){
 
 var regExNums = /[0-9]/g;
 
+app.post('/userPost',function(req,res){
+			console.log('message good: '+req);
+		 	// User.findOneAndUpdate({userProfId: userProfId},
+		 	// 			{firstNameLetter: firstNameLetter,
+				// 	  schoolFriendCount: schoolFriendCount,
+				// 	  userProfId: userProfId,
+				// 	  userAge: userAge,
+				// 	  userName: userName,
+				// 	  personalEvents: yourEvents,
+				// 	  userGender: userGender,
+				// 	  userEmail: userEmail,
+				// 	  school: schoolItem.schoolName},
+				// 	  {upsert: true},
+				// 	  function(err,res){
+				// 	  	if(err){console.log(err.message)}
+				// 	  	else{console.log("User Updated: "+userName);}
+				// 	  });
+
+});
+
 app.post('/loginTry2', function(req, res){
 	 var loginTryEmail = req.body.name;
 	 console.log(loginTryEmail);
