@@ -313,6 +313,7 @@ var regExNums = /[0-9]/g;
 
 app.post('/userPost',function(req,res){
 			console.log('message good: '+req);
+			res.JSON({success:'Worked!'});
 		 	// User.findOneAndUpdate({userProfId: userProfId},
 		 	// 			{firstNameLetter: firstNameLetter,
 				// 	  schoolFriendCount: schoolFriendCount,
