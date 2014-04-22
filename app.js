@@ -299,11 +299,11 @@ var data = [
      latitude: 'Latitude: undefined' }
     ];
 
-app.get('/userGet', function(req,res){
+app.post('/getSchool', function(req,res){
 
-School.findOne({schoolName: 'Binghamton'}, function(err, school){
+School.findOne({schoolName: req}, function(err, school){
 		schoolItem = school;
-		console.log('this is schoolItem:',schoolItem);
+		console.log('Fetched Info for: ',schoolItem.name);
 		res.json({Item: schoolItem});
 
 	});
@@ -329,7 +329,7 @@ app.post('/userPost',function(req,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
-
+			console.log('fetched school data from server, responding');
 			res.json({success:'Worked!'});
 		 	//
 
