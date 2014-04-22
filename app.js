@@ -304,9 +304,9 @@ incSchoolName = req.body.schoolName;
 console.log(incSchoolName);
 
 School.findOne({schoolName: 'Binghamton'}, function(err, school){
-		console.log(err);
+		console.log('error?: 'err);
 		schoolItem = school;
-		console.log('Fetched Info for: '+schoolItem.name);
+		console.log('Fetched Info for: '+schoolItem.schoolName);
 		res.json({Item: schoolItem});
 
 	});
