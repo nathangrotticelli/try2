@@ -300,10 +300,10 @@ var data = [
     ];
 
 app.post('/getSchool', function(req,res){
-
+console.log(req);
 School.findOne({schoolName: req}, function(err, school){
 		schoolItem = school;
-		console.log('Fetched Info for: ',schoolItem.name);
+		console.log('Fetched Info for: '+schoolItem.name);
 		res.json({Item: schoolItem});
 
 	});
@@ -329,7 +329,7 @@ app.post('/userPost',function(req,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
-			console.log('fetched school data from server, responding');
+			console.log('stored user data on server, responding');
 			res.json({success:'Worked!'});
 		 	//
 
