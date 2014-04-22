@@ -300,8 +300,10 @@ var data = [
     ];
 
 app.post('/getSchool', function(req,res){
-console.log(req);
-School.findOne({schoolName: req}, function(err, school){
+incSchoolName = req.body.schoolName;
+console.log(incSchoolName);
+
+School.findOne({schoolName: incSchoolName}, function(err, school){
 		schoolItem = school;
 		console.log('Fetched Info for: '+schoolItem.name);
 		res.json({Item: schoolItem});
