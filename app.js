@@ -303,7 +303,8 @@ app.post('/getSchool', function(req,res){
 incSchoolName = req.body.schoolName;
 console.log(incSchoolName);
 
-School.findOne({schoolName: incSchoolName}, function(err, school){
+School.findOne({schoolName: 'Binghamton'}, function(err, school){
+		console.log(err);
 		schoolItem = school;
 		console.log('Fetched Info for: '+schoolItem.name);
 		res.json({Item: schoolItem});
