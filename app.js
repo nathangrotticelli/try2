@@ -310,7 +310,25 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 		res.json({Item: schoolItem});
 
 	});
-  });
+});
+
+app.post('/schoolPost', function(req,res){
+
+
+School.findOneAndUpdate({schoolName: req.body.schoolName},
+            {
+              schoolEvents: req.body.schoolEvents,
+              timestamp: req.body.timestamp
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User Updated: "+req.body.userName);}
+            });
+      console.log('stored user data on server, responding');
+      res.json({success:'Worked!'});
+
+});
 
 var regExNums = /[0-9]/g;
 
