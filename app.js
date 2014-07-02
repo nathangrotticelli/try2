@@ -381,6 +381,7 @@ app.post('/userPost',function(req,res){
 					  userProfId: req.body.userProfId,
 					  userAge: req.body.userAge,
 					  userName: req.body.userName,
+            userSchool: req.body.schoolName,
 					  privateEvents: req.body.privateEvents,
 					  userGender: req.body.userGender,
 					  userEmail: req.body.userEmail},
