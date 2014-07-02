@@ -321,7 +321,7 @@ User.findOne({ userEmail: userEmail}).exec(function (err, user) {
     console.log('got here');
   }
   else{
-    console.log('good');
+    console.log(user);
   }
 });
 
