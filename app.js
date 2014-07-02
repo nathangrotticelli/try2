@@ -307,7 +307,7 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 		console.log('error?: '+err);
 		schoolItem = school;
 		console.log('Fetched Info for: '+schoolItem.schoolName);
-    console.log(json.stringify(schoolItem.schoolEvents));
+    console.log(JSON.stringify(schoolItem.schoolEvents));
 		res.json({Item: schoolItem});
 
 	});
