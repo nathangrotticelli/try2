@@ -313,7 +313,7 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 });
 
 app.post('/schoolPost', function(req,res){
-
+console.log(req.body.schoolName);
 
 School.findOneAndUpdate({schoolName: req.body.schoolName},
             {
@@ -325,7 +325,7 @@ School.findOneAndUpdate({schoolName: req.body.schoolName},
               if(err){console.log(err.message)}
               else{console.log("School Events Updated: "+req.body.schoolName);}
             });
-      console.log('stored user data on server, responding');
+      console.log('stored school event data on server, responding');
       res.json({success:'Worked!'});
 
 });
