@@ -375,13 +375,12 @@ app.post('/userPost',function(req,res){
 			// console.log(req);
 			// console.log(req.body);
 			// console.log(req.body.userName);
-			User.findOneAndUpdate({userProfId: req.body.userProfId},
+			User.findOneAndUpdate({userEmail: req.body.userEmail},
 		 				{firstNameLetter: req.body.firstNameLetter,
-					  schoolFriendCount: req.body.schoolFriendCount,
 					  userProfId: req.body.userProfId,
 					  userAge: req.body.userAge,
 					  userName: req.body.userName,
-					  personalEvents: req.body.yourEvents,
+					  privateEvents: req.body.privateEvents,
 					  userGender: req.body.userGender,
 					  userEmail: req.body.userEmail},
 					  {upsert: true},
@@ -392,6 +391,26 @@ app.post('/userPost',function(req,res){
 			console.log('stored user data on server, responding');
 			res.json({success:'Worked!'});
 		 	//
+
+});
+
+
+app.post('/privateUserEventAdd',function(req,res){
+      // console.log(req);
+      // console.log(req.body);
+      // console.log(req.body.userName);
+      User.findOneAndUpdate({userEmail: req.body.userEmail},
+            {
+            privateEvents: req.body.privateEvents,
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User Private Event Updated for: "+req.body.userName);}
+            });
+      console.log('stored user data on server, responding');
+      res.json({success:'Worked!'});
+      //
 
 });
 
@@ -448,11 +467,10 @@ app.get('/personalEventDisplay', function(req, res) {
 
 		 	User.findOneAndUpdate({userProfId: userProfId},
 		 				{firstNameLetter: firstNameLetter,
-					  schoolFriendCount: schoolFriendCount,
 					  userProfId: userProfId,
 					  userAge: userAge,
 					  userName: userName,
-					  personalEvents: yourEvents,
+					  privateEvents: privateEvents,
 					  userGender: userGender,
 					  userEmail: userEmail,
 					  school: schoolItem.schoolName},
