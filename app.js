@@ -318,10 +318,10 @@ userEmail = req.body.userEmail;
 // console.log(incSchoolName);
 User.findOne({ userEmail: userEmail}).exec(function (err, user) {
   if(err){
-    alert('got here');
+    console.log('got here');
   }
   else{
-    alert('good');
+    console.log('good');
   }
 });
 
