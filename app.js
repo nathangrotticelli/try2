@@ -317,13 +317,13 @@ app.post('/schoolPost', function(req,res){
 
 School.findOneAndUpdate({schoolName: req.body.schoolName},
             {
-              schoolEvents: req.body.schoolEvents,
-              timestamp: req.body.timestamp
+              schoolEvents: req.body.schoolEvents
+              // timestamp: req.body.timestamp
             },
             {upsert: true},
             function(err,res){
               if(err){console.log(err.message)}
-              else{console.log("User Updated: "+req.body.userName);}
+              else{console.log("School Events Updated: "+req.body.schoolName);}
             });
       console.log('stored user data on server, responding');
       res.json({success:'Worked!'});
