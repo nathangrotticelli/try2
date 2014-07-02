@@ -316,12 +316,14 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 app.post('/getUser', function(req,res){
 userEmail = req.body.userEmail;
 // console.log(incSchoolName);
-User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+User.findOne({ userEmail: userEmail}).reject(function(){
+  alert('got rejected')
+}).resolve(function (err, user) {
   if(err){
     console.log('got here');
   }
   else{
-    console.log(user);
+    console.log('user is ',user);
   }
 });
 
