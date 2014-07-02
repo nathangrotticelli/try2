@@ -316,15 +316,24 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 app.post('/getUser', function(req,res){
 userEmail = req.body.userEmail;
 // console.log(incSchoolName);
+User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+  if(err){
+    alert('got here');
+  }
+  else{
+    alert('good');
+  }
+});
 
-User.findOne({userEmail: userEmail}, function(err, user){
-    console.log('error?: '+err);
-    userItem = user;
-    console.log('Fetched Info for: '+userItem.name);
 
-    res.json({Item: userItem});
+// User.findOne({userEmail: userEmail}, function(err, user){
+//     console.log('error?: '+err);
+//     userItem = user;
+//     console.log('Fetched Info for: '+userItem.name);
 
-  });
+//     res.json({Item: userItem});
+
+//   });
 });
 
 app.post('/schoolPost', function(req,res){
