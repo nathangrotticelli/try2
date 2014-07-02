@@ -307,13 +307,14 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 		console.log('error?: '+err);
 		schoolItem = school;
 		console.log('Fetched Info for: '+schoolItem.schoolName);
+    console.log(schoolItem.schoolEvents[0]);
 		res.json({Item: schoolItem});
 
 	});
 });
 
 app.post('/schoolPost', function(req,res){
-console.log(req.body.schoolName);
+console.log('looking for ' + req.body.schoolName);
 
 School.findOneAndUpdate({schoolName: req.body.schoolName},
             {
