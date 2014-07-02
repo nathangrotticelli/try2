@@ -325,6 +325,7 @@ User.findOne({ userEmail: userEmail}).exec(function (err, user) {
       // console.log(user);
        userItem = user;
        console.log('user is ',user.userName);
+       console.log('user is ',user.school);
        res.json({Item: userItem});
     }
     else{
