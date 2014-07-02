@@ -318,17 +318,19 @@ userEmail = req.body.userEmail;
 // console.log(incSchoolName);
 User.findOne({ userEmail: userEmail}).exec(function (err, user) {
   if(err){
-    console.log('got here');
+    console.log('error?'+err);
   }
   else{
     if(user){
-      console.log(user);
+      // console.log(user);
        userItem = user;
        console.log('user is ',user);
-      res.json({Item: userItem});
+       res.json({Item: userItem});
     }
     else{
-      console.log('not a user')
+      console.log('Not an existing user');
+      userItem = 'DE';
+      res.json({Item: userItem});
     }
 
 //     console.log('Fetched Info for: '+userItem.name);
