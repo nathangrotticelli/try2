@@ -321,7 +321,7 @@ User.findOne({userEmail: userEmail}, function(err, user){
     console.log('error?: '+err);
     userItem = user;
     console.log('Fetched Info for: '+userItem.name);
-    // console.log(JSON.stringify(schoolItem.schoolEvents));
+
     res.json({Item: userItem});
 
   });
@@ -337,7 +337,7 @@ School.findOneAndUpdate({schoolName: req.body.schoolName},
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log(err.message)}
+              if(err){console.log('user maybe doesnt exist?')}
               else{console.log("School Events Updated: "+req.body.schoolName);}
             });
       console.log('stored school event data on server, responding');
