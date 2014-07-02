@@ -323,9 +323,10 @@ User.findOne({ userEmail: userEmail}).exec(function (err, user) {
   else{
     if(user){
       // console.log(user);
+      console.log('Found user, returning userItem')
        userItem = user;
-       console.log('user is ',user.userName);
-       console.log('user is ',user.userSchool);
+       console.log('user is ',userItem.userName);
+       console.log('user is ',userItem.userSchool);
        res.json({Item: userItem});
     }
     else{
