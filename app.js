@@ -16,6 +16,7 @@ var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
 var User = require('./models')["User"];
+var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -378,7 +379,7 @@ app.post('/userPost',function(req,res){
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
 
-        schoolUserDoc.findOneAndUpdate({schoolName: req.body.userSchool},
+        SchoolUserSchema.findOneAndUpdate({schoolName: req.body.userSchool},
             {
              schoolEmails: schoolEmails+=req.body.userEmail
             },
