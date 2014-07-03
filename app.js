@@ -328,27 +328,29 @@ app.post('/getUser', function(req,res){
     else{
       if(schoolUserList){
 
-        console.log('Found School User List for: ',userSchool);
-         // userItem = user;
+        console.log('Found School User List for: '+userSchool+'fetching user info');
+         //checking the school list for email
+          // console.log('school user list exists, fetching user info');
          for(i=0;i<=schoolUserList.length;i++){
           if(schoolUserList[i]===userEmail){
-            console.log('user exists, fetching user info');
             userItem = "5";
-
+            console.log('found user: '+userEmail);
           }
-
          }
-         // console.log('user is ',userItem.userName);
-         // console.log('user is ',userItem.userSchool);
-         ;
+         if(userItem=="5"){
+          res.json({Item: userItem});
+         }
+         else{
+          console.log('user doesnt exist');
+          userItem = 'DE';
+          res.json({Item: userItem});
+         }
       }
       else{
-        console.log('Not an existing user');
-        userItem = 'DE';
-        // res.json({Item: userItem});
+        console.log('Couldnt fetch school user list');
       }
     }
-    res.json({Item: userItem})
+
   });
 });
 
