@@ -48,6 +48,10 @@ var schoolSchema = new Schema({
   emailLength: Number
 });
 
+var schoolUserSchema = new Schema({
+  schoolEmails: []
+});
+
 // var eventsSchema = new Schema ({
 
 // })
@@ -66,9 +70,12 @@ var User = mongoose.model('User', userSchema);
 
 var School = mongoose.model('School', schoolSchema);
 
+var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
+
 // exports.Binghamton = mongoose.model('Binghamton', binghamtonSchema);
 
 module.exports = {
   School: School,
-  User: User
+  User: User,
+  SchoolUserSchema: SchoolUserSchema
 }

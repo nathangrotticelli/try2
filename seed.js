@@ -1,4 +1,17 @@
-// models = require('./models');
+models = require('./models');
+var mongoose = require('mongoose');
+
+var SchoolUserSchema = models.SchoolUserSchema;
+
+var binghamtonUser = new SchoolUserSchema(
+  schoolEmails: ["testemail@aol.com1"]
+  );
+binghamtonUser.save(function (err, saved) {
+                if (err){ return console.error(err);}
+                else{
+                  console.log('saved: Binghamton User');
+                }
+              });
 
 // var School = models.School;
 
@@ -31,6 +44,7 @@ process.exit();
 // 							  	console.log('saved: SB');
 // 							  }
 // 							});
+
 
 // 				var school = new School({
 // 				  schoolLongMax : "-76.8", schoolLongMin : "-77.3", schoolLatMax : "39.1", schoolLatMin : "38.4", schoolFriendMin : 30, schoolName : "George Washington University", schoolTown : "District of Columbia",schoolEvents: {}, emailEnding : "gwu.edu", emailLength : 11 });
