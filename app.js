@@ -379,7 +379,7 @@ app.post('/userPost',function(req,res){
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
 
-        SchoolUserSchema.Update({schoolName: req.body.userSchool},
+        SchoolUserSchema.update({schoolName: req.body.userSchool},
           {$pushAll: {schoolEmails:[req.body.userEmail]}},
             {upsert: true},
             function(err,res){
