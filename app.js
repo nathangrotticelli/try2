@@ -317,21 +317,29 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 app.post('/getUser', function(req,res){
   userEmail = req.body.userEmail;
   userSchool = req.body.userSchool;
-  thing = userSchool + "User";
-  console.log("looking for ",thing);
+  // thing = userSchool + "User";
+  // console.log("looking for ",thing);
   // BinghamtonUser
   // console.log(incSchoolName);
-  User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+  SchoolUserSchema.findOne({ schoolName: userSchool}).exec(function (err, schoolUserList) {
     if(err){
       console.log('error?'+err);
     }
     else{
-      if(user){
-        console.log('Found user, returning userItem')
-         userItem = user;
-         console.log('user is ',userItem.userName);
+      if(schoolUserList){
+        console.log('Found School User List for: ',userSchool);
+         // userItem = user;
+         for(i=0;i<=schoolUserList.length;i++){
+          if(schoolUserList[i]===userEmail){
+            console.log('user exists');
+          }
+          else{
+
+          }
+         }
+         // console.log('user is ',userItem.userName);
          // console.log('user is ',userItem.userSchool);
-         res.json({Item: userItem});
+         res.json({Item: 'userItem'});
       }
       else{
         console.log('Not an existing user');
