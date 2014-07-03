@@ -377,7 +377,7 @@ app.post('/userPost',function(req,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
-        BinghamtonUniversityUser.findOneAndUpdate({userEmail: req.body.userEmail},
+        BinghamtonUser.findOneAndUpdate({userEmail: req.body.userEmail},
             {
              userEmail: req.body.userEmail
             },
