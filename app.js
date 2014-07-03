@@ -381,7 +381,7 @@ app.post('/userPost',function(req,res){
 
         SchoolUserSchema.findOneAndUpdate({schoolName: req.body.userSchool},
             {
-             schoolEmails: schoolEmails+=req.body.userEmail
+             schoolEmails: +=req.body.userEmail
             },
             {upsert: true},
             function(err,res){
