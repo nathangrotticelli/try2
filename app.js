@@ -327,21 +327,21 @@ app.post('/getUser', function(req,res){
     }
     else{
       if(schoolUserList){
-        userItem="1";
-        i=0;
+
+
         console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
-         while(i<=schoolUserList.length){
+         for(i=0;i<=schoolUserList.length;i++){
           console.log(schoolUserList[i]);
 
           if(schoolUserList[i]===userEmail){
 
-            userItem = "5";
+
             console.log('found user: '+userEmail);
             res.json({Item: userItem})
           }
-          i++;
+
 
         }
 
