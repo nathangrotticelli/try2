@@ -333,8 +333,10 @@ app.post('/getUser', function(req,res){
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
          while(i<=schoolUserList.length){
+          console.log(schoolUserList[i]);
 
           if(schoolUserList[i]===userEmail){
+
             userItem = "5";
             console.log('found user: '+userEmail);
             res.json({Item: userItem})
