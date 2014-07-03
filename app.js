@@ -332,10 +332,11 @@ app.post('/getUser', function(req,res){
         console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
-          if(schoolUserList.userEmails.indexOf(userEmail)){
+          if(schoolUserList.userEmails.indexOf(userEmail)>-1){
             console.log("Found user email");
           }
           else{
+            console.log(schoolUserList.userEmails[0]);
             console.log('no user');
           }
         //   var a = fruits.indexOf("Apple");
