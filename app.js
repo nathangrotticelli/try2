@@ -314,43 +314,31 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 });
 
 app.post('/getUser', function(req,res){
-userEmail = req.body.userEmail;
-// console.log(incSchoolName);
-User.findOne({ userEmail: userEmail}).exec(function (err, user) {
-  if(err){
-    console.log('error?'+err);
-  }
-  else{
-    if(user){
-      // console.log(user);
-      console.log('Found user, returning userItem')
-       userItem = user;
-       console.log('user is ',userItem.userName);
-       console.log('user is ',userItem.userSchool);
-       res.json({Item: userItem});
+  userEmail = req.body.userEmail;
+  userSchool = req.body.userSchool;
+  thing = userSchool + "User";
+  console.log("looking for ",thing);
+  // BinghamtonUser
+  // console.log(incSchoolName);
+  User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+    if(err){
+      console.log('error?'+err);
     }
     else{
-      console.log('Not an existing user');
-      userItem = 'DE';
-      res.json({Item: userItem});
+      if(user){
+        console.log('Found user, returning userItem')
+         userItem = user;
+         console.log('user is ',userItem.userName);
+         console.log('user is ',userItem.userSchool);
+         res.json({Item: userItem});
+      }
+      else{
+        console.log('Not an existing user');
+        userItem = 'DE';
+        res.json({Item: userItem});
+      }
     }
-
-//     console.log('Fetched Info for: '+userItem.name);
-
-//     res.json({Item: userItem});
-
-  }
-});
-
-
-// User.findOne({userEmail: userEmail}, function(err, user){
-//     console.log('error?: '+err);
-//     userItem = user;
-//     console.log('Fetched Info for: '+userItem.name);
-
-//     res.json({Item: userItem});
-
-//   });
+  });
 });
 
 app.post('/schoolPost', function(req,res){
@@ -374,9 +362,7 @@ School.findOneAndUpdate({schoolName: req.body.schoolName},
 var regExNums = /[0-9]/g;
 
 app.post('/userPost',function(req,res){
-			// console.log(req);
-			// console.log(req.body);
-			// console.log(req.body.userName);
+
 			User.findOneAndUpdate({userEmail: req.body.userEmail},
 		 				{firstNameLetter: req.body.firstNameLetter,
 					  userProfId: req.body.userProfId,
@@ -391,9 +377,17 @@ app.post('/userPost',function(req,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
+        BinghamtonUniversityUser.findOneAndUpdate({userEmail: req.body.userEmail},
+            {
+             userEmail: req.body.userEmail
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User Updated: "+req.body.userName);}
+            });
 			console.log('stored user data on server, responding');
 			res.json({success:'Worked!'});
-		 	//
 
 });
 
