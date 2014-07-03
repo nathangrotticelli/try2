@@ -35,18 +35,18 @@ var userSchema = new Schema({
 
 
 
-var schoolSchema = new Schema({
-  emailEnding: String,
-  schoolFriendMin: Number,
-  schoolName: String,
-  schoolLongMax: String,
-  schoolLongMin: String,
-  schoolLatMax: String,
-  schoolLatMin: String,
-  schoolTown: String,
-  schoolEvents: {},
-  emailLength: Number
-});
+// var schoolSchema = new Schema({
+//   emailEnding: String,
+//   schoolFriendMin: Number,
+//   schoolName: String,
+//   schoolLongMax: String,
+//   schoolLongMin: String,
+//   schoolLatMax: String,
+//   schoolLatMin: String,
+//   schoolTown: String,
+//   schoolEvents: {},
+//   emailLength: Number
+// });
 
 var schoolUserSchema = new Schema({
   schoolEmails: []

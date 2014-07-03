@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 
 var SchoolUserSchema = models.SchoolUserSchema;
 
-var binghamtonUser = new SchoolUserSchema(
+var binghamtonUser = new SchoolUserSchema({
   schoolEmails: ["testemail@aol.com1"]
-  );
+});
 binghamtonUser.save(function (err, saved) {
                 if (err){ return console.error(err);}
                 else{
