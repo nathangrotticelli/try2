@@ -50,7 +50,7 @@ var schoolSchema = new Schema({
 
 var schoolUserSchema = new Schema({
   schoolName: String,
-  schoolEmails: []
+  userEmails: []
 });
 
 // var eventsSchema = new Schema ({
