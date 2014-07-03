@@ -327,8 +327,8 @@ app.post('/getUser', function(req,res){
     }
     else{
       if(schoolUserList){
-
-        console.log('Found School User List for: '+userSchool+'fetching user info');
+        userItem="1";
+        console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
          for(i=0;i<=schoolUserList.length;i++){
@@ -337,7 +337,7 @@ app.post('/getUser', function(req,res){
             console.log('found user: '+userEmail);
           }
          }
-         if(userItem=="5"){
+         while(userItem=="5"){
           res.json({Item: userItem});
          }
          else{
