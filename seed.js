@@ -5,7 +5,7 @@ var SchoolUserSchema = models.SchoolUserSchema;
 
 var schoolUserDoc = new SchoolUserSchema({
   schoolName: "Binghamton",
-  schoolEmails: ["testemail@aol.com1"]
+  userEmails: ["testemail@aol.com1"]
 });
 
 schoolUserDoc.save(function (err, saved) {
@@ -22,7 +22,7 @@ schoolUserDoc.save(function (err, saved) {
 
 var schoolUserDoc = new SchoolUserSchema({
   schoolName: "George Washington University",
-  schoolEmails: ["testemail2@aol.com1"]
+  userEmails: ["testemail2@aol.com1"]
 });
 
 schoolUserDoc.save(function (err, saved) {

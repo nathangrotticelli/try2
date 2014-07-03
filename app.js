@@ -330,7 +330,7 @@ app.post('/getUser', function(req,res){
         console.log('Found user, returning userItem')
          userItem = user;
          console.log('user is ',userItem.userName);
-         console.log('user is ',userItem.userSchool);
+         // console.log('user is ',userItem.userSchool);
          res.json({Item: userItem});
       }
       else{
@@ -376,15 +376,15 @@ app.post('/userPost',function(req,res){
 					  {upsert: true},
 					  function(err,res){
 					  	if(err){console.log(err.message)}
-					  	else{console.log("User Updated: "+req.body.userName);}
+					  	else{console.log("User Info Updated for: "+req.body.userName);}
 					  });
 
         SchoolUserSchema.update({schoolName: req.body.userSchool},
-          {$pushAll: {schoolEmails:[req.body.userEmail]}},
+          {$pushAll: {userEmails:[req.body.userEmail]}},
             {upsert: true},
             function(err,res){
               if(err){console.log(err.message)}
-              else{console.log("User Updated: "+req.body.userName);}
+              else{console.log("School User List Updated for: "+req.body.userSchool);}
             });
 
 			console.log('stored user data on server, responding');
