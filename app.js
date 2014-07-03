@@ -332,18 +332,25 @@ app.post('/getUser', function(req,res){
         console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
-         for(i=0;i<=schoolUserList.length;i++){
-          console.log(schoolUserList[i]);
-
-          if(schoolUserList[i]===userEmail){
-
-
-            console.log('found user: '+userEmail);
-            res.json({Item: userItem})
+          if(schoolUserList.indexOf(userEmail)){
+            console.log("Found user email");
           }
+          else{
+            console.log('no user');
+          }
+        //   var a = fruits.indexOf("Apple");
+        //  for(i=0;i<=schoolUserList.length;i++){
+        //   console.log(schoolUserList[i]);
+
+        //   if(schoolUserList[i]===userEmail){
 
 
-        }
+        //     console.log('found user: '+userEmail);
+        //     res.json({Item: userItem})
+        //   }
+
+
+        // }
 
           // console.log('user doesnt exist');
           // userItem = 'DE';
