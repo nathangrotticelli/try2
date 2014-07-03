@@ -7,9 +7,13 @@ var binghamtonUser = new SchoolUserSchema({
   schoolEmails: ["testemail@aol.com1"]
 });
 binghamtonUser.save(function (err, saved) {
-                if (err){ return console.error(err);}
+                if (err){
+                  return console.error(err);
+                  process.exit();
+                }
                 else{
-                  console.log('saved: Binghamton User');
+                  console.log('saved: Binghamton User Doc');
+                  process.exit();
                 }
               });
 
@@ -23,7 +27,7 @@ binghamtonUser.save(function (err, saved) {
 
 
 console.log("Inserting data");
-process.exit();
+
 // var schoolUpload = (function(){
 // 				var school = new School({
 // 				  schoolLongMax: '-75.4',
