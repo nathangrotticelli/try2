@@ -377,7 +377,8 @@ app.post('/userPost',function(req,res){
 					  	if(err){console.log(err.message)}
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
-        Binghamtonuser.findOneAndUpdate({userEmail: req.body.userEmail},
+
+        Binghamtonusers.findOneAndUpdate({userEmail: req.body.userEmail},
             {
              userEmail: req.body.userEmail
             },
@@ -386,6 +387,7 @@ app.post('/userPost',function(req,res){
               if(err){console.log(err.message)}
               else{console.log("User Updated: "+req.body.userName);}
             });
+
 			console.log('stored user data on server, responding');
 			res.json({success:'Worked!'});
 
