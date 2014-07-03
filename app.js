@@ -334,10 +334,13 @@ app.post('/getUser', function(req,res){
           // console.log('school user list exists, fetching user info');
           if(schoolUserList.userEmails.indexOf(userEmail)>-1){
             console.log("Found user email");
+            userItem = "5";
+            res.json({Item: userItem});
           }
           else{
-            console.log(schoolUserList.userEmails[0]);
             console.log('no user');
+            userItem = "DE";
+            res.json({Item: userItem});
           }
         //   var a = fruits.indexOf("Apple");
         //  for(i=0;i<=schoolUserList.length;i++){
