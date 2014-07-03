@@ -378,7 +378,7 @@ app.post('/userPost',function(req,res){
 					  	else{console.log("User Updated: "+req.body.userName);}
 					  });
 
-        SchoolUserSchema.findOneAndUpdate({userEmail: req.body.userEmail},
+        SchoolUserSchema.findOneAndUpdate({schoolName: req.body.userSchool},
             {
              userEmail: req.body.userEmail
             },
