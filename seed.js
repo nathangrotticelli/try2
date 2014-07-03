@@ -1,40 +1,42 @@
-models = require('./models');
-var mongoose = require('mongoose');
+// models = require('./models');
+// var mongoose = require('mongoose');
 
-var SchoolUserSchema = models.SchoolUserSchema;
+// var SchoolUserSchema = models.SchoolUserSchema;
 
-var schoolUserDoc = new SchoolUserSchema({
-  schoolName: "Binghamton",
-  userEmails: ["testemail@aol.com1"]
-});
+// var schoolUserDoc = new SchoolUserSchema({
+//   schoolName: "Binghamton",
+//   userEmails: ["testemail@aol.com1"]
+// });
 
-schoolUserDoc.save(function (err, saved) {
-                if (err){
-                  return console.error(err);
-                  // process.exit();
-                }
-                else{
-                  console.log('saved: Binghamton User Doc');
-                  // process.exit();
-                }
-              });
+// schoolUserDoc.save(function (err, saved) {
+//                 if (err){
+//                   return console.error(err);
+//                   // process.exit();
+//                 }
+//                 else{
+//                   console.log('saved: Binghamton User Doc');
+//                   // process.exit();
+//                 }
+//               });
 
 
-var schoolUserDoc = new SchoolUserSchema({
-  schoolName: "George Washington University",
-  userEmails: ["testemail2@aol.com1"]
-});
+// var schoolUserDoc = new SchoolUserSchema({
+//   schoolName: "George Washington University",
+//   userEmails: ["testemail2@aol.com1"]
+// });
 
-schoolUserDoc.save(function (err, saved) {
-                if (err){
-                  return console.error(err);
-                  process.exit();
-                }
-                else{
-                  console.log('saved: GW User Doc');
-                  process.exit();
-                }
-              });
+// schoolUserDoc.save(function (err, saved) {
+//                 if (err){
+//                   return console.error(err);
+//                   process.exit();
+//                 }
+//                 else{
+//                   console.log('saved: GW User Doc');
+//                   process.exit();
+//                 }
+//               });
+
+process.exit();
 
 // var binghamtonUser = new SchoolUserSchema({
 //   schoolEmails: ["testemail@aol.com1"]
