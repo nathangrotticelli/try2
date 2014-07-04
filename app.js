@@ -327,40 +327,25 @@ app.post('/getUser', function(req,res){
     }
     else{
       if(schoolUserList){
-
-
         console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
           if(schoolUserList.userEmails.indexOf(userEmail)>-1){
-            console.log("Found user email");
-            userItem = "5";
-            res.json({Item: userItem});
+            console.log("Found user email, fetching user info.");
+            User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+              if(err){
+                console.log('error?'+err);
+              }
+              else{
+                res.json({Item: user});
+              }
+            })
           }
           else{
-            console.log('no user');
-            userItem = "DE";
-            res.json({Item: userItem});
+            console.log("User doesn't exist");
+            user = "DE";
+            res.json({Item: user});
           }
-        //   var a = fruits.indexOf("Apple");
-        //  for(i=0;i<=schoolUserList.length;i++){
-        //   console.log(schoolUserList[i]);
-
-        //   if(schoolUserList[i]===userEmail){
-
-
-        //     console.log('found user: '+userEmail);
-        //     res.json({Item: userItem})
-        //   }
-
-
-        // }
-
-          // console.log('user doesnt exist');
-          // userItem = 'DE';
-          // res.json({Item: userItem});
-
-
       }
       else{
         console.log('Couldnt fetch school user list');
