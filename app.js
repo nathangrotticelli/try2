@@ -332,11 +332,12 @@ app.post('/getUser', function(req,res){
           // console.log('school user list exists, fetching user info');
           if(schoolUserList.userEmails.indexOf(userEmail)>-1){
             console.log("Found user email, fetching user info.");
-            User.findOne({ userEmail: userEmail}).exec(function (err, user) {
+            User.findOne({ userEmail: userEmail}).exec(function (err, user){
               if(err){
                 console.log('error?'+err);
               }
               else{
+                console.log('user info sent back');
                 res.json({Item: user});
               }
             })
