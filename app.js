@@ -414,7 +414,10 @@ app.post('/privateUserEventAdd',function(req,res){
       // console.log(req.body.privateEvents);
       User.findOneAndUpdate({userEmail: req.body.userEmail},
             {
-            privateEvents: req.body.privateEvents
+            privateEvents: {
+              heelll:"whats up",
+              heell2: "whats up 2"
+            }
             },
             {upsert: true},
             function(err,result){
