@@ -419,7 +419,7 @@ app.post('/privateUserEventAdd',function(req,res){
               if(err){console.log(err.message)}
               else{console.log("User Private Event Updated for: "+req.body.userName);}
             });
-      console.log('stored user data on server, responding');
+      console.log('stored private user data on server, responding');
       res.json({success:'Worked!'});
       //
 
