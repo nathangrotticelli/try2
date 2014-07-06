@@ -327,7 +327,7 @@ app.post('/userSchoolPost',function(req,res){
 
       res.json({success:'Worked!'});
 
-  }
+  });
 
 app.post('/getUser', function(req,res){
   userEmail = req.body.userEmail;
