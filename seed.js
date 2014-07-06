@@ -1,118 +1,153 @@
-// models = require('./models');
-// var mongoose = require('mongoose');
+models = require('./models');
+var mongoose = require('mongoose');
 
-// var SchoolUserSchema = models.SchoolUserSchema;
+var SchoolUserSchema = models.SchoolUserSchema;
 
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Oneonta",
-//   userEmails: ["testemailOneonta@aol.com"]
-// });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "Oneonta",
+  userEmails: ["testemailOneonta@aol.com"]
+});
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: Oneonta User Doc');
-//                   // process.exit();
-//                 }
-//               });
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Central Florida",
-//   userEmails: ["testemailCF@aol.com1"]
-// });
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: Oneonta User Doc');
+                  // process.exit();
+                }
+              });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "Central Florida",
+  userEmails: ["testemailCF@aol.com1"]
+});
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: Central Florida User Doc');
-//                   // process.exit();
-//                 }
-//               });
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Michigan State",
-//   userEmails: ["testemailMS@aol.com1"]
-// });
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: Central Florida User Doc');
+                  // process.exit();
+                }
+              });
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: Michigan State User Doc');
-//                   // process.exit();
-//                 }
-//               });
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "University of Michigan",
-//   userEmails: ["testemailUM@aol.com1"]
-// });
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: University of Michigan User Doc');
-//                   // process.exit();
-//                 }
-//               });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "Binghamton",
+  userEmails: ["testemailBU@aol.com"]
+});
 
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "University of Illinois at Urbana-Champaign",
-//   userEmails: ["testemailUIUC@aol.com1"]
-// });
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: BU User Doc');
+                  // process.exit();
+                }
+              });
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: University of Illinois at Urbana-Champaign User Doc');
-//                   // process.exit();
-//                 }
-//               });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "George Washington University",
+  userEmails: ["testemailGW@aol.com"]
+});
 
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "University of Hawaii",
-//   userEmails: ["testemailUH@aol.com1"]
-// });
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: GW User Doc');
+                  // process.exit();
+                }
+              });
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   // process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: University of Hawaii User Doc');
-//                   // process.exit();
-//                 }
-//               });
 
-// var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Central Michigan",
-//   userEmails: ["testemailCM@aol.com1"]
-// });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "Michigan State",
+  userEmails: ["testemailMS@aol.com1"]
+});
 
-// schoolUserDoc.save(function (err, saved) {
-//                 if (err){
-//                   return console.error(err);
-//                   process.exit();
-//                 }
-//                 else{
-//                   console.log('saved: Central Michigan User Doc');
-//                   process.exit();
-//                 }
-//               });
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: Michigan State User Doc');
+                  // process.exit();
+                }
+              });
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "University of Michigan",
+  userEmails: ["testemailUM@aol.com1"]
+});
 
-  process.exit();
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: University of Michigan User Doc');
+                  // process.exit();
+                }
+              });
+
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "University of Illinois at Urbana-Champaign",
+  userEmails: ["testemailUIUC@aol.com1"]
+});
+
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: University of Illinois at Urbana-Champaign User Doc');
+                  // process.exit();
+                }
+              });
+
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "University of Hawaii",
+  userEmails: ["testemailUH@aol.com1"]
+});
+
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  // process.exit();
+                }
+                else{
+                  console.log('saved: University of Hawaii User Doc');
+                  // process.exit();
+                }
+              });
+
+var schoolUserDoc = new SchoolUserSchema({
+  schoolName: "Central Michigan",
+  userEmails: ["testemailCM@aol.com1"]
+});
+
+schoolUserDoc.save(function (err, saved) {
+                if (err){
+                  return console.error(err);
+                  process.exit();
+                }
+                else{
+                  console.log('saved: Central Michigan User Doc');
+                  process.exit();
+                }
+              });
+
+
 
 // var binghamtonUser = new SchoolUserSchema({
 //   schoolEmails: ["testemail@aol.com1"]
