@@ -411,7 +411,7 @@ app.post('/privateUserEventAdd',function(req,res){
       // console.log(req);
       // console.log(req.body);
       // console.log(req.body.userName);
-      console.log(req.body.privateEvents['Test Event 2'].name);
+      console.log(req.body.privateEvents);
       User.findOneAndUpdate({userEmail: req.body.userEmail},
             {
             privateEvents: req.body.privateEvents,

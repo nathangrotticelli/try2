@@ -1,7 +1,7 @@
-models = require('./models');
-var mongoose = require('mongoose');
+// models = require('./models');
+// var mongoose = require('mongoose');
 
-var SchoolUserSchema = models.SchoolUserSchema;
+// var SchoolUserSchema = models.SchoolUserSchema;
 
 // var schoolUserDoc = new SchoolUserSchema({
 //   schoolName: "Oneonta",
@@ -66,23 +66,23 @@ var SchoolUserSchema = models.SchoolUserSchema;
 //                   // process.exit();
 //                 }
 //               });
+process.exit();
 
+// var schoolUserDoc = new SchoolUserSchema({
+//   schoolName: "Michigan State",
+//   userEmails: ["testemailMS@aol.com1"]
+// });
 
-var schoolUserDoc = new SchoolUserSchema({
-  schoolName: "Michigan State",
-  userEmails: ["testemailMS@aol.com1"]
-});
-
-schoolUserDoc.save(function (err, saved) {
-                if (err){
-                  return console.error(err);
-                  // process.exit();
-                }
-                else{
-                  console.log('saved: Michigan State User Doc');
-                  process.exit();
-                }
-              });
+// schoolUserDoc.save(function (err, saved) {
+//                 if (err){
+//                   return console.error(err);
+//                   // process.exit();
+//                 }
+//                 else{
+//                   console.log('saved: Michigan State User Doc');
+//                   process.exit();
+//                 }
+//               });
 // var schoolUserDoc = new SchoolUserSchema({
 //   schoolName: "University of Michigan",
 //   userEmails: ["testemailUM@aol.com1"]
