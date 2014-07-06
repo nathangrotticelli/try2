@@ -413,20 +413,25 @@ app.post('/privateUserEventAdd',function(req,res){
       // console.log(req.body.userName);
       // console.log(req.body.privateEvents);
       User.findOneAndUpdate({userEmail: req.body.userEmail},
-            {
-             privateEvents: req.body.privateEvents
-            },
-            {upsert: true},
-            function(err,result){
-              if(err){
-                 console.log(err.message);
-              }
-              else{
-                console.log("User Private Event Updated for: "+result.userEmail);
-                console.log('stored private user data on server, responding');
-             }
-          });
-        res.json({success:'Worked!'});
+              {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
+                console.log('User Private events saved for: ',result.userEmail);
+              });
+
+      // User.update({userEmail: req.body.userEmail},
+      //       {
+      //        privateEvents: req.body.privateEvents
+      //       },
+      //       {upsert: true},
+      //       function(err,result){
+      //         if(err){
+      //            console.log(err.message);
+      //         }
+      //         else{
+      //           console.log("User Private Event Updated for: "+result.userEmail);
+      //           console.log('stored private user data on server, responding');
+      //        }
+      //     });
+        // res.json({success:'Worked!'});
       //
 
 });
