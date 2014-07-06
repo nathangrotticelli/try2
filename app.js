@@ -418,11 +418,15 @@ app.post('/privateUserEventAdd',function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log(err.message)}
-              else{console.log("User Private Event Updated for: "+req.body.userName);}
-            });
-      console.log('stored private user data on server, responding');
-      res.json({success:'Worked!'});
+              if(err){
+                 console.log(err.message);
+              }
+              else{
+                console.log("User Private Event Updated for: "+req.body.userName);
+              console.log('stored private user data on server, responding');
+             }
+          });
+        res.json({success:'Worked!'});
       //
 
 });
