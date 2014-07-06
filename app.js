@@ -316,18 +316,18 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 
 app.post('/getUser', function(req,res){
   userEmail = req.body.userEmail;
-  currentSchool = req.body.currentSchool;
+  userSchool = req.body.userSchool;
   // thing = userSchool + "User";
   // console.log("looking for ",thing);
   // BinghamtonUser
   // console.log(incSchoolName);
-  SchoolUserSchema.findOne({ schoolName: currentSchool}).exec(function (err, schoolUserList) {
+  SchoolUserSchema.findOne({ schoolName: userSchool}).exec(function (err, schoolUserList) {
     if(err){
       console.log('error?'+err);
     }
     else{
       if(schoolUserList){
-        console.log('Found School User List for: '+currentSchool+' fetching user info');
+        console.log('Found School User List for: '+userSchool+' fetching user info');
          //checking the school list for email
           // console.log('school user list exists, fetching user info');
           if(schoolUserList.userEmails.indexOf(userEmail)>-1){
@@ -402,22 +402,6 @@ app.post('/userPost',function(req,res){
 
 			console.log('stored user data on server, responding');
 			res.json({success:'Worked!'});
-
-});
-
-app.post('/userSchoolPost',function(req,res){
-
-      User.findOneAndUpdate({userEmail: req.body.userEmail},
-            {
-            userSchool: req.body.userSchool
-            },
-            {upsert: true},
-            function(err,res){
-              if(err){console.log(err.message)}
-              else{console.log("User School Updated for: "+req.body.userName);}
-            });
-
-      res.json({success:'Worked!'});
 
 });
 
