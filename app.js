@@ -411,10 +411,10 @@ app.post('/privateUserEventAdd',function(req,res){
       // console.log(req);
       // console.log(req.body);
       // console.log(req.body.userName);
-      console.log(req.body.privateEvents);
+      // console.log(req.body.privateEvents);
       User.findOneAndUpdate({userEmail: req.body.userEmail},
             {
-            privateEvents: req.body.privateEvents,
+            privateEvents: req.body.privateEvents
             },
             {upsert: true},
             function(err,res){
