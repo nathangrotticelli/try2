@@ -381,7 +381,6 @@ app.post('/userPost',function(req,res){
 			User.findOneAndUpdate({userEmail: req.body.userEmail},
 		 				{firstNameLetter: req.body.firstNameLetter,
 					  userProfId: req.body.userProfId,
-					  userAge: req.body.userAge,
 					  userName: req.body.userName,
             userSchool: req.body.userSchool,
 					  privateEvents: req.body.privateEvents,
