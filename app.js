@@ -314,6 +314,57 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 	});
 });
 
+app.post('/userSchoolPost',function(req,res){
+  User.findOneAndUpdate({userEmail: req.body.userEmail},
+            {
+            userSchool: req.body.userSchool
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User School Updated for: "+req.body.userName);}
+            });
+
+      res.json({success:'Worked!'});
+
+  }
+
+// if(updateSchool=='true'){
+//                 $http.post('http://stark-eyrie-6720.herokuapp.com/userSchoolPost',
+//                 {
+//                   userEmail: userEmail,
+//                 userSchool: schoolName
+//                 })
+//             }
+//               // currentSchool = schoolName;
+//         // if(!userSchool){
+//         //   userSchool = schoolItem.schoolName;
+//         // }
+//         //  if(userSchool !== schoolName){
+//         //   updateSchool = 'true';
+//         //   userSchool = currentSchool;
+//         // }
+//         // else{
+//         //   updateSchool = 'false';
+//         // }
+
+
+
+//       User.findOneAndUpdate({userEmail: req.body.userEmail},
+//             {
+//             userSchool: req.body.userSchool
+//             },
+//             {upsert: true},
+//             function(err,res){
+//               if(err){console.log(err.message)}
+//               else{console.log("User School Updated for: "+req.body.userName);}
+//             });
+
+//       res.json({success:'Worked!'});
+
+// });
+
+
 app.post('/getUser', function(req,res){
   userEmail = req.body.userEmail;
   userSchool = req.body.userSchool;
