@@ -15,8 +15,8 @@ var userSchema = new Schema({
   userGender: String,
   userName: String,
   userEmail: String,
-  personalEvents: {},
-  school: String
+  privateEvents: {},
+  userSchool: String
 });
 
 //event schema
