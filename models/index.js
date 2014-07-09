@@ -15,6 +15,7 @@ var userSchema = new Schema({
   userGender: String,
   userName: String,
   userEmail: String,
+  entranceEmail: String,
   privateEvents: {},
   userSchool: String
 });

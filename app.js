@@ -392,6 +392,9 @@ School.findOneAndUpdate({schoolName: req.body.schoolName},
 var regExNums = /[0-9]/g;
 
 app.post('/userPost',function(req,res){
+	if(!req.body.entranceEmail){
+		req.body.entranceEmail="none";
+	}
 
 			User.findOneAndUpdate({userEmail: req.body.userEmail},
 		 				{firstNameLetter: req.body.firstNameLetter,
@@ -400,6 +403,7 @@ app.post('/userPost',function(req,res){
             userSchool: req.body.userSchool,
 					  privateEvents: req.body.privateEvents,
 					  userGender: req.body.userGender,
+					  entranceEmail: req.body.entranceEmail,
 					  userEmail: req.body.userEmail},
 					  {upsert: true},
 					  function(err,res){
