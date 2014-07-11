@@ -432,7 +432,7 @@ app.post('/privateUserEventAdd',function(req,res){
       // console.log(req.body.privateEvents);
       User.findOneAndUpdate({userEmail: req.body.userEmail},
               {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
-                console.log('User Private events saved for: ',result.userEmail);
+                console.log('User Private events saved for: ',result.userName;
               });
 
       // User.update({userEmail: req.body.userEmail},
@@ -449,7 +449,7 @@ app.post('/privateUserEventAdd',function(req,res){
       //           console.log('stored private user data on server, responding');
       //        }
       //     });
-        // res.json({success:'Worked!'});
+        res.json({success:'Worked!'});
       //
 
 });
