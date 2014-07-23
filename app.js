@@ -351,7 +351,7 @@ app.post('/userEventSubmit',function(req,res){
 var mailOptions = {
     from: 'UN App ✔', // sender address
     to: 'unrepteam@gmail.com', // list of receivers
-    subject: 'New Event Submitted! Number: '+manualEventCount, // Subject line
+    subject: 'New Event Submitted!', // Subject line
     text: 'User Name: '+req.body.userName+', User Email: '+req.body.userEmail+', Event Name'+req.body.eventName+', Event Contact Email', // plaintext body
     html: '<b>Hello world<br> ✔</b>' // html body
 };
