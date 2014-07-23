@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
+var nodemailer = require('nodemailer');
 var path = require('path');
 var graph = require('fbgraph');
 var swig = require('swig');
@@ -302,7 +303,7 @@ app.get('/denied', function(req, res){
 
 app.post('/getSchool', function(req,res){
 incSchoolName = req.body.schoolName;
-// console.log(incSchoolName);
+console.log(incSchoolName);
 
 School.findOne({schoolName: incSchoolName}, function(err, school){
 		console.log('error?: '+err);
@@ -324,6 +325,45 @@ app.post('/userSchoolPost',function(req,res){
               if(err){console.log(err.message)}
               else{console.log("User School Updated for: "+req.body.userName);}
             });
+
+      res.json({success:'Worked!'});
+
+  });
+// create reusable transporter object using SMTP transport
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'gmail.user@gmail.com',
+        pass: 'userpass'
+    }
+});
+
+var manualEventCount = 0;
+
+// NB! No need to recreate the transporter object. You can use
+// the same transporter object for all e-mails
+
+
+
+app.post('/userEventSubmit',function(req,res){
+	manualEventCount++;
+	// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: 'UN App ✔', // sender address
+    to: 'unrepteam@gmail.com', // list of receivers
+    subject: 'New Event Submitted! Number: '+manualEventCount, // Subject line
+    text: 'User Name: '+req.body.userName+', User Email: '+req.body.userEmail+', Event Name'+req.body.eventName+', Event Contact Email', // plaintext body
+    html: '<b>Hello world<br> ✔</b>' // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+    }else{
+        console.log('Message sent: ' + info.response);
+    }
+});
 
       res.json({success:'Worked!'});
 
