@@ -349,11 +349,11 @@ app.post('/userEventSubmit',function(req,res){
 	// manualEventCount++;
 	// setup e-mail data with unicode symbols
 var mailOptions = {
-    from: 'UN App ✔', // sender address
+    from: 'UN App', // sender address
     to: 'unrepteam@gmail.com', // list of receivers
-    subject: 'New Event Submitted!', // Subject line
-    text: 'Hello World', // plaintext body
-    html: 'User Name: '+req.body.userName+'<br>User Email: '+req.body.userEmail+', Event Name'+req.body.eventName+', Event Contact Email' // html body
+    subject: 'New Event Submitted ✔', // Subject line
+    text: 'New UN Event', // plaintext body
+    html: 'User Name: '+req.body.userName+'<br>User Email: '+req.body.userEmail+'<br>Event Name: '+req.body.eventName+'<br>Event Contact Email: '+req.body.eventEmail+'<br>Event Date: '+req.body.eventDate+'<br>Event Address: '+req.body.eventAddress+'<br>Event Info: '+req.body.eventInfo // html body
 };
 
 // send mail with defined transport object
