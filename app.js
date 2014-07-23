@@ -333,12 +333,12 @@ app.post('/userSchoolPost',function(req,res){
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'gmail.user@gmail.com',
-        pass: 'userpass'
+        user: 'unrepteam@gmail.com',
+        pass: 'University'
     }
 });
 
-var manualEventCount = 0;
+// var manualEventCount = 0;
 
 // NB! No need to recreate the transporter object. You can use
 // the same transporter object for all e-mails
@@ -346,7 +346,7 @@ var manualEventCount = 0;
 
 
 app.post('/userEventSubmit',function(req,res){
-	manualEventCount++;
+	// manualEventCount++;
 	// setup e-mail data with unicode symbols
 var mailOptions = {
     from: 'UN App ✔', // sender address
