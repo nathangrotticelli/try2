@@ -352,8 +352,8 @@ var mailOptions = {
     from: 'UN App ✔', // sender address
     to: 'unrepteam@gmail.com', // list of receivers
     subject: 'New Event Submitted!', // Subject line
-    text: 'User Name: '+req.body.userName+', User Email: '+req.body.userEmail+', Event Name'+req.body.eventName+', Event Contact Email', // plaintext body
-    html: '<b>Hello world<br> ✔</b>' // html body
+    text: 'Hello World', // plaintext body
+    html: 'User Name: '+req.body.userName+'<br>User Email: '+req.body.userEmail+', Event Name'+req.body.eventName+', Event Contact Email' // html body
 };
 
 // send mail with defined transport object
