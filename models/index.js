@@ -46,7 +46,8 @@ var schoolSchema = new Schema({
   schoolLatMin: String,
   schoolTown: String,
   schoolEvents: {},
-  emailLength: Number
+  emailLength: Number,
+  inviteNum: Number
 });
 
 var schoolUserSchema = new Schema({
