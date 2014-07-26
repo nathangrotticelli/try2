@@ -353,7 +353,7 @@ var mailOptions = {
     to: 'unrepteam@gmail.com', // list of receivers
     subject: 'New Event Submitted ✔', // Subject line
     text: 'New UN Event', // plaintext body
-    html: 'User Name: '+req.body.userName+'<br><br>User Email: '+req.body.userEmail+'<br><br>Event Name: '+req.body.eventName+'<br><br>Event Contact Email: '+req.body.eventEmail+'<br><br>Event Date: '+req.body.eventDate+'<br><br>Event Address: '+req.body.eventAddress+'<br><br>Event Info: '+req.body.eventInfo // html body
+    html: 'User Name: '+req.body.userName+'<br><br>User Email: '+req.body.userEmail+'<br><br>Event Name: '+req.body.eventName+'<br><br>Event Contact Email: '+req.body.eventEmail+'<br><br>Event Date: '+req.body.eventDate+'<br><br>Event Time: '+req.body.eventTime+'<br><br>Event Address: '+req.body.eventAddress+'<br><br>Event Info: '+req.body.eventInfo // html body
 };
 
 // send mail with defined transport object
