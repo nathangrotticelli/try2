@@ -375,7 +375,7 @@ app.post('/getUser', function(req,res){
   // thing = userSchool + "User";
   // console.log("looking for ",thing);
   // BinghamtonUser
-  // console.log(incSchoolName);
+  console.log('here');
   SchoolUserSchema.findOne({ schoolName: userSchool}).exec(function (err, schoolUserList) {
     if(err){
       console.log('error?'+err);
