@@ -173,7 +173,7 @@ process.exit();
 //    console.log('collection removed')
 
 
-console.log("Inserting data");
+// console.log("Inserting data");
 
 // var schoolUpload = (function(){
 // 				var school = new School({
