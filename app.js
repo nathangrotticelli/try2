@@ -226,6 +226,25 @@ School.findOne({schoolName: incSchoolName}, function(err, school){
 	});
 });
 
+app.post('/ticketCount', function(req,res){
+  incSchoolName = req.body.schoolName;
+ School.findOne({schoolName: incSchoolName},function(err,school){
+  console.log('error?: '+err);
+    schoolItem = school;
+    upCount = schoolItem.ticketCount+=1;
+
+    School.findOneAndUpdate({schoolName: incSchoolName},
+            {
+             ticketCount: upCount
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('upCount failed')}
+              else{console.log("upCount success for : "+incSchoolName);}
+            });
+ });
+});
+
 app.post('/userSchoolPost',function(req,res){
 	console.log(req.body.userEmail);
   User.findOneAndUpdate({userEmail: req.body.userEmail},
