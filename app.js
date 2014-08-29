@@ -400,7 +400,7 @@ app.post('/privateUserEventAdd',function(req,res){
       User.findOneAndUpdate({userEmail: req.body.userEmail},
               {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
 
-                  console.log('User Private events saved for: ',result.userEmail);
+                  console.log('User Private events saved for: ',req.body.userEmail);
 
               });
 
