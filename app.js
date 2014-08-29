@@ -254,7 +254,11 @@ app.post('/userSchoolPost',function(req,res){
             {upsert: true},
             function(err,res){
               if(err){console.log(err.message)}
-              else{console.log("User School Updated for: "+req.body.userName);}
+              else{
+
+                  console.log("User School Updated for: "+req.body.userEmail);
+
+              }
             });
 
       res.json({success:'Worked!'});
@@ -355,6 +359,9 @@ app.post('/userPost',function(req,res){
 	if(!req.body.entranceEmail){
 		req.body.entranceEmail="none";
 	}
+  if(!req.body.userName){
+    req.body.userName="none";
+  }
 
 			User.findOneAndUpdate({userEmail: req.body.userEmail},
 		 				{firstNameLetter: req.body.firstNameLetter,
@@ -389,7 +396,9 @@ app.post('/privateUserEventAdd',function(req,res){
 
       User.findOneAndUpdate({userEmail: req.body.userEmail},
               {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
-                console.log('User Private events saved for: ',result.userName);
+
+                  console.log('User Private events saved for: ',result.userEmail);
+
               });
 
         res.json({success:'Worked!'});
