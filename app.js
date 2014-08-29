@@ -246,7 +246,7 @@ app.post('/ticketCount', function(req,res){
 });
 
 app.post('/userSchoolPost',function(req,res){
-	console.log(req.body.userEmail);
+	// console.log(req.body.userEmail);
   User.findOneAndUpdate({userEmail: req.body.userEmail},
             {
             userSchool: req.body.userSchool
@@ -359,6 +359,9 @@ app.post('/userPost',function(req,res){
 	if(!req.body.entranceEmail){
 		req.body.entranceEmail="none";
 	}
+  if(!req.body.userEmail){
+    req.body.userEmail=req.body.userProfId;
+  }
   if(!req.body.userName){
     req.body.userName="none";
   }
