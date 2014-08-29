@@ -396,11 +396,11 @@ app.post('/userPost',function(req,res){
 
 
 app.post('/privateUserEventAdd',function(req,res){
-
-      User.findOneAndUpdate({userEmail: req.body.userEmail},
+  userEmail = req.body.userEmail;
+      User.findOneAndUpdate({userEmail: userEmail},
               {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
 
-                  console.log('User Private events saved for: ',req.body.userEmail);
+                  console.log('User Private events saved for: ',userEmail);
 
               });
 
