@@ -299,7 +299,7 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.update({userSchool: "George Washington University"},
+  User.update({userSchool: "University of Illinois at Urbana-Champaign"},
             {
                 followers: [],
   following: [],
