@@ -299,9 +299,9 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.findOneAndUpdate({userEmail: "nmg2225@yahoo.com"},
+  User.update({userSchool: "George Washington University"},
             {
-                followers: ["joh","john","janessss"],
+                followers: [],
   following: [],
             },
             {upsert: true},
