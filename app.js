@@ -299,7 +299,8 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/findFriends', function(req,res){
-console.log('find friends startedddddddd');
+console.log(req.fbFriends);
+console.log(req.userProfId);
  res.json({unFriends: 'hi!'});
 
 });
