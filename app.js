@@ -299,16 +299,16 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.find({userSchool: "George Washington University"}).upsert(
+  User.Update({userSchool: "George Washington University"},
             {
                 followers: [],
   following: [],
-            }
-            );
-            // function(err,res){
-            //   if(err){console.log('user maybe doesnt exist?')}
-            //   else{console.log("workeddddddddddddddddd");}
-            // });
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('user maybe doesnt exist?')}
+              else{console.log("workeddddddddddddddddd");}
+            });
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
 
