@@ -299,15 +299,15 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.collection.update({userEmail:"nmg2225@yahoo.com"},{
-    followers: [],
-  following: [],
-},
-   {
-     upsert: true,
-     multi: true
-   }
-)
+//   User.collection.update({userEmail:"nmg2225@yahoo.com"},{
+//     followers: [],
+//   following: [],
+// },
+//    {
+//      upsert: true,
+//      multi: true
+//    }
+// )
   userEmail = req.body.userEmail;
   userSchool = req.body.userSchool;
   SchoolUserSchema.findOne({ schoolName: userSchool}).exec(function (err, schoolUserList) {
