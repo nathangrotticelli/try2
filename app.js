@@ -302,7 +302,7 @@ app.post('/findFriends', function(req,res){
 console.log('find friends startedddddddd');
  res.json({unFriends: 'hi!'});
 
-};
+});
 
 app.post('/getUser', function(req,res){
 
