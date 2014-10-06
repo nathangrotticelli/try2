@@ -299,7 +299,7 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.findAndModify({userEmail: "nmg2225@yahoo.com"},
+  User.find({userEmail: "nmg2225@yahoo.com"},
             {
                 followers: ["joh","john","janessss"],
   following: [],
