@@ -4,7 +4,7 @@
 // var SchoolUserSchema = models.SchoolUserSchema;
 
 // var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Oneonta",
+//   schoolName: "SUNY Oneonta",
 //   userEmails: ["testemailOneonta@aol.com"]
 // });
 
@@ -19,7 +19,7 @@
 //                 }
 //               });
 // var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Central Florida",
+//   schoolName: "University of Central Florida",
 //   userEmails: ["testemailCF@aol.com1"]
 // });
 
@@ -36,7 +36,7 @@
 
 
 // var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Binghamton",
+//   schoolName: "SUNY Binghamton",
 //   userEmails: ["testemailBU@aol.com"]
 // });
 
@@ -69,7 +69,7 @@
 process.exit();
 
 // var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Michigan State",
+//   schoolName: "Michigan State University",
 //   userEmails: ["testemailMS@aol.com1"]
 // });
 
@@ -132,7 +132,7 @@ process.exit();
 //               });
 
 // var schoolUserDoc = new SchoolUserSchema({
-//   schoolName: "Central Michigan",
+//   schoolName: "Central Michigan University",
 //   userEmails: ["testemailCM@aol.com1"]
 // });
 
@@ -207,7 +207,7 @@ process.exit();
 // 							  }
 // 							});
 
-// 				var school = new School({schoolLongMax : "-74.8", schoolLongMin : "-75.4", schoolLatMax : "42.7", schoolLatMin : "42.1", schoolFriendMin : 30, schoolName : "Oneonta",schoolEvents: {}, schoolTown : "Oneonta", emailEnding : "@suny.oneonta.edu", emailLength : 20 });
+// 				var school = new School({schoolLongMax : "-74.8", schoolLongMin : "-75.4", schoolLatMax : "42.7", schoolLatMin : "42.1", schoolFriendMin : 30, schoolName : "SUNY Oneonta",schoolEvents: {}, schoolTown : "Oneonta", emailEnding : "@suny.oneonta.edu", emailLength : 20 });
 
 // 				school.save(function (err, saved) {
 // 							  if (err){ return console.error(err);}
@@ -216,7 +216,7 @@ process.exit();
 // 							  }
 // 							});
 
-// 				var school = new School({schoolLongMax : "-80.9", schoolLongMin : "-81.6", schoolLatMax : "28.9", schoolLatMin : "28.3", schoolFriendMin : 30,schoolEvents: {}, schoolName : "Central Florida", schoolTown : "Orlando", emailEnding : "@knights.ucf.edu", emailLength : 19});
+// 				var school = new School({schoolLongMax : "-80.9", schoolLongMin : "-81.6", schoolLatMax : "28.9", schoolLatMin : "28.3", schoolFriendMin : 30,schoolEvents: {}, schoolName : "University of Central Florida", schoolTown : "Orlando", emailEnding : "@knights.ucf.edu", emailLength : 19});
 
 // 				school.save(function (err, saved) {
 // 							  if (err){ return console.error(err);}
@@ -225,7 +225,7 @@ process.exit();
 // 							  }
 // 							});
 
-// 				var school = new School({schoolLongMax : "-84.22", schoolLongMin : "-84.64", schoolLatMax : "43", schoolLatMin : "42.55", schoolFriendMin : 30,schoolEvents: {}, schoolName : "Michigan State", schoolTown : "East Lansing", emailEnding : "@msu.edu", emailLength : 11 });
+// 				var school = new School({schoolLongMax : "-84.22", schoolLongMin : "-84.64", schoolLatMax : "43", schoolLatMin : "42.55", schoolFriendMin : 30,schoolEvents: {}, schoolName : "Michigan State University", schoolTown : "East Lansing", emailEnding : "@msu.edu", emailLength : 11 });
 
 // 				school.save(function (err, saved) {
 // 							  if (err){ return console.error(err);}
@@ -243,7 +243,7 @@ process.exit();
 // 							  }
 // 							});
 
-// 				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 30,schoolEvents: {}, schoolName : "Central Michigan", schoolTown : "Mt Pleasant", emailEnding : "@cmich.edu", emailLength : 13});
+// 				var school = new School({schoolLongMax : "-84.65", schoolLongMin : "-84.99", schoolLatMax : "43.64", schoolLatMin : "43.35", schoolFriendMin : 30,schoolEvents: {}, schoolName : "Central Michigan University", schoolTown : "Mt Pleasant", emailEnding : "@cmich.edu", emailLength : 13});
 
 // 				school.save(function (err, saved) {
 // 							  if (err){ return console.error(err);}
