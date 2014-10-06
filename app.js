@@ -310,9 +310,8 @@ app.post('/getUser', function(req,res){
               else{console.log("workeddddddddddddddddd");}
             });
       // console.log('stored school event data on server, responding');
-      res.json({success:'Worked!'});
+      // res.json({success:'Worked!'});
 
-});
 
 //   User.update({userEmail:"nmg2225@yahoo.com"},{
 //     followers: [],
