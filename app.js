@@ -298,6 +298,12 @@ app.post('/userEventSubmit',function(req,res){
 
 });
 
+app.post('/findFriends', function(req,res){
+console.log('find friends startedddddddd');
+ res.json({unFriends: 'hi!'});
+
+};
+
 app.post('/getUser', function(req,res){
 
   // User.update({userSchool: "Michigan State University"},
