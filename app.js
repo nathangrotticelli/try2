@@ -299,7 +299,7 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.Update({userSchool: "George Washington University"},
+  User.find({userSchool: "George Washington University"},
             {
                 followers: [],
   following: [],
