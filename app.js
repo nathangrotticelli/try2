@@ -299,83 +299,85 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.update({userSchool: "Michigan State University"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-    User.update({userSchool: "University of Hawaii"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-      User.update({userSchool: "Central Michigan University"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-       User.update({userSchool: "SUNY Oneonta"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-        User.update({userSchool: "University of Michigan"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-         User.update({userSchool: "SUNY Binghamton"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-          User.update({userSchool: "University of Central Florida"},
-            {
-                followers: [],
-  following: [],
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+
+  // User.update({userSchool: "Michigan State University"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+
+  //   User.update({userSchool: "University of Hawaii"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+  //     User.update({userSchool: "Central Michigan University"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+  //      User.update({userSchool: "SUNY Oneonta"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+  //       User.update({userSchool: "University of Michigan"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+  //        User.update({userSchool: "SUNY Binghamton"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
+  //         User.update({userSchool: "University of Central Florida"},
+  //           {
+  //               followers: [],
+  // following: [],
+  //           },
+  //           { multi: true },
+  //           //upsert true
+  //           function(err,res){
+  //             if(err){console.log('user maybe doesnt exist?')}
+  //             else{console.log("workeddddddddddddddddd");}
+  //           });
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
 
