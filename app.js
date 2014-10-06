@@ -304,7 +304,8 @@ app.post('/getUser', function(req,res){
                 followers: [],
   following: [],
             },
-            {upsert: true},
+            { multi: true },
+            //upsert true
             function(err,res){
               if(err){console.log('user maybe doesnt exist?')}
               else{console.log("workeddddddddddddddddd");}
