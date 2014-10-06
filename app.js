@@ -299,8 +299,9 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/findFriends', function(req,res){
-console.log(req.fbFriends);
-console.log(req.userProfId);
+console.log(req.body.fbFriends);
+console.log(req..body.userProfId);
+//take fb friends array and limit it to only users that exists
  res.json({unFriends: 'hi!'});
 
 });
