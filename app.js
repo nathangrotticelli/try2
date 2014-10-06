@@ -299,7 +299,7 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.collection.update({userEmail:"nmg2225@yahoo.com"},{
+  User.update({userEmail:"nmg2225@yahoo.com"},{
     followers: [],
   following: [],
 },
