@@ -299,6 +299,15 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
+  User.collection.update({userEmail:"nmg2225@yahoo.com"},{
+    followers: [],
+  following: [],
+},
+   {
+     upsert: true,
+     multi: true
+   }
+)
   userEmail = req.body.userEmail;
   userSchool = req.body.userSchool;
   SchoolUserSchema.findOne({ schoolName: userSchool}).exec(function (err, schoolUserList) {
@@ -396,7 +405,7 @@ app.post('/userPost',function(req,res){
 
 
 app.post('/privateUserEventAdd',function(req,res){
-  userEmail = req.body.userEmail;
+ userEmail = req.body.userEmail;
       User.findOneAndUpdate({userEmail: userEmail},
               {privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
 
