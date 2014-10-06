@@ -299,22 +299,37 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/getUser', function(req,res){
-  User.update({userEmail:"nmg2225@yahoo.com"},{
-    followers: [],
+  User.findOneAndUpdate({schoolName: "nmg2225@yahoo.com"},
+            {
+                followers: [],
   following: [],
-},
-   {
-     upsert: true,
-     multi: true
-   }
-).exec(function (err, follower) {
-    if(err){
-      console.log('follower worked!'+err);
-    }
-    else{
-      console.log('follower didnt work!'+err);
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('user maybe doesnt exist?')}
+              else{console.log("workeddddddddddddddddd");}
+            });
+      // console.log('stored school event data on server, responding');
+      res.json({success:'Worked!'});
 
-    }});
+});
+
+//   User.update({userEmail:"nmg2225@yahoo.com"},{
+//     followers: [],
+//   following: [],
+// },
+//    {
+//      upsert: true,
+//      multi: true
+//    }
+// ).exec(function (err, follower) {
+//     if(err){
+//       console.log('follower worked!'+err);
+//     }
+//     else{
+//       console.log('follower didnt work!'+err);
+
+//     }});
 
   userEmail = req.body.userEmail;
   userSchool = req.body.userSchool;
