@@ -311,8 +311,12 @@ console.log(req.body.userProfId);
               }
               else{
                 for(i=0;i<res.length;i++){
+                   console.log('res name 1'+res[i].name);
                   for(f=0;f<fbFriends.length;f++){
+                    console.log('fb friend id'+fbFriends[f].id);
+                    console.log('res id'+res[i].id);
                      if(res[i].id==fbFriends[f].id){
+                       console.log('hierrereerre');
                         userIds.push(res[i]);
                      }
                   }
@@ -323,7 +327,7 @@ console.log(req.body.userProfId);
                 console.log('eorrrorororo');
               }
               else{
-                 console.log(userIds[0].name);
+                 console.log('hi3'+userIds);
                  res.json({userIds: userIds});
               }
             });
