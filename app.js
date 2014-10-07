@@ -324,15 +324,15 @@ userIds = [];
                      if(currentUserId==fbFriends[z].id){
                        console.log('hierrereerre');
                         userIds.push(res[i]);
-                        if(i==res.length){
-                            res.json({userIds: userIds});
-                        }
+                        // if(i==res.length){
+
+                        // }
                      }
                   }
                 }
               }
             });
-
+ res.json({userIds: userIds});
 
   // console.log(res[0].id);
                 // res.forEach()
