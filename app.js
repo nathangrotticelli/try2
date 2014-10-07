@@ -305,10 +305,10 @@ userIds = [];
 console.log(req.body.userProfId);
 
  User.find({userSchool: "Michigan State University"},
-
-            //upsert true
             function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
+              if(err){
+                console.log('user maybe doesnt exist?')
+              }
               else{
                 for(i=0;i<res.length;i++){
                   for(f=0;f<fbFriends.length;f++){
@@ -317,6 +317,7 @@ console.log(req.body.userProfId);
                      }
                   }
                 }
+              }
 
                 // console.log(res[0].id);
                 // res.forEach()
