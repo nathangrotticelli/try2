@@ -305,13 +305,13 @@ userIds = [];
 // console.log(req.body.userProfId);
 
  User.find({userSchool: "SUNY Binghamton"},
-            function(err,res){
+            function(err,req){
               if(err){
                 console.log('trouble finding user school mates');
               }
               else{
-                for(i=0;i<res.length;i++){
-                   currentUserId=res[i].userProfId;
+                for(i=0;i<req.length;i++){
+                   currentUserId=req[i].userProfId;
 
                   for(z=0;z<fbFriends.length;z++){
                     // console.log(fbFriends[z].name);
@@ -323,12 +323,12 @@ userIds = [];
                     // }
                      if(currentUserId==fbFriends[z].id){
                        // console.log('hierrereerre');
-                        userIds.push(res[i]);
+                        userIds.push(req[i]);
                      }
                   }
                 }
-                res.json({userIds: userIds});
               }
+              res.json({userIds: userIds});
             });
 
 
