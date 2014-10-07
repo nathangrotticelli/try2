@@ -322,7 +322,7 @@ userIds = [];
 
                     // }
                      if(currentUserId==fbFriends[z].id){
-                       // console.log('hierrereerre');
+                       console.log('hierrereerre');
                         userIds.push(res[i]);
                      }
                   }
