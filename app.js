@@ -311,7 +311,7 @@ console.log(req.body.userProfId);
             function(err,res){
               if(err){console.log('user maybe doesnt exist?')}
               else{
-                alert(res[0].id);
+                console.log(res[0].id);
                 // res.forEach()
                 console.log("workeddddddddddddddddd");}
             });
