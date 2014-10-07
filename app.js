@@ -317,10 +317,10 @@ userIds = [];
                     // console.log(fbFriends[z].name);
                     // console.log(fbFriends[z].id);
                     // console.log('res id'+res[i].id);
-                    if(res[i].userName=="Jonathan Salas"){
-                      console.log('found justing');
+                    // if(res[i].userName=="Jonathan Salas"){
+                    //   console.log('found justing');
 
-                    }
+                    // }
                      if(currentUserId==fbFriends[z].id){
                        // console.log('hierrereerre');
                         userIds.push(res[i]);
@@ -333,7 +333,7 @@ userIds = [];
                 console.log('eorrrorororo');
               }
               else{
-                 // console.log('hi3'+userIds);
+                 console.log(userIds[0]);
                  res.json({userIds: userIds});
               }
             });
