@@ -323,8 +323,8 @@ console.log(req.body.userProfId);
                 console.log('eorrrorororo');
               }
               else{
-                 console.log("workeddddddddddddddddd");
-                 res.json({unFriends: userIds});
+                 console.log(userIds[0].name);
+                 res.json({userIds: userIds});
               }
             });
 
