@@ -318,17 +318,23 @@ console.log(req.body.userProfId);
                   }
                 }
               }
-
-                // console.log(res[0].id);
-                // res.forEach()
-                console.log("workeddddddddddddddddd");}
+            }).exec(function (err, users){
+              if(err){
+                console.log('eorrrorororo');
+              }
+              else{
+                 console.log("workeddddddddddddddddd");
+                 res.json({unFriends: userIds});
+              }
             });
 
 
+  // console.log(res[0].id);
+                // res.forEach()
 
 //existing ids
 //take fb friends array and limit it to only users that exists
- res.json({unFriends: userIds});
+
 
 });
 
