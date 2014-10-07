@@ -311,19 +311,20 @@ console.log(req.body.userProfId);
               }
               else{
                 for(i=0;i<res.length;i++){
-                   console.log('res name 1'+res[i].userProfId);
+                   currentUserId=res[i].userProfId;
 
-                  for(f=0;f<fbFriends.length;f++){
-                    // console.log('fb friend id'+fbFriends[f].id);
+                  for(z=0;z<fbFriends.length;z++){
+                    console.log(fbFriends[f].name);
+                    console.log(fbFriends[f].id);
                     // console.log('res id'+res[i].id);
-                    if(res[i].userName=="Justin Hill"){
-                      console.log('found justing')
+                    if(res[i].userName=="Jonathan Salas"){
+                      console.log('found justing');
 
                     }
-                     // if(res[i].userProfId==fbFriends[f].id){
-                     //   console.log('hierrereerre');
-                     //    userIds.push(res[i]);
-                     // }
+                     if(currentUserId==fbFriends[f].id){
+                       console.log('hierrereerre');
+                        userIds.push(res[i]);
+                     }
                   }
                 }
               }
