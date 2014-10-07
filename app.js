@@ -305,8 +305,6 @@ userIds = [];
 console.log(req.body.userProfId);
 
  User.find({userSchool: "Michigan State University"},
-            {
-            },
             { multi: true },
             //upsert true
             function(err,res){
