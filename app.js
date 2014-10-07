@@ -324,17 +324,12 @@ userIds = [];
                      if(currentUserId==fbFriends[z].id){
                        console.log('hierrereerre');
                         userIds.push(res[i]);
+                        if(i==res.length){
+                            res.json({userIds: userIds});
+                        }
                      }
                   }
                 }
-              }
-            }).exec(function (err, users){
-              if(err){
-                console.log('eorrrorororo');
-              }
-              else{
-                 console.log(userIds[0]);
-                 res.json({userIds: userIds});
               }
             });
 
