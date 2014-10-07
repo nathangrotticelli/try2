@@ -304,7 +304,7 @@ userIds = [];
 // users
 console.log(req.body.userProfId);
 
- User.find({userSchool: "Michigan State University"},{},
+ User.find({userSchool: "Michigan State University"},
             function(err,res){
               if(err){
                 console.log('user maybe doesnt exist?')
