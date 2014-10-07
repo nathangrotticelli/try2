@@ -326,22 +326,17 @@ userIds = [];
                         userIds.push(res[i]);
                      }
                   }
-                 if(i>=res.length){
-                  res.json({userIds: userIds});
-                 }
                 }
+                res.json({userIds: userIds});
               }
             }).exec(function (err, users){
               if(err){
                 console.log('eorrrorororo');
               }
               else{
-                 // console.log(userIds[0]);
-            // setTimeout(function() {
-            //   res.json({userIds: userIds});
-            // }, 500);
 
-          }
+                 // res.json({userIds: userIds});
+              }
             });
 
 
