@@ -313,7 +313,7 @@ console.log(req.body.userProfId);
               if(err){console.log('user maybe doesnt exist?')}
               else{
                 for(i=0;i<res.length;i++){
-                  for(f=0;f<fb.Friends.length;f++){
+                  for(f=0;f<fbFriends.length;f++){
                      if(res[i].id==fbFriends[f].id){
                         userIds.push(res[i]);
                      }
