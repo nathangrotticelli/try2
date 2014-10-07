@@ -314,7 +314,7 @@ console.log(req.body.userProfId);
                    currentUserId=res[i].userProfId;
 
                   for(z=0;z<fbFriends.length;z++){
-                    console.log(fbFriends[f]);
+                    console.log(fbFriends[z]);
                     // console.log(fbFriends[f].id);
                     // console.log('res id'+res[i].id);
                     if(res[i].userName=="Jonathan Salas"){
