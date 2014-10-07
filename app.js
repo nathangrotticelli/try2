@@ -314,8 +314,8 @@ userIds = [];
                    currentUserId=res[i].userProfId;
 
                   for(z=0;z<fbFriends.length;z++){
-                    console.log(fbFriends[z].name);
-                    console.log(fbFriends[z].id);
+                    // console.log(fbFriends[z].name);
+                    // console.log(fbFriends[z].id);
                     // console.log('res id'+res[i].id);
                     if(res[i].userName=="Jonathan Salas"){
                       console.log('found justing');
