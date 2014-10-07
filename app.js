@@ -315,7 +315,7 @@ console.log(req.body.userProfId);
                   for(f=0;f<fbFriends.length;f++){
                     // console.log('fb friend id'+fbFriends[f].id);
                     // console.log('res id'+res[i].id);
-                     if(res[i].id==fbFriends[f].id){
+                     if(res[i].userProfId==fbFriends[f].id){
                        console.log('hierrereerre');
                         userIds.push(res[i]);
                      }
