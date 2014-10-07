@@ -299,8 +299,28 @@ app.post('/userEventSubmit',function(req,res){
 });
 
 app.post('/findFriends', function(req,res){
-console.log(req.body.fbFriends);
+fbFriends = req.body.fbFriends;
+// users
 console.log(req.body.userProfId);
+
+ User.find({userSchool: "Michigan State University"},
+            {
+            },
+            { multi: true },
+            //upsert true
+            function(err,res){
+              if(err){console.log('user maybe doesnt exist?')}
+              else{
+                alert(res[0].id);
+                // res.forEach()
+                console.log("workeddddddddddddddddd");}
+            });
+
+// for(i=0;i<fbFriends.length;i++){
+
+// }
+
+//existing ids
 //take fb friends array and limit it to only users that exists
  res.json({unFriends: 'hi!'});
 
