@@ -300,6 +300,7 @@ app.post('/userEventSubmit',function(req,res){
 
 app.post('/findFriends', function(req,res){
 fbFriends = req.body.fbFriends;
+userIds = [];
 // users
 console.log(req.body.userProfId);
 
@@ -311,18 +312,24 @@ console.log(req.body.userProfId);
             function(err,res){
               if(err){console.log('user maybe doesnt exist?')}
               else{
-                console.log(res[0].id);
+                for(i=0;i<res.length;i++){
+                  for(f=0;f<fb.Friends.length;f++){
+                     if(res[i].id==fbFriends[f].id){
+                        userIds.push(res[i]);
+                     }
+                  }
+                }
+
+                // console.log(res[0].id);
                 // res.forEach()
                 console.log("workeddddddddddddddddd");}
             });
 
-// for(i=0;i<fbFriends.length;i++){
 
-// }
 
 //existing ids
 //take fb friends array and limit it to only users that exists
- res.json({unFriends: 'hi!'});
+ res.json({unFriends: userIds});
 
 });
 
