@@ -329,14 +329,6 @@ userIds = [];
                 }
                 res.json({userIds: userIds});
               }
-            }).exec(function (err, users){
-              if(err){
-                console.log('eorrrorororo');
-              }
-              else{
-
-                 // res.json({userIds: userIds});
-              }
             });
 
 
