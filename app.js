@@ -367,7 +367,12 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   }
   else{
     // appUser = appUser;
-    appUser.following.push(followingId);
+    if(appUser.following.indexOf(userProfId)>-1){
+      console.log("other user is already being followed");
+
+    }
+    else{
+       appUser.following.push(followingId);
 
     User.findOneAndUpdate({ userProfId: userProfId},
             {
@@ -381,6 +386,8 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
                 res.json({success:'Worked!'});
             }
             });
+
+    }
   }
  });
 
