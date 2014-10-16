@@ -245,6 +245,21 @@ app.post('/ticketCount', function(req,res){
  });
 });
 
+app.post('/followCount', function(req,res){
+  userProfId = req.body.userProfId;
+ User.findOne({userProfId: userProfId},function(err,user){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    var count = user.following.length;
+    res.json({count:count});
+  }
+    // schoolItem = school;
+    // upCount = schoolItem.ticketCount+=1;
+ });
+});
+
 app.post('/userSchoolPost',function(req,res){
 	// console.log(req.body.userEmail);
   User.findOneAndUpdate({userEmail: req.body.userEmail},
