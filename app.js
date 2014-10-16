@@ -341,6 +341,64 @@ userIds = [];
 
 });
 
+app.post('/follow', function(req,res){
+
+  userProfId = req.body.userProfId;
+  followingId = req.body.followingId;
+
+User.findOne({ userProfId: userProfId},function(err,appUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // appUser = appUser;
+    newFollowing = appUser.following.push(followingId);
+
+    User.findOneAndUpdate({ userProfId: userProfId},
+            {
+             following: newFollowing
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('following update failed')}
+              else{console.log("following update success");}
+            });
+  }
+ });
+});
+
+
+  // User.findOneAndUpdate({ userProfId: userProfId},{following:}).exec(function (err, appUser) {
+  //   if(err){
+  //     console.log('error?'+err);
+  //   }
+  //   else{
+
+  //     if(appUser){
+  //       User.findOneAndUpdate({userEmail: req.body.userEmail},
+  //           {firstNameLetter: req.body.firstNameLetter,
+  //           userProfId: req.body.userProfId,
+  //           userName: req.body.userName,
+  //           userSchool: req.body.userSchool,
+  //           privateEvents: req.body.privateEvents,
+  //           userGender: req.body.userGender,
+  //           entranceEmail: req.body.entranceEmail,
+  //           userEmail: req.body.userEmail},
+  //           {upsert: true},
+  //           function(err,res){
+  //             if(err){console.log(err.message)}
+  //             else{console.log("User Info Updated for: "+req.body.userName);}
+  //           });
+
+  //     }
+  //     else{
+  //       console.log('Couldnt fetch user following list');
+  //     }
+  //   }
+
+  // });
+// });
+
 app.post('/getUser', function(req,res){
 
   // User.update({userSchool: "Michigan State University"},
