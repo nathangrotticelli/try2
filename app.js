@@ -368,6 +368,31 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             });
   }
  });
+
+User.findOne({ userProfId: followingId},function(err,otherUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // appUser = appUser;
+    otherUser.following.push(followingId);
+
+    User.findOneAndUpdate({ userProfId: followingId},
+            {
+             following: otherUser.following
+            },
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('2nd following update failed')}
+              else{
+                console.log("2nd following update success");
+                res.json({success:'Worked!'});
+            }
+            });
+  }
+ });
+
+
 });
 
 
