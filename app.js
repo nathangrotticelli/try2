@@ -361,7 +361,9 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             {upsert: true},
             function(err,res){
               if(err){console.log('following update failed')}
-              else{console.log("following update success");}
+              else{console.log("following update success");
+            res.json({Item: userProfId});
+          }
             });
   }
  });
