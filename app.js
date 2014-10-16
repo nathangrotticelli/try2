@@ -359,11 +359,12 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
              following: newFollowing
             },
             {upsert: true},
-            function(err,res){
+            function(err,red){
               if(err){console.log('following update failed')}
-              else{console.log("following update success");
-            res.json({success:'Worked!'});
-          }
+              else{
+                console.log("following update success");
+                res.json({success:'Worked!'});
+            }
             });
   }
  });
