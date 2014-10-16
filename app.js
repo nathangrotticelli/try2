@@ -375,7 +375,7 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
   }
   else{
     // appUser = appUser;
-    otherUser.followers.push(followingId);
+    otherUser.followers.push(userProfId);
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
