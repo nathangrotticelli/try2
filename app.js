@@ -396,6 +396,61 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
 });
 
 
+app.post('/unfollow', function(req,res){
+
+  userProfId = req.body.userProfId;
+  followingId = req.body.followingId;
+
+User.findOne({ userProfId: userProfId},function(err,appUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // appUser = appUser;
+    appUser.following.pop(followingId);
+
+    User.findOneAndUpdate({ userProfId: userProfId},
+            {
+             following: appUser.following
+            },
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('unfollowing update failed')}
+              else{
+                console.log("unfollowing update success");
+                res.json({success:'Worked!'});
+            }
+            });
+  }
+ });
+
+User.findOne({ userProfId: followingId},function(err,otherUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // appUser = appUser;
+    otherUser.followers.pop(userProfId);
+
+    User.findOneAndUpdate({ userProfId: followingId},
+            {
+             followers: otherUser.followers
+            },
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('2nd unfollow update failed')}
+              else{
+                console.log("2nd unfollow update success");
+                res.json({success:'Worked!'});
+            }
+            });
+  }
+ });
+
+
+});
+
+
   // User.findOneAndUpdate({ userProfId: userProfId},{following:}).exec(function (err, appUser) {
   //   if(err){
   //     console.log('error?'+err);
