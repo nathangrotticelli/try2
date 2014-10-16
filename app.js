@@ -356,7 +356,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
     User.findOneAndUpdate({ userProfId: userProfId},
             {
-             following: appUser
+             following: appUser.following
             },
             {upsert: true},
             function(err,red){
