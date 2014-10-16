@@ -352,11 +352,11 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   }
   else{
     // appUser = appUser;
-    newFollowing = [].push(followingId);
+    appUser.following.push(followingId);
 
     User.findOneAndUpdate({ userProfId: userProfId},
             {
-             following: newFollowing
+             following: following
             },
             {upsert: true},
             function(err,red){
