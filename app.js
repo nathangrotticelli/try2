@@ -375,17 +375,17 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
   }
   else{
     // appUser = appUser;
-    otherUser.following.push(followingId);
+    otherUser.followers.push(followingId);
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
-             following: otherUser.following
+             followers: otherUser.followers
             },
             {upsert: true},
             function(err,red){
-              if(err){console.log('2nd following update failed')}
+              if(err){console.log('2nd follower update failed')}
               else{
-                console.log("2nd following update success");
+                console.log("2nd follower update success");
                 res.json({success:'Worked!'});
             }
             });
