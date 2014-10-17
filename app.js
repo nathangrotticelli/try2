@@ -506,17 +506,16 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
 
 app.post('/getUser', function(req,res){
 
-  // User.update({userSchool: "Michigan State University"},
-  //           {
-  //               followers: [],
-  // following: [],
-  //           },
-  //           { multi: true },
-  //           //upsert true
-  //           function(err,res){
-  //             if(err){console.log('user maybe doesnt exist?')}
-  //             else{console.log("workeddddddddddddddddd");}
-  //           });
+  User.update({userSchool: "Michigan State University"},
+            {
+                notifications: []
+            },
+            { multi: true },
+            //upsert true
+            function(err,res){
+              if(err){console.log('notifications update failed')}
+              else{console.log("workeddddddddddddddddd");}
+            });
 
   //   User.update({userSchool: "University of Hawaii"},
   //           {
