@@ -506,87 +506,87 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
 
 app.post('/getUser', function(req,res){
 
-  User.update({userSchool: "George Washington University"},
-            {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-User.update({userSchool: "University of Illinois at Urbana-Champaign"},
-            {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+//   User.update({userSchool: "George Washington University"},
+//             {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+// User.update({userSchool: "University of Illinois at Urbana-Champaign"},
+//             {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
 
-    User.update({userSchool: "University of Hawaii"},
-          {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-      User.update({userSchool: "Central Michigan University"},
-           {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-       User.update({userSchool: "SUNY Oneonta"},
-            {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-        User.update({userSchool: "University of Michigan"},
-            {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-         User.update({userSchool: "SUNY Binghamton"},
-           {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-          User.update({userSchool: "University of Central Florida"},
-           {
-                notifications: []
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+//     User.update({userSchool: "University of Hawaii"},
+//           {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//       User.update({userSchool: "Central Michigan University"},
+//            {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//        User.update({userSchool: "SUNY Oneonta"},
+//             {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//         User.update({userSchool: "University of Michigan"},
+//             {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//          User.update({userSchool: "SUNY Binghamton"},
+//            {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//           User.update({userSchool: "University of Central Florida"},
+//            {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
 
