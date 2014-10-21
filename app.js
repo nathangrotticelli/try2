@@ -375,6 +375,8 @@ app.post('/follow', function(req,res){
 
   userProfId = req.body.userProfId;
   followingId = req.body.followingId;
+  message = req.body.message;
+  notDate = req.body.notDate;
 
 User.findOne({ userProfId: userProfId},function(err,appUser){
   if(err){
@@ -413,10 +415,12 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
   else{
     // appUser = appUser;
     otherUser.followers.push(userProfId);
+    otherUser.notifications.push({message:message,date:notDate});
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
-             followers: otherUser.followers
+             followers: otherUser.followers,
+             notifications: otherUser.notifications
             },
             {upsert: true},
             function(err,red){
