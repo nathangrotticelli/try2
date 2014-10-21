@@ -473,7 +473,14 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
   else{
     // appUser = appUser;
     otherUser.followers.pop(userProfId);
-    otherUser.notifications.pop({message:message});
+    for(q=0;q<otherUser.notifications.length;q++){
+      if(otherUser.notifications[q].message==message){
+        // arr1.splice(x,1);
+        otherUser.notifications.splice(q,1);
+        console.log("not Poppedd!!!!!!!!")
+      }
+    }
+
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
