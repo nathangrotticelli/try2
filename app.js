@@ -340,7 +340,7 @@ for(z=0;z<fbFriends.length;z++){
   fbFriends[z].notifications.push({message:message,date:notDate});
    User.update({userProfId: fbFriends[z].userProfId},
             {
-                notifications: []
+                notifications: fbFriends[z].notifications
             },
             { multi: false },
             //upsert true
@@ -378,7 +378,7 @@ userSchool = req.body.userSchool;
                     // console.log(fbFriends[z].name);
                     // console.log(fbFriends[z].id);
                     // console.log('res id'+res[i].id);
-                    // if(res[i].userName=="Jonathan Salas"){
+                    // if(res[i].userName=="Jonathanfp Salas"){
                     //   console.log('found justing');
 
                     // }
