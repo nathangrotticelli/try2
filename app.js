@@ -336,7 +336,7 @@ for(z=0;z<fbFriends.length;z++){
   // console.log(fbFriends[z].userName);
   // otherUser.notifications.push({message:message,date:notDate})
   message = "Your friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
-  date = "9/11/1210";
+  notDate = "9/11/1210";
   fbFriends[z].notifications.push({message:message,date:notDate});
    User.update({userProfId: fbFriends[z].userProfId},
             {
@@ -346,7 +346,9 @@ for(z=0;z<fbFriends.length;z++){
             //upsert true
             function(err,res){
               if(err){console.log('friend joined un notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
+              else{console.log("workeddddddddddddddddd");
+          res.json({success:'Worked!'});
+        }
             });
 
 }
