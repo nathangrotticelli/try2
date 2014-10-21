@@ -260,6 +260,21 @@ app.post('/followCount', function(req,res){
  });
 });
 
+app.post('/notifications', function(req,res){
+  userProfId = req.body.userProfId;
+ User.findOne({userProfId: userProfId},function(err,user){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    var notifications = user.notifications;
+    res.json({notifications:notifications});
+  }
+    // schoolItem = school;
+    // upCount = schoolItem.ticketCount+=1;
+ });
+});
+
 app.post('/userSchoolPost',function(req,res){
 	// console.log(req.body.userEmail);
   User.findOneAndUpdate({userEmail: req.body.userEmail},
