@@ -484,7 +484,8 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
-             followers: otherUser.followers
+             followers: otherUser.followers,
+             notifications: otherUser.notifications
             },
             {upsert: true},
             function(err,red){
