@@ -330,19 +330,24 @@ app.post('/userEventSubmit',function(req,res){
 app.post('/newFriend', function(req,res){
 
 fbFriends = req.body.fbFriends;
+userName = req.body.userName;
 
 for(z=0;z<fbFriends.length;z++){
-  console.log(fbFriends[z].userName);
-//    User.update({userProfId: userProfId},
-//             {
-//                 notifications: []
-//             },
-//             { multi: true },
-//             //upsert true
-//             function(err,res){
-//               if(err){console.log('notifications update failed')}
-//               else{console.log("workeddddddddddddddddd");}
-//             });
+  // console.log(fbFriends[z].userName);
+  // otherUser.notifications.push({message:message,date:notDate})
+  message = "Your friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
+  date = "9/11/1210";
+  fbFriends[z].notifications.push({message:message,date:notDate});
+   User.update({userProfId: fbFriends[z].userProfId},
+            {
+                notifications: fbFriends[z].notifications
+            },
+            { multi: false },
+            //upsert true
+            function(err,res){
+              if(err){console.log('friend joined un notifications update failed')}
+              else{console.log("workeddddddddddddddddd");}
+            });
 
 }
 
