@@ -344,7 +344,7 @@ for(z=0;z<fbFriends.length;z++){
             },
             { multi: false },
             //upsert true
-            function(err,res){
+            function(err,red){
               if(err){console.log('friend joined un notifications update failed')}
               else{console.log("workeddddddddddddddddd");
           res.json({success:'Worked!'});
