@@ -327,6 +327,29 @@ app.post('/userEventSubmit',function(req,res){
       res.json({success:'Worked!'});
 
 });
+app.post('/newFriend', function(req,res){
+
+fbFriends = req.body.fbFriends;
+
+for(z=0;z<fbFriends.length;z++){
+  console.log(fbFriends[z].userName);
+//    User.update({userProfId: userProfId},
+//             {
+//                 notifications: []
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+
+}
+
+
+
+});
+
 
 app.post('/findFriends', function(req,res){
 fbFriends = req.body.fbFriends;
