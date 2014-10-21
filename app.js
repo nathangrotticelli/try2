@@ -441,6 +441,7 @@ app.post('/unfollow', function(req,res){
 
   userProfId = req.body.userProfId;
   followingId = req.body.followingId;
+  message = req.body.message;
 
 User.findOne({ userProfId: userProfId},function(err,appUser){
   if(err){
@@ -472,6 +473,7 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
   else{
     // appUser = appUser;
     otherUser.followers.pop(userProfId);
+    otherUser.notifications.pop({message:message});
 
     User.findOneAndUpdate({ userProfId: followingId},
             {
