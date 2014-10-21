@@ -340,7 +340,7 @@ for(z=0;z<fbFriends.length;z++){
   fbFriends[z].notifications.push({message:message,date:notDate});
    User.update({userProfId: fbFriends[z].userProfId},
             {
-                notifications: fbFriends[z].notifications
+                notifications: []
             },
             { multi: false },
             //upsert true
@@ -361,10 +361,11 @@ for(z=0;z<fbFriends.length;z++){
 app.post('/findFriends', function(req,res){
 fbFriends = req.body.fbFriends;
 userIds = [];
+userSchool = req.body.userSchool;
 // users
 // console.log(req.body.userProfId);
 
- User.find({userSchool: "SUNY Binghamton"},
+ User.find({userSchool: userSchool},
             function(err,req){
               if(err){
                 console.log('trouble finding user school mates');
