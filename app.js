@@ -419,6 +419,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     // appUser = appUser;
     if(appUser.following.indexOf(userProfId)>-1){
       console.log("other user is already being followed");
+      res.json({success:'follow already'});
 
     }
     else{
@@ -433,7 +434,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               if(err){console.log('following update failed')}
               else{
                 console.log("following update success");
-                res.json({success:'Worked!'});
+                res.json({success:'followed'});
             }
             });
 
