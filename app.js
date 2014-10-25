@@ -336,10 +336,10 @@ userProfId = req.body.userProfId;
 for(z=0;z<fbFriends.length;z++){
   // console.log(fbFriends[z].userName);
   // otherUser.notifications.push({message:message,date:notDate})
-  message = "Your Facebook friend "+userName+" just joined U Nightlife. Double-Tap this message to follow them!";
+  message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
   notDate = "9/11/1210";
-  doubleTap = "follow";
-  fbFriends[z].notifications.push({message:message,date:notDate,doubleTap:doubleTap,followId:userProfId});
+  tap = "follow";
+  fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
    User.update({userProfId: fbFriends[z].userProfId},
             {
                 notifications: fbFriends[z].notifications
