@@ -404,7 +404,7 @@ userSchool = req.body.userSchool;
 
 });
 
-app.post('/watchAction', function(req,res){
+app.post('/watchEvent', function(req,res){
 
   userProfId = req.body.userProfId;
   // followingId = req.body.followingId;
