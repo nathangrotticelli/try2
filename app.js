@@ -460,7 +460,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
         }
             });
 
-        }
+      }
 
 
    }
@@ -472,6 +472,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
                 // res.json({success:'Worked!'});
             }
             });
+});
 
 
 
