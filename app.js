@@ -415,19 +415,32 @@ app.post('/watchEvent', function(req,res){
 
   //push event into user watch list
  User.update({ userProfId: userProfId},
-  {$pushAll: {notifications:[{message:message,date:notDate}]}},
+  {$pushAll: {watchList:[eventObj]}},
             {upsert: true},
             function(err,red){
               if(err){console.log('watch notification event update failed')}
               else{
                 console.log("watch notification event update success");
+                  //create notification for user
+   User.update({ userProfId: userProfId},
+  {$pushAll: {notifications:[{message:message,date:notDate}]}},
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('watch22 notification event update failed')}
+              else{
+                console.log("watch22 notification event update success");
                 res.json({success:'Worked!'});
+            }
+            });
+                // res.json({success:'Worked!'});
             }
             });
 
 
 
-  //create notification for user
+
+
+
   //create notification for followers
 
   // console.log(eventName);
