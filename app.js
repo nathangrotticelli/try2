@@ -464,7 +464,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
                 //   console.log("shamwowwwwww");
 
                 // }
-
         }
             });
 
