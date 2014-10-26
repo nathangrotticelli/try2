@@ -449,10 +449,12 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             { multi: false },
             function(err,red){
               if(err){
-                console.log('friend joined un notifications update failed')}
+                console.log('friend joined un notifications update failed')
+              }
               else{
                 console.log("workeddddddddddddddddd");
-                if(z == appUser.followers.length-1){
+                a = z+=1;
+                if(a == appUser.followers.length){
                   console.log("shamwowwwwww");
                   res.json({success:'Worked!'});
                 }
@@ -548,7 +550,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
 
 
-});
+// });
 
 app.post('/follow', function(req,res){
 
