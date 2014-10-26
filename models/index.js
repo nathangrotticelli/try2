@@ -19,6 +19,7 @@ var userSchema = new Schema({
   followers: [],
   following: [],
   notifications: [],
+  watchList: [],
   privateEvents: {},
   userSchool: String
 });

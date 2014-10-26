@@ -411,30 +411,38 @@ app.post('/watchEvent', function(req,res){
   message = req.body.message;
   notDate = req.body.notDate;
   eventName = req.body.eventName;
-  console.log(eventName);
-  console.log(message);
-  console.log(notDate);
-  console.log(userProfId);
-  res.json({success:'Worked!'});
+  // console.log(eventName);
+  // console.log(message);
+  // console.log(notDate);
+  // console.log(userProfId);
+  // res.json({success:'Worked!'});
 
-// User.findOne({ userProfId: userProfId},function(err,appUser){
-//   if(err){
-//     console.log('error?: '+err);
-//   }
-//   else{
-//     // appUser = appUser;
-//     if(appUser.following.indexOf(followingId)>-1){
-//       console.log("other user is already being followed");
-//       res.json({success:'follow already'});
-//     }
-//     else{
-//        // appUser.following.push(followingId);
+User.findOne({ userProfId: userProfId},function(err,appUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // appUser = appUser;
+    if(appUser.notifications.indexOf(message)>-1){
+      console.log("user already has watch event notification");
+      // res.json({success:'follow already'});
+    }
+    else{
+       // appUser.following.push(followingId);
 
-//     User.update({ userProfId: userProfId},
-//             {$pushAll: {following:[followingId]}},
-//             {upsert: true},
-//             function(err,red){
-//               if(err){console.log('following update failed')}
+    // User.update({ userProfId: userProfId},
+    //         {$pushAll: {following:[followingId]}},
+    //         {upsert: true},
+    //         function(err,red){
+    //           if(err){console.log('following update failed')}
+    //             else{
+
+    //             }
+  }
+}
+
+
+
 //               else{
 //                 console.log("following update for app user success");
 //         User.findOne({ userProfId: followingId},function(err,otherUser){
@@ -461,13 +469,13 @@ app.post('/watchEvent', function(req,res){
 
 
 
-//                 // res.json({success:"following update success"});
+// //                 // res.json({success:"following update success"});
 //             }
-//             });
+            });
 
-//     }
-//   }
-//  });
+    // }
+ //  }
+ // });
 
 
 
@@ -696,18 +704,16 @@ app.post('/getUser', function(req,res){
 //               if(err){console.log('notifications update failed')}
 //               else{console.log("workeddddddddddddddddd");}
 //             });
-         // User.update({userSchool: "SUNY Binghamton"},
-         //   {
-         //        notifications: [],
-         //        followers:[],
-         //        following:[]
-         //    },
-         //    { multi: true },
-         //    //upsert true
-         //    function(err,res){
-         //      if(err){console.log('notifications update failed')}
-         //      else{console.log("workeddddddddddddddddd");}
-         //    });
+         User.update({userSchool: "SUNY Binghamton"},
+           {
+                watchList: []
+            },
+            { multi: true },
+            //upsert true
+            function(err,res){
+              if(err){console.log('notifications update failed')}
+              else{console.log("workeddddddddddddddddd");}
+            });
 //           User.update({userSchool: "University of Central Florida"},
 //            {
 //                 notifications: []
