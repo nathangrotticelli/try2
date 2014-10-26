@@ -434,8 +434,8 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     console.log('error?: '+err);
   }
   else{
-    console.log(appUser.userName);
-    console.log(appUser.followers.length);
+    // console.log(appUser.userName);
+    // console.log(appUser.followers.length);
 
     for(z=0;z<appUser.followers.length;z++){
       console.log('IGOTHEREe');
@@ -458,16 +458,17 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               }
               else{
                 console.log("workeddddddddddddddddd");
-                var a = z+=1;
-                if(a == appUser.followers.length){
-                  console.log("shamwowwwwww");
-                  res.json({success:'Worked!'});
-                }
+                // var a = z+=1;
+                // if(a == appUser.followers.length){
+                //   console.log("shamwowwwwww");
+
+                // }
 
         }
             });
 
       }
+      res.json({success:'Worked!'});
 
 
    }
