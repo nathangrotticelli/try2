@@ -482,40 +482,32 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   }
   else{
     // appUser = appUser;
-    appUser.following.pop(followingId);
+    // appUser.following.pop(followingId);
 
-    User.findOneAndUpdate({ userProfId: userProfId},
-            {
-             following: appUser.following
-            },
+    User.update({ userProfId: userProfId},
+      { $pull:{ following:[followingId] }},
             {upsert: true},
             function(err,red){
               if(err){console.log('unfollowing update failed')}
               else{
                 console.log("unfollowing update success");
-                res.json({success:'Worked!'});
+        User.findOne({ userProfId: followingId},function(err,otherUser){
+          if(err){
+            console.log('error?: '+err);
+          }
+          else{
+            // appUser = appUser;
+            otherUser.followers.pop(userProfId);
+            for(q=0;q<otherUser.notifications.length;q++){
+              if(otherUser.notifications[q].message==message){
+                // arr1.splice(x,1);
+                otherUser.notifications.splice(q,1);
+                console.log("note Poppedd!!!!!!!!")
+              }
             }
-            });
-  }
- });
-
-User.findOne({ userProfId: followingId},function(err,otherUser){
-  if(err){
-    console.log('error?: '+err);
-  }
-  else{
-    // appUser = appUser;
-    otherUser.followers.pop(userProfId);
-    for(q=0;q<otherUser.notifications.length;q++){
-      if(otherUser.notifications[q].message==message){
-        // arr1.splice(x,1);
-        otherUser.notifications.splice(q,1);
-        console.log("not Poppedd!!!!!!!!")
-      }
-    }
 
 
-    User.findOneAndUpdate({ userProfId: followingId},
+            User.findOneAndUpdate({ userProfId: followingId},
             {
              followers: otherUser.followers,
              notifications: otherUser.notifications
@@ -527,9 +519,16 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
                 console.log("2nd unfollow update success");
                 res.json({success:'Worked!'});
             }
+          });
+         }
+        });
+
+            }
             });
   }
  });
+
+
 
 
 });
