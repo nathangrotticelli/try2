@@ -508,7 +508,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
 
             User.update({ userProfId: followingId},
-              { $pull: { "following" : [userProfId] },{ "notifications" : { message: message } } },
+              { $pull: { "followers" : [userProfId],{ "notifications" : { message: message } } },
             {upsert: true},
             function(err,red){
               if(err){console.log('2nd unfollow update failed')}
