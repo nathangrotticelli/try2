@@ -485,10 +485,12 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     // appUser.following.pop(followingId);
 
     User.update({ userProfId: userProfId},
-      { $pull: { "following" : [followingId] } },
+      { $pull:  following: [followingId]  },
             {upsert: true},
             function(err,red){
-              if(err){console.log('unfollowing update failed')}
+              if(err){
+                console.log('unfollowing update failed')
+              }
               else{
                 console.log("unfollowing update success");
         User.findOne({ userProfId: followingId},function(err,otherUser){
