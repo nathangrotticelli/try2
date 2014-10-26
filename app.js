@@ -404,6 +404,76 @@ userSchool = req.body.userSchool;
 
 });
 
+app.post('/watchAction', function(req,res){
+
+  userProfId = req.body.userProfId;
+  // followingId = req.body.followingId;
+  message = req.body.message;
+  notDate = req.body.notDate;
+  eventName = req.body.eventName;
+  console.log(eventName);
+  console.log(message);
+  console.log(notDate);
+  console.log(userProfId);
+  res.json({success:'Worked!'});
+
+// User.findOne({ userProfId: userProfId},function(err,appUser){
+//   if(err){
+//     console.log('error?: '+err);
+//   }
+//   else{
+//     // appUser = appUser;
+//     if(appUser.following.indexOf(followingId)>-1){
+//       console.log("other user is already being followed");
+//       res.json({success:'follow already'});
+//     }
+//     else{
+//        // appUser.following.push(followingId);
+
+//     User.update({ userProfId: userProfId},
+//             {$pushAll: {following:[followingId]}},
+//             {upsert: true},
+//             function(err,red){
+//               if(err){console.log('following update failed')}
+//               else{
+//                 console.log("following update for app user success");
+//         User.findOne({ userProfId: followingId},function(err,otherUser){
+//             if(err){
+//               console.log('error?: '+err);
+//             }
+//             else{
+//               // appUser = appUser;
+//               // otherUser.followers.push(userProfId);
+//               // otherUser.notifications.push({message:message,date:notDate});
+
+//               User.update({ userProfId: followingId},
+//             {$pushAll: {followers:[userProfId]},notifications:[{message:message,date:notDate}]},
+//             {upsert: true},
+//             function(err,red){
+//               if(err){console.log('otheruser follower update failed')}
+//               else{
+//                 console.log("otheruser follower update success");
+//                 res.json({success:'Worked!'});
+//             }
+//             });
+//   }
+//  });
+
+
+
+//                 // res.json({success:"following update success"});
+//             }
+//             });
+
+//     }
+//   }
+//  });
+
+
+
+
+});
+
 app.post('/follow', function(req,res){
 
   userProfId = req.body.userProfId;
