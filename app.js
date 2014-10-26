@@ -442,7 +442,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               // otherUser.notifications.push({message:message,date:notDate});
 
               User.update({ userProfId: followingId},
-            {$pushAll: {following:[followingId]},notifications:[{message:message,date:notDate}]},
+            {$pushAll: {followers:[userProfId]},notifications:[{message:message,date:notDate}]},
             {upsert: true},
             function(err,red){
               if(err){console.log('otheruser follower update failed')}
