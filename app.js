@@ -431,8 +431,10 @@ app.post('/watchEvent', function(req,res){
                   //create notification for followers
 User.findOne({ userProfId: userProfId},function(err,appUser){
   if(err){
-    console.log('watch notification event update for followers failed')}
+    console.log('watch notification event update for followers failed')
+  }
    else{
+    console.log(appUser.userName);
 
     for(z=0;z<appUser.followers.length;z++){
   // console.log(fbFriends[z].userName);
@@ -443,7 +445,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
   // if(appUser.followers[])
    User.update({userProfId: appUser.followers[z].userProfId},
-    {$pushAll: {notifications:[{message:message2,date:notDate,tap:tap,followId:userProfId}]}},
+    {$pushAll: {notifications:[{message:message2,date:notDate}]}},
             { multi: false },
             //upsert true
             function(err,red){
@@ -457,7 +459,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
 
               }
-})
+});
 
 
             }
