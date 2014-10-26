@@ -423,18 +423,16 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
     }
     else{
-       appUser.following.push(followingId);
+       // appUser.following.push(followingId);
 
-    User.findOneAndUpdate({ userProfId: userProfId},
-            {
-             following: appUser.following
-            },
+    User.update({ userProfId: userProfId},
+            {$pushAll: {following:followingId}}
             {upsert: true},
             function(err,red){
               if(err){console.log('following update failed')}
               else{
                 console.log("following update success");
-                res.json({success:'followed'});
+                res.json({success:"following update success"});
             }
             });
 
