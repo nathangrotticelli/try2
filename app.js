@@ -497,21 +497,18 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
           }
           else{
             // appUser = appUser;
-            otherUser.followers.pop(userProfId);
-            for(q=0;q<otherUser.notifications.length;q++){
-              if(otherUser.notifications[q].message==message){
-                // arr1.splice(x,1);
-                otherUser.notifications.splice(q,1);
-                console.log("note Poppedd!!!!!!!!");
-              }
-            }
+            // otherUser.followers.pop(userProfId);
+            // for(q=0;q<otherUser.notifications.length;q++){
+            //   if(otherUser.notifications[q].message==message){
+            //     // arr1.splice(x,1);
+            //     otherUser.notifications.splice(q,1);
+            //     console.log("note Poppedd!!!!!!!!");
+            //   }
+            // }
 
 
-            User.findOneAndUpdate({ userProfId: followingId},
-            {
-             followers: otherUser.followers,
-             notifications: otherUser.notifications
-            },
+            User.update({ userProfId: followingId},
+              { $pull: { "following" : [userProfId] },{ "notifications" : { message: message } } },
             {upsert: true},
             function(err,red){
               if(err){console.log('2nd unfollow update failed')}
