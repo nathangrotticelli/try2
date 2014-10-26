@@ -423,7 +423,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
     }
     else{
-       appUser.following.push(followingId);
+       // appUser.following.push(followingId);
 
     User.update({ userProfId: userProfId},
             {$pushAll: {following:[followingId]}},
@@ -431,7 +431,31 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             function(err,red){
               if(err){console.log('following update failed')}
               else{
-                console.log("following update success");
+                console.log("following update for app user success");
+        User.findOne({ userProfId: followingId},function(err,otherUser){
+            if(err){
+              console.log('error?: '+err);
+            }
+            else{
+              // appUser = appUser;
+              // otherUser.followers.push(userProfId);
+              // otherUser.notifications.push({message:message,date:notDate});
+
+              User.update({ userProfId: followingId},
+            {$pushAll: {following:[followingId]},notifications:[{message:message,date:notDate}]},
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('otheruser follower update failed')}
+              else{
+                console.log("otheruser follower update success");
+                res.json({success:'Worked!'});
+            }
+            });
+  }
+ });
+
+
+
                 // res.json({success:"following update success"});
             }
             });
@@ -440,30 +464,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   }
  });
 
-User.findOne({ userProfId: followingId},function(err,otherUser){
-  if(err){
-    console.log('error?: '+err);
-  }
-  else{
-    // appUser = appUser;
-    otherUser.followers.push(userProfId);
-    otherUser.notifications.push({message:message,date:notDate});
 
-    User.findOneAndUpdate({ userProfId: followingId},
-            {
-             followers: otherUser.followers,
-             notifications: otherUser.notifications
-            },
-            {upsert: true},
-            function(err,red){
-              if(err){console.log('2nd follower update failed')}
-              else{
-                console.log("2nd follower update success");
-                // res.json({success:'Worked!'});
-            }
-            });
-  }
- });
 
 
 });
