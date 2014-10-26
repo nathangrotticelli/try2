@@ -485,7 +485,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     // appUser.following.pop(followingId);
 
     User.update({ userProfId: userProfId},
-      { $pull:{ following:[followingId] }},
+      { $pull: { "following" : [followingId] } },
             {upsert: true},
             function(err,red){
               if(err){console.log('unfollowing update failed')}
@@ -502,7 +502,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               if(otherUser.notifications[q].message==message){
                 // arr1.splice(x,1);
                 otherUser.notifications.splice(q,1);
-                console.log("note Poppedd!!!!!!!!")
+                console.log("note Poppedd!!!!!!!!");
               }
             }
 
