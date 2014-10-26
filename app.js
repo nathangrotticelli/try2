@@ -432,7 +432,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               if(err){console.log('following update failed')}
               else{
                 console.log("following update success");
-                res.json({success:"following update success"});
+                // res.json({success:"following update success"});
             }
             });
 
@@ -459,7 +459,7 @@ User.findOne({ userProfId: followingId},function(err,otherUser){
               if(err){console.log('2nd follower update failed')}
               else{
                 console.log("2nd follower update success");
-                res.json({success:'Worked!'});
+                // res.json({success:'Worked!'});
             }
             });
   }
