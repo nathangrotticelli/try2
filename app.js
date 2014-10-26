@@ -485,7 +485,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     // appUser.following.pop(followingId);
 
     User.update({ userProfId: userProfId},
-      { $pull:  following: [followingId]  },
+      { $pull:  "following" : [followingId]  },
             {upsert: true},
             function(err,red){
               if(err){
