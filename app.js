@@ -420,7 +420,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     if(appUser.following.indexOf(followingId)>-1){
       console.log("other user is already being followed");
       res.json({success:'follow already'});
-
     }
     else{
        // appUser.following.push(followingId);
