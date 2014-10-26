@@ -435,6 +435,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   }
   else{
     console.log(appUser.userName);
+    console.log(appUser.followers.length);
 
     for(z=0;z<appUser.followers.length;z++){
       console.log('IGOTHEREe');
