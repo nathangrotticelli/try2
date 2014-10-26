@@ -339,11 +339,9 @@ for(z=0;z<fbFriends.length;z++){
   message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
   notDate = "9/11/1210";
   tap = "follow";
-  fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
+  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
    User.update({userProfId: fbFriends[z].userProfId},
-            {
-                notifications: fbFriends[z].notifications
-            },
+    {$pushAll: {notifications:[{message:message,date:notDate,tap:tap,followId:userProfId}]}},
             { multi: false },
             //upsert true
             function(err,red){
@@ -409,6 +407,7 @@ app.post('/watchEvent', function(req,res){
   userProfId = req.body.userProfId;
   // followingId = req.body.followingId;
   message = req.body.message;
+  message2 = req.body.message2;
   notDate = req.body.notDate;
   eventName = req.body.eventName;
   eventObj = req.body.eventObj;
@@ -429,7 +428,38 @@ app.post('/watchEvent', function(req,res){
               if(err){console.log('watch22 notification event update failed')}
               else{
                 console.log("watch22 notification event update success");
-                res.json({success:'Worked!'});
+                  //create notification for followers
+User.findOne({ userProfId: userProfId},function(err,appUser){
+  if(err){
+    console.log('watch notification event update for followers failed')}
+   else{
+
+    for(z=0;z<appUser.followers.length;z++){
+  // console.log(fbFriends[z].userName);
+  // otherUser.notifications.push({message:message,date:notDate})
+  // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
+  // notDate = "9/11/1210";
+  // tap = "follow";
+  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
+  // if(appUser.followers[])
+   User.update({userProfId: appUser.followers[z].userProfId},
+    {$pushAll: {notifications:[{message:message2,date:notDate,tap:tap,followId:userProfId}]}},
+            { multi: false },
+            //upsert true
+            function(err,red){
+              if(err){console.log('friend joined un notifications update failed')}
+              else{console.log("workeddddddddddddddddd");
+          res.json({success:'Worked!'});
+        }
+            });
+
+}
+
+
+              }
+})
+
+
             }
             });
                 // res.json({success:'Worked!'});
@@ -440,8 +470,6 @@ app.post('/watchEvent', function(req,res){
 
 
 
-
-  //create notification for followers
 
   // console.log(eventName);
   // console.log(message);
