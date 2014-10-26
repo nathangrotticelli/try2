@@ -627,18 +627,18 @@ app.post('/getUser', function(req,res){
 //               if(err){console.log('notifications update failed')}
 //               else{console.log("workeddddddddddddddddd");}
 //             });
-         User.update({userSchool: "SUNY Binghamton"},
-           {
-                notifications: [],
-                followers:[],
-                following:[]
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+         // User.update({userSchool: "SUNY Binghamton"},
+         //   {
+         //        notifications: [],
+         //        followers:[],
+         //        following:[]
+         //    },
+         //    { multi: true },
+         //    //upsert true
+         //    function(err,res){
+         //      if(err){console.log('notifications update failed')}
+         //      else{console.log("workeddddddddddddddddd");}
+         //    });
 //           User.update({userSchool: "University of Central Florida"},
 //            {
 //                 notifications: []
