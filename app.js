@@ -438,7 +438,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     // console.log(appUser.followers.length);
 
     for(z=0;z<appUser.followers.length;z++){
-      console.log('IGOTHEREe');
+      // console.log('IGOTHEREe');
   // console.log(fbFriends[z].userName);
   // otherUser.notifications.push({message:message,date:notDate})
   // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
@@ -446,8 +446,9 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   // tap = "follow";
   // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
   // if(appUser.followers[])
-  followerId = appUser.followers[z].userProfId;
-  console.log(followerId);
+  followerId = appUser.followers[z];
+
+  // console.log(followerId);
 
    User.update({userProfId:followerId },
     {$pushAll: {notifications:[{message:message2,date:notDate}]}},
