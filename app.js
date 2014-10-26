@@ -411,35 +411,54 @@ app.post('/watchEvent', function(req,res){
   message = req.body.message;
   notDate = req.body.notDate;
   eventName = req.body.eventName;
+  eventObj = req.body.eventObj;
+
+  //push event into user watch list
+ User.update({ userProfId: userProfId},
+  {$pushAll: {notifications:[{message:message,date:notDate}]}},
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('watch notification event update failed')}
+              else{
+                console.log("watch notification event update success");
+                res.json({success:'Worked!'});
+            }
+            });
+
+
+
+  //create notification for user
+  //create notification for followers
+
   // console.log(eventName);
   // console.log(message);
   // console.log(notDate);
   // console.log(userProfId);
   // res.json({success:'Worked!'});
 
-User.findOne({ userProfId: userProfId},function(err,appUser){
-  if(err){
-    console.log('error?: '+err);
-  }
-  else{
-    // appUser = appUser;
-    if(appUser.notifications.indexOf(message)>-1){
-      console.log("user already has watch event notification");
-      // res.json({success:'follow already'});
-    }
-    else{
-       // appUser.following.push(followingId);
+// User.findOne({ userProfId: userProfId},function(err,appUser){
+//   if(err){
+//     console.log('error?: '+err);
+//   }
+//   else{
+//     // appUser = appUser;
+//     if(appUser.notifications.indexOf(message)>-1){
+//       console.log("user already has watch event notification");
+//       // res.json({success:'follow already'});
+//     }
+//     else{
+//        // appUser.following.push(followingId);
 
-    // User.update({ userProfId: userProfId},
-    //         {$pushAll: {following:[followingId]}},
-    //         {upsert: true},
-    //         function(err,red){
-    //           if(err){console.log('following update failed')}
-    //             else{
+//     // User.update({ userProfId: userProfId},
+//     //         {$pushAll: {following:[followingId]}},
+//     //         {upsert: true},
+//     //         function(err,red){
+//     //           if(err){console.log('following update failed')}
+//     //             else{
 
-    //             }
-  }
-}
+//     //             }
+//   }
+// }
 
 
 
@@ -471,7 +490,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
 // //                 // res.json({success:"following update success"});
 //             }
-            });
+            // });
 
     // }
  //  }
