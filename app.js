@@ -494,24 +494,27 @@ app.post('/unwatchEvent', function(req,res){
 
   //pull event from user watch list
  User.update({ userProfId: userProfId},
-   { $pull:  {"watchList" : {name:eventObj.name} } },
+   { $pull:  {"watchList" : {name:eventObj.name,start_time:eventObj.start_time} } },
             {upsert: true},
             function(err,red){
               if(err){console.log('watch event pull failed')}
               else{
                 console.log("watch event pull success");
-                 res.json({success:'Worked!'});
+
               }
             });
 
-                  //create notification for user
-//    User.update({ userProfId: userProfId},
-//   {$pushAll: {notifications:[{message:message,date:notDate}]}},
-//             {upsert: true},
-//             function(err,red){
-//               if(err){console.log('watch22 notification event update failed')}
-//               else{
-//                 console.log("watch22 notification event update success");
+                  //delete notification for user
+   User.update({ userProfId: userProfId},
+  {$pull: {"notifications":{message:message,date:notDate} }},
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('watch33 notification event update failed')}
+              else{
+                console.log("watch33 notification event update success");
+                res.json({success:'Worked!'});
+              }
+            });
 //                   //create notification for followers
 // User.findOne({ userProfId: userProfId},function(err,appUser){
 //   if(err){
