@@ -494,7 +494,7 @@ app.post('/unwatchEvent', function(req,res){
 
   //pull event from user watch list
  User.update({ userProfId: userProfId},
-   { $pull:  {"watchList" : eventObj } },
+   { $pull:  {"watchList" : {name:eventObj.name} } },
             {upsert: true},
             function(err,red){
               if(err){console.log('watch event pull failed')}
