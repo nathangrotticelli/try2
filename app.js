@@ -482,7 +482,89 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             });
 });
 
+app.post('/unwatchEvent', function(req,res){
 
+  userProfId = req.body.userProfId;
+  // followingId = req.body.followingId;
+  message = req.body.message;
+  message2 = req.body.message2;
+  notDate = req.body.notDate;
+  eventName = req.body.eventName;
+  eventObj = req.body.eventObj;
+
+  //pull event from user watch list
+ User.update({ userProfId: userProfId},
+   { $pull:  {"watchList" : [eventObj] } },
+            {upsert: true},
+            function(err,red){
+              if(err){console.log('watch event pull failed')}
+              else{
+                console.log("watch event pull success");
+                 res.json({success:'Worked!'});
+              }
+            });
+
+                  //create notification for user
+//    User.update({ userProfId: userProfId},
+//   {$pushAll: {notifications:[{message:message,date:notDate}]}},
+//             {upsert: true},
+//             function(err,red){
+//               if(err){console.log('watch22 notification event update failed')}
+//               else{
+//                 console.log("watch22 notification event update success");
+//                   //create notification for followers
+// User.findOne({ userProfId: userProfId},function(err,appUser){
+//   if(err){
+//     console.log('error?: '+err);
+//   }
+//   else{
+//     // console.log(appUser.userName);
+//     // console.log(appUser.followers.length);
+
+//     for(z=0;z<appUser.followers.length;z++){
+//       // console.log('IGOTHEREe');
+//   // console.log(fbFriends[z].userName);
+//   // otherUser.notifications.push({message:message,date:notDate})
+//   // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
+//   // notDate = "9/11/1210";
+//   // tap = "follow";
+//   // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
+//   // if(appUser.followers[])
+//   followerId = appUser.followers[z];
+
+//   // console.log(followerId);
+
+//    User.update({userProfId:followerId },
+//     {$pushAll: {notifications:[{message:message2,date:notDate}]}},
+//             {upsert: true},
+//             function(err,red){
+//               if(err){
+//                 console.log('friend joined un notifications update failed')
+//               }
+//               else{
+//                 console.log("workeddddddddddddddddd");
+//                 // var a = z+=1;
+//                 // if(a == appUser.followers.length){
+//                 //   console.log("shamwowwwwww");
+
+//                 // }
+//         }
+//             });
+
+//       }
+//       res.json({success:'Worked!'});
+
+
+//    }
+});
+
+
+            }
+            });
+                // res.json({success:'Worked!'});
+            }
+            });
+});
 
 
 
