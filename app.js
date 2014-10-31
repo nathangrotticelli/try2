@@ -509,10 +509,8 @@ app.post('/unwatchEvent', function(req,res){
               if(err){console.log('watch33 notification event update failed')}
               else{
                 console.log("watch33 notification event update success");
-                res.json({success:'Worked!'});
-              }
-            });
-                  //delete notification for followers
+
+                                //delete notification for followers
 User.findOne({ userProfId: userProfId},function(err,appUser){
   if(err){
     console.log('error?: '+err);
@@ -558,6 +556,9 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 res.json({success:'Worked!'});
    }
 });
+              }
+            });
+
 
 
               }
