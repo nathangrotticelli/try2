@@ -543,9 +543,9 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               else{
                 console.log("delete watch update workedddd");
 
-                var a = z+1;
-                console.log(a);
-                if(a == appUser.followers.length){
+                // var a = z+1;
+                console.log(z);
+                if(a == appUser.followers.length-1){
                   console.log("shamwowwwwww");
                    res.json({success:'Worked!'});
 
