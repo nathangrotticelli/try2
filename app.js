@@ -501,9 +501,6 @@ app.post('/unwatchEvent', function(req,res){
               else{
                 console.log("watch event pull success");
 
-              }
-            });
-
                   //delete notification for user
    User.update({ userProfId: userProfId},
   {$pull: {"notifications":{message:message,date:notDate} }},
@@ -515,51 +512,57 @@ app.post('/unwatchEvent', function(req,res){
                 res.json({success:'Worked!'});
               }
             });
-//                   //create notification for followers
-// User.findOne({ userProfId: userProfId},function(err,appUser){
-//   if(err){
-//     console.log('error?: '+err);
-//   }
-//   else{
-//     // console.log(appUser.userName);
-//     // console.log(appUser.followers.length);
+                  //delete notification for followers
+User.findOne({ userProfId: userProfId},function(err,appUser){
+  if(err){
+    console.log('error?: '+err);
+  }
+  else{
+    // console.log(appUser.userName);
+    // console.log(appUser.followers.length);
 
-//     for(z=0;z<appUser.followers.length;z++){
-//       // console.log('IGOTHEREe');
-//   // console.log(fbFriends[z].userName);
-//   // otherUser.notifications.push({message:message,date:notDate})
-//   // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
-//   // notDate = "9/11/1210";
-//   // tap = "follow";
-//   // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
-//   // if(appUser.followers[])
-//   followerId = appUser.followers[z];
+    for(z=0;z<appUser.followers.length;z++){
+      // console.log('IGOTHEREe');
+  // console.log(fbFriends[z].userName);
+  // otherUser.notifications.push({message:message,date:notDate})
+  // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
+  // notDate = "9/11/1210";
+  // tap = "follow";
+  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
+  // if(appUser.followers[])
+  followerId = appUser.followers[z];
 
-//   // console.log(followerId);
+  // console.log(followerId);
 
-//    User.update({userProfId:followerId },
-//     {$pushAll: {notifications:[{message:message2,date:notDate}]}},
-//             {upsert: true},
-//             function(err,red){
-//               if(err){
-//                 console.log('friend joined un notifications update failed')
-//               }
-//               else{
-//                 console.log("workeddddddddddddddddd");
-//                 // var a = z+=1;
-//                 // if(a == appUser.followers.length){
-//                 //   console.log("shamwowwwwww");
+   User.update({userProfId:followerId },
+    {$pull: {"notifications":{message:message2,date:notDate}}},
+            {upsert: true},
+            function(err,red){
+              if(err){
+                console.log('delete watch update failed')
+              }
+              else{
+                console.log("delete watch update workedddd");
 
-//                 // }
-//         }
-//             });
+                // var a = z+=1;
+                // if(a == appUser.followers.length){
+                //   console.log("shamwowwwwww");
 
-//       }
-//       res.json({success:'Worked!'});
+                // }
+        }
+            });
+
+      }
 
 
-//    }
-// });
+res.json({success:'Worked!'});
+   }
+});
+
+
+              }
+            });
+
 
 
             // }
