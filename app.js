@@ -549,7 +549,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             });
 
        console.log(z);
-                x = appUser.followers.length-1;
+                x = appUser.followers.length;
                 if(z == x){
                   console.log("shamwowwwwww");
                    res.json({success:'Worked!'});
