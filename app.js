@@ -544,16 +544,17 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
                 console.log("delete watch update workedddd");
 
                 // var a = z+1;
-                console.log(z);
+
+        }
+            });
+
+       console.log(z);
                 x = appUser.followers.length-1;
                 if(z == x){
                   console.log("shamwowwwwww");
                    res.json({success:'Worked!'});
 
                 }
-        }
-            });
-
       }
 
 
