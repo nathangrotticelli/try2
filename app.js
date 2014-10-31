@@ -546,7 +546,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
                 // var a = z+1;
                 console.log(z);
                 x = appUser.followers.length-1;
-                if(a == x){
+                if(z == x){
                   console.log("shamwowwwwww");
                    res.json({success:'Worked!'});
 
