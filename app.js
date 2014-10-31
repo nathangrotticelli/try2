@@ -537,23 +537,24 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             {upsert: true},
             function(err,red){
               if(err){
-                console.log('delete watch update failed')
+                console.log('delete watch update failed');
+                 res.json({success:'Worked!'});
               }
               else{
                 console.log("delete watch update workedddd");
 
-                // var a = z+=1;
-                // if(a == appUser.followers.length){
-                //   console.log("shamwowwwwww");
+                var a = z+=1;
+                if(a == appUser.followers.length){
+                  console.log("shamwowwwwww");
+                   res.json({success:'Worked!'});
 
-                // }
+                }
         }
             });
 
       }
 
 
-res.json({success:'Worked!'});
    }
 });
               }
