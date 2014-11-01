@@ -489,8 +489,8 @@ app.post('/unwatchEvent', function(req,res){
   // followingId = req.body.followingId;
   message = req.body.message;
   message2 = req.body.message2;
-  notDate = req.body.notDate;
-  eventName = req.body.eventName;
+  // notDate = req.body.notDate;
+  // eventName = req.body.eventName;
   eventObj = req.body.eventObj;
 
   //pull event from user watch list
@@ -502,9 +502,9 @@ app.post('/unwatchEvent', function(req,res){
               else{
                 console.log("watch event pull success");
 
-                  //delete notification for user
+                  //delete notification for user {$pull: {"notifications":{message:message,date:notDate} }},
    User.update({ userProfId: userProfId},
-  {$pull: {"notifications":{message:message,date:notDate} }},
+  {$pull: {"notifications":{message:message} }},
             {upsert: true},
             function(err,red){
               if(err){console.log('watch33 notification event update failed')}
@@ -534,7 +534,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   // console.log(followerId);
 
    User.update({userProfId:followerId },
-    {$pull: {"notifications":{message:message2,date:notDate}}},
+    {$pull: {"notifications":{message:message2}}},
             {upsert: true},
             function(err,red){
               if(err){
