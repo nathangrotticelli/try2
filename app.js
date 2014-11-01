@@ -411,6 +411,7 @@ app.post('/watchEvent', function(req,res){
   notDate = req.body.notDate;
   eventObj = req.body.eventObj;
 
+
   //push event into user watch list
  User.update({ userProfId: userProfId},
   {$pushAll: {watchList:[eventObj]}},
