@@ -410,6 +410,7 @@ app.post('/watchEvent', function(req,res){
   message2 = req.body.message2;
   notDate = req.body.notDate;
   eventObj = req.body.eventObj;
+  tap = req.body.tap;
 
 
   //push event into user watch list
@@ -422,7 +423,7 @@ app.post('/watchEvent', function(req,res){
                 console.log("watch notification event update success");
                   //create notification for user
    User.update({ userProfId: userProfId},
-  {$pushAll: {notifications:[{message:message,date:notDate}]}},
+  {$pushAll: {notifications:[{message:message,date:notDate,tap:tap}]}},
             {upsert: true},
             function(err,red){
               if(err){console.log('watch22 notification event update failed')}
@@ -451,7 +452,7 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
   // console.log(followerId);
 
    User.update({userProfId:followerId },
-    {$pushAll: {notifications:[{message:message2,date:notDate}]}},
+    {$pushAll: {notifications:[{message:message2,date:notDate,tap:tap}]}},
             {upsert: true},
             function(err,red){
               if(err){
