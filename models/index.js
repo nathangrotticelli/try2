@@ -55,15 +55,17 @@ var schoolSchema = new Schema({
   ticketCount: Number
 });
 
+var privateEventSchema = new Schema({
+  events: {},
+  privateTag: String
+});
+
 var schoolUserSchema = new Schema({
   schoolName: String,
   userEmails: []
 });
 
-var privateEventsSchema = new Schema({
-  events: {},
-  privateTag: String
-});
+
 
 // var eventsSchema = new Schema ({
 
@@ -83,7 +85,7 @@ var User = mongoose.model('User', userSchema);
 
 var School = mongoose.model('School', schoolSchema);
 
-var PrivateEvents = mongoose.model('PrivateEvents', privateEventsSchema);
+var PrivateEvents = mongoose.model('PrivateEvents', privateEventSchema);
 
 var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 
