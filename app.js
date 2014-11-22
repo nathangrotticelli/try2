@@ -1056,6 +1056,19 @@ app.post('/privateUserEventAdd',function(req,res){
 
 });
 
+app.post('/privateListEventAdd',function(req,res){
+ // userEmail = req.body.userEmail;
+      SchoolUserSchema.findOneAndUpdate({ schoolName: "privateTag" },
+              { privateEvents:req.body.privateEvents},{upsert: true},function(req,result){
+
+                  console.log('Complete Private events updated');
+
+              });
+
+        res.json({success:'Worked!'});
+
+});
+
 // app.post('/loginTry2', function(req, res){
 // 	 var loginTryEmail = req.body.name;
 // 	 console.log(loginTryEmail);
