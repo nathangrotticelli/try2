@@ -217,7 +217,7 @@ app.post('/getSchool', function(req,res){
 incSchoolName = req.body.schoolName;
 
 console.log('here22222232323232');
-console.log(PrivateList.events="private events list hereeeeeeee");
+console.log(PrivateList.events+"private events list hereeeeeeee");
 
 
 // PrivateList.findOne({events: incSchoolName}, function(err, school){
