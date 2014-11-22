@@ -221,8 +221,9 @@ console.log('here22222232323232');
 // var a123 = "{
 //         "$oid": "54703c49e4b04de436f29363"
 //     }"
-// console.log(PrivateEvents.db.collections);
-console.log(PrivateEvents.db.collections);
+console.log(JSON.stringify(PrivateEvents));
+console.log('her999999999');
+console.log(PrivateEvents.db);
 // console.log(PrivateEvents.db.collections);
 
 // PrivateEvents.findOne({privateTag: "privateTag" }, function(err, pEvents){
