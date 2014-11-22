@@ -1019,7 +1019,7 @@ app.post('/userPost',function(req,res){
 					  userProfId: req.body.userProfId,
 					  userName: req.body.userName,
             userSchool: req.body.userSchool,
-					  privateEvents: req.body.privateEvents,
+					  // privateEvents: req.body.privateEvents,
 					  userGender: req.body.userGender,
 					  entranceEmail: req.body.entranceEmail,
 					  userEmail: req.body.userEmail},
