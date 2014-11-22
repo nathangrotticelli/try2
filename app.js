@@ -850,7 +850,8 @@ app.post('/getUser', function(req,res){
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -865,7 +866,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -880,7 +882,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -894,7 +897,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -908,7 +912,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -922,7 +927,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
@@ -936,7 +942,10 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
+
+
 
             },
             { multi: true },
@@ -965,7 +974,8 @@ User.update({userSchool: "University of Illinois at Urbana-Champaign"},
                 notifications: [],
                 watchList: [],
                 followers: [],
-                following: []
+                following: [],
+                privateEvents: {}
 
             },
             { multi: true },
