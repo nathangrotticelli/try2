@@ -232,7 +232,7 @@ SchoolUserSchema.findOne({ schoolName: pT }).exec(function (err, privateList) {
       console.log('error?'+err);
     }
     else{
-          console.log('Fetched Info222222 for: '+privateList);
+          console.log('Fetched Info222222 for: '+privateList.privateEvents);
     // console.log(JSON.stringify(pEvents));
     }
     // privateItem = pEvents;
