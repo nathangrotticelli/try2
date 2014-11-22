@@ -16,7 +16,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
-var PrivateList = require('./models')["PrivateList"];
+var PrivateEvents = require('./models')["PrivateList"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
@@ -222,10 +222,10 @@ console.log('here22222232323232');
 //         "$oid": "54703c49e4b04de436f29363"
 //     }"
 
-PrivateList.findOne({privateTag: "privateTag" }, function(err, pEvents){
+PrivateEvents.findOne({privateTag: "privateTag" }, function(err, pEvents){
     console.log('error?: '+err);
-    // Item = school;
-    console.log("right hizerr"+pEvents.events);
+    privateItem = pEvents;
+    // console.log("right hizerr"+pEvents.events);
     console.log('Fetched Info222222 for: '+pEvents);
     // console.log(JSON.stringify(schoolItem));
     // res.json({Item: schoolItem});
