@@ -16,7 +16,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
-var PrivateEvents = require('./models')["PrivateList"];
+var PrivateEvents = require('./models')["PrivateEvents"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
