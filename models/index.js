@@ -83,7 +83,7 @@ var User = mongoose.model('User', userSchema);
 
 var School = mongoose.model('School', schoolSchema);
 
-var PrivateEvents = mongoose.model('PrivateList', privateEventsSchema);
+var PrivateEvents = mongoose.model('PrivateEvents', privateEventsSchema);
 
 var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 
