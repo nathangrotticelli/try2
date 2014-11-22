@@ -16,7 +16,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
-var PrivateEvents = require('./models')["PrivateEvents"];
+var PrivateEvent = require('./models')["PrivateEvent"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
@@ -226,7 +226,7 @@ console.log('here22222232323232');
 // console.log(PrivateEvents.db);
 // console.log(PrivateEvents.db.collections);
 
-PrivateEvents.findOne({}, function(err, pEvents){
+PrivateEvent.findOne({privateTag:"privateTag"}, function(err, pEvents){
     console.log('error?: '+err);
     // privateItem = pEvents;
     // console.log("right hizerr"+pEvents.events);

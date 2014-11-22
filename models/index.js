@@ -85,7 +85,7 @@ var User = mongoose.model('User', userSchema);
 
 var School = mongoose.model('School', schoolSchema);
 
-var PrivateEvents = mongoose.model('PrivateEvents', privateEventSchema);
+var PrivateEvent = mongoose.model('PrivateEvent', privateEventSchema);
 
 var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 
@@ -94,6 +94,6 @@ var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 module.exports = {
   School: School,
   User: User,
-  PrivateEvents: PrivateEvents,
+  PrivateEvent: PrivateEvent,
   SchoolUserSchema: SchoolUserSchema
 }
