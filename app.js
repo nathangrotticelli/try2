@@ -844,146 +844,146 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 // });
 
 app.post('/getUser', function(req,res){
+//to reset users to blank arrays/events
+//   User.update({userSchool: "George Washington University"},
+//             {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-  User.update({userSchool: "George Washington University"},
-            {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+// User.update({userSchool: "University of Illinois at Urbana-Champaign"},
+//             {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-User.update({userSchool: "University of Illinois at Urbana-Champaign"},
-            {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+//     User.update({userSchool: "University of Hawaii"},
+//          {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-    User.update({userSchool: "University of Hawaii"},
-         {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//       User.update({userSchool: "Central Michigan University"},
+//             {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-      User.update({userSchool: "Central Michigan University"},
-            {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//        User.update({userSchool: "SUNY Oneonta"},
+//              {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-       User.update({userSchool: "SUNY Oneonta"},
-             {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//         User.update({userSchool: "University of Michigan"},
+//              {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-        User.update({userSchool: "University of Michigan"},
-             {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
-
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-        User.update({userSchool: "Michigan State University"},
-             {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//         User.update({userSchool: "Michigan State University"},
+//              {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
 
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-         User.update({userSchool: "SUNY Binghamton"},
-            {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//          User.update({userSchool: "SUNY Binghamton"},
+//             {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
-          User.update({userSchool: "University of Central Florida"},
-            {
-                notifications: [],
-                watchList: [],
-                followers: [],
-                following: [],
-                privateEvents: {}
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
+//           User.update({userSchool: "University of Central Florida"},
+//             {
+//                 notifications: [],
+//                 watchList: [],
+//                 followers: [],
+//                 following: [],
+//                 privateEvents: {}
 
-            },
-            { multi: true },
-            //upsert true
-            function(err,res){
-              if(err){console.log('notifications update failed')}
-              else{console.log("workeddddddddddddddddd");}
-            });
+//             },
+//             { multi: true },
+//             //upsert true
+//             function(err,res){
+//               if(err){console.log('notifications update failed')}
+//               else{console.log("workeddddddddddddddddd");}
+//             });
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
 
