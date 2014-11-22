@@ -225,16 +225,30 @@ console.log('here22222232323232');
 // console.log('her999999999');
 // console.log(PrivateEvents.db);
 // console.log(PrivateEvents.db.collections);
-var pT = "privateTag"
+// var pT = "privateTag"
 
-SchoolUserSchema.findOne({ schoolName: pT }).exec(function (err, privateList) {
+SchoolUserSchema.findOne({ schoolName: "privateTag" }).exec(function (err, privateList) {
     if(err){
       console.log('error?'+err);
+      var privateEvents = null;
     }
     else{
-          console.log('Fetched Info222222 for: '+privateList.privateEvents);
+          console.log('Got private event list');
+          var privateEvents = privateList.privateEvents;
     // console.log(JSON.stringify(pEvents));
     }
+    School.findOne({schoolName: incSchoolName}, function(err, school){
+      if(err){
+          console.log('error?: '+err);
+    }
+    else{
+    schoolItem = school;
+    console.log('Fetched Info for: '+incSchoolName);
+    // console.log(JSON.stringify(schoolItem));
+    res.json({Item: schoolItem, Private:privateEvents});
+  }
+
+  });
     // privateItem = pEvents;
     // console.log("right hizerr"+pEvents.events);
 
@@ -243,18 +257,6 @@ SchoolUserSchema.findOne({ schoolName: pT }).exec(function (err, privateList) {
 
   });
 
-School.findOne({schoolName: incSchoolName}, function(err, school){
-		  if(err){
-          console.log('error?: '+err);
-    }
-    else{
-		schoolItem = school;
-		console.log('Fetched Info for: '+incSchoolName);
-    // console.log(JSON.stringify(schoolItem));
-		res.json({Item: schoolItem});
-  }
-
-	});
 });
 
 app.post('/ticketCount', function(req,res){
