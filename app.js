@@ -231,6 +231,7 @@ PrivateEvents.findOne({privateTag: "privateTag" }, function(err, pEvents){
     // privateItem = pEvents;
     // console.log("right hizerr"+pEvents.events);
     console.log('Fetched Info222222 for: '+pEvents);
+    console.log(JSON.stringify(pEvents));
     // console.log(JSON.stringify(schoolItem));
     // res.json({Item: schoolItem});
 
