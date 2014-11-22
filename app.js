@@ -222,7 +222,7 @@ console.log('here22222232323232');
 //         "$oid": "54703c49e4b04de436f29363"
 //     }"
 
-PrivateList.findOne({'_id' : "54703c49e4b04de436f29363" }, function(err, pEvents){
+PrivateList.findOne({privateTag: "privateTag" }, function(err, pEvents){
     console.log('error?: '+err);
     // Item = school;
     console.log("right hizerr"+pEvents.events);
