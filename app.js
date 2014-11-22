@@ -222,7 +222,7 @@ console.log('here22222232323232');
 //         "$oid": "54703c49e4b04de436f29363"
 //     }"
 // console.log(PrivateEvents.db.collections);
-console.log(PrivateEvents.db.collections.privateevents);
+console.log(PrivateEvents.db.collections.privateevents.events);
 
 // PrivateEvents.findOne({privateTag: "privateTag" }, function(err, pEvents){
 //     console.log('error?: '+err);
