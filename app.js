@@ -218,12 +218,11 @@ incSchoolName = req.body.schoolName;
 
 console.log('here22222232323232');
 // console.log(PrivateList.events+"private events list hereeeeeeee");
-var a123 = {
-        "Test Event 1": {
-            "stuff": "hello"
-        };
+var a123 = "{
+        "$oid": "54703c49e4b04de436f29363"
+    }"
 
-PrivateList.findOne({events:a123}, function(err, pEvents){
+PrivateList.findOne({_id:a123}, function(err, pEvents){
     console.log('error?: '+err);
     // Item = school;
     console.log("right hizerr"+pEvents.events);
