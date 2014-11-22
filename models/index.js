@@ -62,7 +62,7 @@ var schoolUserSchema = new Schema({
 
 var privateEventsSchema = new Schema({
   events: {},
-  privateTag:String
+  privateTag: String
 });
 
 // var eventsSchema = new Schema ({
