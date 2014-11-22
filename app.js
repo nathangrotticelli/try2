@@ -226,7 +226,7 @@ console.log('here22222232323232');
 // console.log(PrivateEvents.db);
 // console.log(PrivateEvents.db.collections);
 
-PrivateEvents.findOne({privateTag: "privateTag" }, function(err, pEvents){
+PrivateEvents.findOne({}, function(err, pEvents){
     console.log('error?: '+err);
     // privateItem = pEvents;
     // console.log("right hizerr"+pEvents.events);
