@@ -16,7 +16,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
-var PrivateEvent = require('./models')["PrivateEvent"];
+// var PrivateEvent = require('./models')["PrivateEvent"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
@@ -225,24 +225,34 @@ console.log('here22222232323232');
 // console.log('her999999999');
 // console.log(PrivateEvents.db);
 // console.log(PrivateEvents.db.collections);
+var pT = "privateTag"
 
-PrivateEvent.findOne({privateTag:"privateTag"}, function(err, pEvents){
-    console.log('error?: '+err);
+SchoolUserSchema.findOne({ schoolName: pT }).exec(function (err, privateList) {
+    if(err){
+      console.log('error?'+err);
+    }
+    else{
+          console.log('Fetched Info222222 for: '+privateList);
+    // console.log(JSON.stringify(pEvents));
+    }
     // privateItem = pEvents;
     // console.log("right hizerr"+pEvents.events);
-    console.log('Fetched Info222222 for: '+pEvents);
-    console.log(JSON.stringify(pEvents));
+
     // console.log(JSON.stringify(schoolItem));
     // res.json({Item: schoolItem});
 
   });
 
 School.findOne({schoolName: incSchoolName}, function(err, school){
-		console.log('error?: '+err);
+		  if(err){
+          console.log('error?: '+err);
+    }
+    else{
 		schoolItem = school;
 		console.log('Fetched Info for: '+incSchoolName);
     // console.log(JSON.stringify(schoolItem));
 		res.json({Item: schoolItem});
+  }
 
 	});
 });
