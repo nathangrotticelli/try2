@@ -220,7 +220,7 @@ console.log('here22222232323232');
 // console.log(PrivateList.events+"private events list hereeeeeeee");
 
 
-PrivateList.findOne({}, function(err, pEvents){
+PrivateList.findOne({events:true}, function(err, pEvents){
     console.log('error?: '+err);
     // schoolItem = school;
     console.log('Fetched Info222222 for: '+pEvents);
