@@ -60,6 +60,10 @@ var schoolUserSchema = new Schema({
   userEmails: []
 });
 
+var privateListSchema = new Schema({
+  events: {}
+});
+
 // var eventsSchema = new Schema ({
 
 // })
@@ -78,6 +82,8 @@ var User = mongoose.model('User', userSchema);
 
 var School = mongoose.model('School', schoolSchema);
 
+var PrivateList = mongoose.model('PrivateList', privateListSchema);
+
 var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 
 // exports.Binghamton = mongoose.model('Binghamton', binghamtonSchema);
@@ -85,5 +91,6 @@ var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 module.exports = {
   School: School,
   User: User,
+  PrivateList: PrivateList,
   SchoolUserSchema: SchoolUserSchema
 }

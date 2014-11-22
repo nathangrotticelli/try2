@@ -16,6 +16,7 @@ var conf = require('./config');
 var models = require('./models');
 var MongoStore = require('connect-mongo')(express);
 var School = require('./models')["School"];
+var PrivateList = require('./models')["PrivateList"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
 
@@ -214,7 +215,19 @@ app.get('/denied', function(req, res){
 
 app.post('/getSchool', function(req,res){
 incSchoolName = req.body.schoolName;
-console.log(incSchoolName);
+
+console.log('here22222232323232');
+console.log(PrivateList.events="private events list hereeeeeeee");
+
+
+// PrivateList.findOne({events: incSchoolName}, function(err, school){
+//     console.log('error?: '+err);
+//     schoolItem = school;
+//     console.log('Fetched Info for: '+incSchoolName);
+//     // console.log(JSON.stringify(schoolItem));
+//     res.json({Item: schoolItem});
+
+//   });
 
 School.findOne({schoolName: incSchoolName}, function(err, school){
 		console.log('error?: '+err);
