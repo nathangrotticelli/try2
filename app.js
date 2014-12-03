@@ -1092,6 +1092,7 @@ app.post('/userPost',function(req,res){
 					  userProfId: req.body.userProfId,
 					  userName: req.body.userName,
             userSchool: req.body.userSchool,
+            firstLogin: req.body.firstLogin,
 					  // privateEvents: req.body.privateEvents,
 					  userGender: req.body.userGender,
 					  entranceEmail: req.body.entranceEmail,
