@@ -16,6 +16,7 @@ var userSchema = new Schema({
   userName: String,
   userEmail: String,
   entranceEmail: String,
+  firstLogin: boolean,
   followers: [],
   following: [],
   notifications: [],
