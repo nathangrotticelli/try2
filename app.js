@@ -332,7 +332,7 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'unrepteam@gmail.com',
-        pass: 'Lilbill666'
+        pass: 'University'
     }
 });
 
@@ -351,10 +351,13 @@ app.post('/userEventSubmit',function(req,res){
 	transporter.sendMail(mailOptions, function(error, info){
 	    if(error){
 	        console.log(error);
+          // res.json({success:'Worked!'});
 	    }
 	    else{
 	        console.log('Message sent: ' + info.response);
+
 	    }
+        res.json({success:'Worked!'});
 	});
 
 
