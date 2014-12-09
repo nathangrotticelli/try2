@@ -983,8 +983,8 @@ app.post('/loginTry2', function(req, res){
 });
 app.post('/singleSend', function(req, res){
    // var loginTryEmail = req.body.name;
-   console.log(req.body.schoolName);
-   console.log(req.body.eventDate);
+   // console.log(req.body.schoolName);
+   console.log(req.body.eventDate.split('-')[0]);
 
    var getFormattedTime = function (fourDigitTime) {
     var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
@@ -995,6 +995,7 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 var a = req.body.eventTime.replace(':','');
+// var c = req.body.eventDate.split('-')[0];
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
             console.log('error?: '+err);
