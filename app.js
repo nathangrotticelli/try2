@@ -994,25 +994,25 @@ app.post('/singleSend', function(req, res){
 
     return hours + ':' + minutes + amPm;
 };
-// var a = req.body.eventTime;
-var c = req.body.eventDate.split('-')[0];
-var a = req.body.eventTime.split("").reverse().join("").replace('-','/');
+var a1 = getFormattedTime(req.body.eventTime);
+var c1 = req.body.eventDate.split('-')[0];
+var d1 = req.body.eventDate.split("").reverse().join("").replace('-','/');
 
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
             console.log('error?: '+err);
-             res.redirect('/uploadFailed');
+             // res.redirect('/uploadFailed');
       }
       else{
 
     // user.save();
     school.schoolEvents[req.body.eventName] = {
-      "timeString": a,
-            "timeOfEvent":a,
-            "startYear": c,
+      "timeString": a1,
+            "timeOfEvent":a1,
+            "startYear": c1,
             "name": req.body.eventName,
             "location": req.body.eventAddress,
-            "start_time": req.body.eventDate,
+            "start_time": d1,
             "cover": req.body.coverLink,
             "description": req.body.eventInfo
                 };
