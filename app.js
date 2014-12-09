@@ -214,46 +214,28 @@ app.get('/denied', function(req, res){
 
 
 app.post('/getSchool', function(req,res){
-incSchoolName = req.body.schoolName;
+ incSchoolName = req.body.schoolName;
 
-// console.log('here22222232323232');
-// console.log(PrivateList.events+"private events list hereeeeeeee");
-// var a123 = "{
-//         "$oid": "54703c49e4b04de436f29363"
-//     }"
-// console.log(JSON.stringify(PrivateEvents));
-// console.log('her999999999');
-// console.log(PrivateEvents.db);
-// console.log(PrivateEvents.db.collections);
-// var pT = "privateTag"
-
-SchoolUserSchema.findOne({ schoolName: "privateTag" }).exec(function (err, privateList) {
-    if(err){
-      console.log('error?'+err);
-      var privateEvents = null;
-    }
-    else{
-          console.log('Got private event list');
-          var privateEvents = privateList.privateEvents;
-    // console.log(JSON.stringify(pEvents));
-    }
-    School.findOne({schoolName: incSchoolName}, function(err, school){
+  SchoolUserSchema.findOne({ schoolName: "privateTag" }).exec(function (err, privateList) {
       if(err){
-          console.log('error?: '+err);
+        console.log('error?'+err);
+        var privateEvents = null;
+      }
+      else{
+            console.log('Got private event list');
+            var privateEvents = privateList.privateEvents;
+      }
+      School.findOne({schoolName: incSchoolName}, function(err, school){
+        if(err){
+            console.log('error?: '+err);
+      }
+      else{
+      schoolItem = school;
+      console.log('Fetched Info for: '+incSchoolName);
+      res.json({Item: schoolItem, Private:privateEvents});
     }
-    else{
-    schoolItem = school;
-    console.log('Fetched Info for: '+incSchoolName);
-    // console.log(JSON.stringify(schoolItem));
-    res.json({Item: schoolItem, Private:privateEvents});
-  }
 
-  });
-    // privateItem = pEvents;
-    // console.log("right hizerr"+pEvents.events);
-
-    // console.log(JSON.stringify(schoolItem));
-    // res.json({Item: schoolItem});
+    });
 
   });
 
@@ -288,8 +270,6 @@ app.post('/followCount', function(req,res){
     var count = user.following.length;
     res.json({count:count});
   }
-    // schoolItem = school;
-    // upCount = schoolItem.ticketCount+=1;
  });
 });
 
@@ -303,13 +283,10 @@ app.post('/notifications', function(req,res){
     var notifications = user.notifications;
     res.json({notifications:notifications});
   }
-    // schoolItem = school;
-    // upCount = schoolItem.ticketCount+=1;
  });
 });
 
 app.post('/userSchoolPost',function(req,res){
-	// console.log(req.body.userEmail);
   User.findOneAndUpdate({userEmail: req.body.userEmail},
             {
             userSchool: req.body.userSchool
@@ -327,6 +304,7 @@ app.post('/userSchoolPost',function(req,res){
       res.json({success:'Worked!'});
 
   });
+
 // create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -351,7 +329,6 @@ app.post('/userEventSubmit',function(req,res){
 	transporter.sendMail(mailOptions, function(error, info){
 	    if(error){
 	        console.log(error);
-          // res.json({success:'Worked!'});
 	    }
 	    else{
 	        console.log('Message sent: ' + info.response);
@@ -363,6 +340,7 @@ app.post('/userEventSubmit',function(req,res){
 
 
 });
+
 app.post('/newFriend', function(req,res){
 
 fbFriends = req.body.fbFriends;
@@ -370,16 +348,12 @@ userName = req.body.userName;
 userProfId = req.body.userProfId;
 
 for(z=0;z<fbFriends.length;z++){
-  // console.log(fbFriends[z].userName);
-  // otherUser.notifications.push({message:message,date:notDate})
   message = "Your Facebook friend "+userName+" just joined U Nightlife.";
   notDate = Date.now();
   tap = "follow";
-  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
    User.update({userProfId: fbFriends[z].userProfId},
     {$pushAll: {notifications:[{message:message,date:notDate,tap:tap,followId:userProfId}]}},
             { multi: false },
-            //upsert true
             function(err,red){
               if(err){console.log('friend joined un notifications update failed')}
               else{console.log("workeddddddddddddddddd");
@@ -390,7 +364,6 @@ for(z=0;z<fbFriends.length;z++){
 }
 
 
-
 });
 
 
@@ -398,8 +371,6 @@ app.post('/findFriends', function(req,res){
 fbFriends = req.body.fbFriends;
 userIds = [];
 userSchool = req.body.userSchool;
-// users
-// console.log(req.body.userProfId);
 
  User.find({userSchool: userSchool},
             function(err,req){
@@ -427,21 +398,11 @@ userSchool = req.body.userSchool;
               }
               res.json({userIds: userIds});
             });
-
-
-  // console.log(res[0].id);
-                // res.forEach()
-
-//existing ids
-//take fb friends array and limit it to only users that exists
-
-
 });
 
 app.post('/watchEvent', function(req,res){
 
   userProfId = req.body.userProfId;
-  // followingId = req.body.followingId;
   message = req.body.message;
   message2 = req.body.message2;
   notDate = req.body.notDate;
@@ -466,66 +427,46 @@ app.post('/watchEvent', function(req,res){
               else{
                 console.log("watch22 notification event update success");
                   //create notification for followers
-User.findOne({ userProfId: userProfId},function(err,appUser){
-  if(err){
-    console.log('error?: '+err);
-  }
-  else{
-    // console.log(appUser.userName);
-    // console.log(appUser.followers.length);
-    for(z=0;z<appUser.followers.length;z++){
-      // console.log('IGOTHEREe');
-  // console.log(fbFriends[z].userName);
-  // otherUser.notifications.push({message:message,date:notDate})
-  // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
-  // notDate = "9/11/1210";
-  // tap = "follow";
-  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
-  // if(appUser.followers[])
-  followerId = appUser.followers[z];
-
-  // console.log(followerId);
-
-   User.update({userProfId:followerId },
-    {$pushAll: {notifications:[{message:message2,date:notDate,eventDate:eventObj.start_time,tap:tap}]}},
-            {upsert: true},
-            function(err,red){
-              if(err){
-                console.log('friend joined un notifications update failed')
-              }
-              else{
-                console.log("workeddddddddddddddddd");
-                // var a = z+=1;
-                // if(a == appUser.followers.length){
-                //   console.log("shamwowwwwww");
-
-                // }
-        }
-            });
-
-      }
-      res.json({success:'Worked!'});
+                  User.findOne({ userProfId: userProfId},function(err,appUser){
+                    if(err){
+                      console.log('error?: '+err);
+                    }
+                    else{
+                      for(z=0;z<appUser.followers.length;z++){
+                    followerId = appUser.followers[z];
 
 
-   }
-});
+                     User.update({userProfId:followerId },
+                      {$pushAll: {notifications:[{message:message2,date:notDate,eventDate:eventObj.start_time,tap:tap}]}},
+                              {upsert: true},
+                              function(err,red){
+                                if(err){
+                                  console.log('friend joined un notifications update failed')
+                                }
+                                else{
+                                  console.log("workeddddddddddddddddd");
+                                }
+                              });
+
+                        }
+                        res.json({success:'Worked!'});
 
 
-            }
-            });
-                // res.json({success:'Worked!'});
-            }
+                     }
+                  });
+
+
+               }
+              });
+             }
             });
 });
 
 app.post('/unwatchEvent', function(req,res){
 
   userProfId = req.body.userProfId;
-  // followingId = req.body.followingId;
   message = req.body.message;
   message2 = req.body.message2;
-  // notDate = req.body.notDate;
-  // eventName = req.body.eventName;
   eventObj = req.body.eventObj;
 
   //pull event from user watch list
@@ -552,22 +493,8 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     console.log('error?: '+err);
   }
   else{
-    // console.log(appUser.userName);
-    // console.log(appUser.followers.length);
-
     for(z=0;z<appUser.followers.length;z++){
-      // console.log('IGOTHEREe');
-  // console.log(fbFriends[z].userName);
-  // otherUser.notifications.push({message:message,date:notDate})
-  // message = "Your Facebook friend "+userName+" just joined U Nightlife. Tap this message to follow them!";
-  // notDate = "9/11/1210";
-  // tap = "follow";
-  // fbFriends[z].notifications.push({message:message,date:notDate,tap:tap,followId:userProfId});
-  // if(appUser.followers[])
   followerId = appUser.followers[z];
-
-  // console.log(followerId);
-
    User.update({userProfId:followerId },
     {$pull: {"notifications":{message:message2}}},
             {upsert: true},
@@ -578,9 +505,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               }
               else{
                 console.log("delete watch update workedddd");
-
-                // var a = z+1;
-
         }
             });
 
@@ -603,89 +527,8 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
               }
             });
-
-
-
-            // }
-            // });
-            //     // res.json({success:'Worked!'});
-            // }
-            // });
 });
 
-
-
-
-  // console.log(eventName);
-  // console.log(message);
-  // console.log(notDate);
-  // console.log(userProfId);
-  // res.json({success:'Worked!'});
-
-// User.findOne({ userProfId: userProfId},function(err,appUser){
-//   if(err){
-//     console.log('error?: '+err);
-//   }
-//   else{
-//     // appUser = appUser;
-//     if(appUser.notifications.indexOf(message)>-1){
-//       console.log("user already has watch event notification");
-//       // res.json({success:'follow already'});
-//     }
-//     else{
-//        // appUser.following.push(followingId);
-
-//     // User.update({ userProfId: userProfId},
-//     //         {$pushAll: {following:[followingId]}},
-//     //         {upsert: true},
-//     //         function(err,red){
-//     //           if(err){console.log('following update failed')}
-//     //             else{
-
-//     //             }
-//   }
-// }
-
-
-
-//               else{
-//                 console.log("following update for app user success");
-//         User.findOne({ userProfId: followingId},function(err,otherUser){
-//             if(err){
-//               console.log('error?: '+err);
-//             }
-//             else{
-//               // appUser = appUser;
-//               // otherUser.followers.push(userProfId);
-//               // otherUser.notifications.push({message:message,date:notDate});
-
-//               User.update({ userProfId: followingId},
-//             {$pushAll: {followers:[userProfId]},notifications:[{message:message,date:notDate}]},
-//             {upsert: true},
-//             function(err,red){
-//               if(err){console.log('otheruser follower update failed')}
-//               else{
-//                 console.log("otheruser follower update success");
-//                 res.json({success:'Worked!'});
-//             }
-//             });
-//   }
-//  });
-
-
-
-// //                 // res.json({success:"following update success"});
-//             }
-            // });
-
-    // }
- //  }
- // });
-
-
-
-
-// });
 
 app.post('/follow', function(req,res){
 
@@ -699,14 +542,11 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     console.log('error?: '+err);
   }
   else{
-    // appUser = appUser;
     if(appUser.following.indexOf(followingId)>-1){
       console.log("other user is already being followed");
       res.json({success:'follow already'});
     }
     else{
-       // appUser.following.push(followingId);
-
     User.update({ userProfId: userProfId},
             {$pushAll: {following:[followingId]}},
             {upsert: true},
@@ -719,10 +559,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
               console.log('error?: '+err);
             }
             else{
-              // appUser = appUser;
-              // otherUser.followers.push(userProfId);
-              // otherUser.notifications.push({message:message,date:notDate});
-
               User.update({ userProfId: followingId},
             {$pushAll: {followers:[userProfId]},notifications:[{message:message,date:notDate}]},
             {upsert: true},
@@ -735,10 +571,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             });
   }
  });
-
-
-
-                // res.json({success:"following update success"});
             }
             });
 
@@ -763,9 +595,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
     console.log('error?: '+err);
   }
   else{
-    // appUser = appUser;
-    // appUser.following.pop(followingId);
-
     User.update({ userProfId: userProfId},
       { $pull:  {"following" : followingId } },
             {upsert: true},
@@ -780,17 +609,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
             console.log('error?: '+err);
           }
           else{
-            // appUser = appUser;
-            // otherUser.followers.pop(userProfId);
-            // for(q=0;q<otherUser.notifications.length;q++){
-            //   if(otherUser.notifications[q].message==message){
-            //     // arr1.splice(x,1);
-            //     otherUser.notifications.splice(q,1);
-            //     console.log("note Poppedd!!!!!!!!");
-            //   }
-            // }
-
-
             User.update({ userProfId: followingId},
               { $pull:  {"followers" : userProfId, "notifications" : {message:message} } },
             {upsert: true},
@@ -813,38 +631,6 @@ User.findOne({ userProfId: userProfId},function(err,appUser){
 
 
 });
-
-
-  // User.findOneAndUpdate({ userProfId: userProfId},{following:}).exec(function (err, appUser) {
-  //   if(err){
-  //     console.log('error?'+err);
-  //   }
-  //   else{
-
-  //     if(appUser){
-  //       User.findOneAndUpdate({userEmail: req.body.userEmail},
-  //           {firstNameLetter: req.body.firstNameLetter,
-  //           userProfId: req.body.userProfId,
-  //           userName: req.body.userName,
-  //           userSchool: req.body.userSchool,
-  //           privateEvents: req.body.privateEvents,
-  //           userGender: req.body.userGender,
-  //           entranceEmail: req.body.entranceEmail,
-  //           userEmail: req.body.userEmail},
-  //           {upsert: true},
-  //           function(err,res){
-  //             if(err){console.log(err.message)}
-  //             else{console.log("User Info Updated for: "+req.body.userName);}
-  //           });
-
-  //     }
-  //     else{
-  //       console.log('Couldnt fetch user following list');
-  //     }
-  //   }
-
-  // });
-// });
 
 app.post('/getUser', function(req,res){
 //to reset users to blank arrays/events
@@ -1382,8 +1168,6 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-	// oneFriendsEvents = friend.events.data.map(function(singleEvent){
 
  	// eachFriend[friend.id] = oneFriendsEvents;
 
