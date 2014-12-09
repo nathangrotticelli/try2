@@ -983,7 +983,8 @@ app.post('/loginTry2', function(req, res){
 });
 app.post('/singleSend', function(req, res){
    // var loginTryEmail = req.body.name;
-   console.log(req.body.eventInfo);
+   console.log(req.body.eventTime);
+      res.redirect('/');
    // loginTryEmail = loginTryEmail.toLowerCase();
    // else {
       // if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
