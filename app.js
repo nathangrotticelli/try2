@@ -994,9 +994,9 @@ app.post('/singleSend', function(req, res){
 
     return hours + ':' + minutes + amPm;
 };
-var a = req.body.eventTime.replace(':','');
+// var a = req.body.eventTime;
 var c = req.body.eventDate.split('-')[0];
-
+var a = req.body.eventTime.split("").reverse().join("").replace('-','/');
 
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
