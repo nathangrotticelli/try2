@@ -998,7 +998,7 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 
-var a1 = getFormattedTime(req.body.eventTime).replace(":"."");
+var a1 = getFormattedTime(req.body.eventTime).replace(":","");
 // var c1 = req.body.eventDate.split('-')[0].replace(":","");
 var b2 = req.body.eventDate.split('-')[0].replace(":","");
 var c2 = req.body.eventDate.split('-')[1].replace(":","");
@@ -1037,8 +1037,9 @@ var d1 = c2+'/'+d2+'/'+b2;
                  res.redirect('/uploadFailed');
               }
               else{
-                    res.redirect('/');
+
                 console.log("School single events updated!!!!!!!!!");
+                res.redirect('/');
               }
             });
       // schoolItem = school;
