@@ -998,7 +998,7 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 
-var a1 = getFormattedTime(req.body.eventTime);
+var a1 = getFormattedTime(req.body.eventTime).replace(":"."");
 // var c1 = req.body.eventDate.split('-')[0].replace(":","");
 var b2 = req.body.eventDate.split('-')[0].replace(":","");
 var c2 = req.body.eventDate.split('-')[1].replace(":","");
@@ -1033,10 +1033,11 @@ var d1 = c2+'/'+d2+'/'+b2;
             {upsert: true},
             function(err,red){
               if(err){
-                console.log('School single events failed..........')
+                console.log('School single events failed..........');
+                 res.redirect('/uploadFailed');
               }
               else{
-
+                    res.redirect('/');
                 console.log("School single events updated!!!!!!!!!");
               }
             });
@@ -1066,8 +1067,6 @@ var d1 = c2+'/'+d2+'/'+b2;
 //             });
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
-
-      res.redirect('/uploadFailed');
    // loginTryEmail = loginTryEmail.toLowerCase();
    // else {
       // if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
