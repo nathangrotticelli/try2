@@ -230,6 +230,9 @@ app.get('/singleSubmit', function(req,res){
 
 });
 
+app.get('/uploadFailed', function(req, res){
+   res.redirect('/uploadFailed');
+});
 
 app.post('/getSchool', function(req,res){
  incSchoolName = req.body.schoolName;
@@ -955,32 +958,32 @@ app.post('/privateListEventAdd',function(req,res){
 
 });
 
-app.post('/loginTry2', function(req, res){
-	 var loginTryEmail = req.body.name;
-	 console.log(loginTryEmail);
-	 loginTryEmail = loginTryEmail.toLowerCase();
-	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
-			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
-			 		schoolFriendCount=301;
-			 		// pullSchoolEventsFunc();
-			 		res.redirect('/personalEventDisplay');
-			 	}
-			 	else{
-			 		res.redirect('/denied');
-			 	}
-	 }
+// app.post('/loginTry2', function(req, res){
+// 	 var loginTryEmail = req.body.name;
+// 	 console.log(loginTryEmail);
+// 	 loginTryEmail = loginTryEmail.toLowerCase();
+// 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
+// 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
+// 			 		schoolFriendCount=301;
+// 			 		// pullSchoolEventsFunc();
+// 			 		res.redirect('/personalEventDisplay');
+// 			 	}
+// 			 	else{
+// 			 		res.redirect('/denied');
+// 			 	}
+// 	 }
 
-	 else {
-		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
-			 	schoolFriendCount=301;
-			 	res.redirect('/personalEventDisplay');
-			  }
-		 	else{
-		 		res.redirect('/denied');
-		 	}
-	 }
+// 	 else {
+// 		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
+// 			 	schoolFriendCount=301;
+// 			 	res.redirect('/personalEventDisplay');
+// 			  }
+// 		 	else{
+// 		 		res.redirect('/denied');
+// 		 	}
+// 	 }
 
-});
+// });
 app.post('/singleSend', function(req, res){
    // var loginTryEmail = req.body.name;
    // console.log(req.body.schoolName);
@@ -995,13 +998,17 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 var a1 = getFormattedTime(req.body.eventTime);
-var c1 = req.body.eventDate.split('-')[0];
-var d1 = req.body.eventDate.split("").reverse().join("").replace('-','/');
+// var c1 = req.body.eventDate.split('-')[0].replace(":","");
+var b2 = req.body.eventTime.split('-')[0].replace(":","");
+var c2 = req.body.eventTime.split('-')[1].replace(":","");
+var d2 = req.body.eventTime.split('-')[2].replace(":","");
+var d1 = c2+'/'+d2+'/'+b2;
+// var d1 = req.body.eventDate.split("-").reverse().join("").replace('-','/');
 
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
             console.log('error?: '+err);
-             // res.redirect('/uploadFailed');
+             res.redirect('/uploadFailed');
       }
       else{
 
@@ -1009,7 +1016,7 @@ var d1 = req.body.eventDate.split("").reverse().join("").replace('-','/');
     school.schoolEvents[req.body.eventName] = {
       "timeString": a1,
             "timeOfEvent":a1,
-            "startYear": c1,
+            "startYear": b2,
             "name": req.body.eventName,
             "location": req.body.eventAddress,
             "start_time": d1,
