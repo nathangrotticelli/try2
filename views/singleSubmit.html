@@ -4,6 +4,33 @@
 <!--   <h2> {{title}}</h2> -->
 
 
+<form id="eForm">
 
+     <h3 class="eventForm">Name of the Event:*</h3>
+     <input type="text"/>
+
+     <h3 class="eventForm">Contact Email:*</h3>
+      <input type="email"/>
+
+
+      <h3 class="eventForm">Date/Start Time:*</h3>
+      <input type="date" class="dateInput"/>
+      <input type="time" class="dateInput"/>
+
+      <br>
+
+      <h3 class="eventForm">Address:* </h3>
+    <input type="text"/>
+
+
+    <h3 class="eventForm">Event Info:</h3>
+    <textarea rows="7"> </textarea>
+    <br>
+
+<br>
+<!-- href="newEventSend(eventForm.name,eventForm.email,eventForm.date,eventForm.time,eventForm.address,eventForm.info)" -->
+    <div class="enterBtn button thing5" >Submit</div>
+
+</form>
 
 {% endblock %}

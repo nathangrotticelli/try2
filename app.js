@@ -208,9 +208,9 @@ app.get('/', function(req, res){
   res.render("index");
 });
 
-app.get('/denied', function(req, res){
-  res.render("denied",{schoolName: schoolItem.schoolName});
-});
+// app.get('/denied', function(req, res){
+//   res.render("denied",{schoolName: schoolItem.schoolName});
+// });
 app.get('/singleSubmit', function(req,res){
     res.render("singleSubmit");
 
