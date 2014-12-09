@@ -211,6 +211,24 @@ app.get('/', function(req, res){
 app.get('/denied', function(req, res){
   res.render("denied",{schoolName: schoolItem.schoolName});
 });
+app.get('/singleSubmit', function(req,res){
+    res.render("singleSubmit");
+
+// console.log('looking for ' + req.body.schoolName);
+
+// School.findOneAndUpdate({schoolName: req.body.schoolName},
+//             {
+//               schoolEvents: req.body.schoolEvents
+//             },
+//             {upsert: true},
+//             function(err,res){
+//               if(err){console.log('user maybe doesnt exist?')}
+//               else{console.log("School Events Updated: "+req.body.schoolName);}
+//             });
+//       console.log('stored school event data on server, responding');
+//       res.json({success:'Worked!'});
+
+});
 
 
 app.post('/getSchool', function(req,res){
@@ -862,6 +880,8 @@ School.findOneAndUpdate({schoolName: req.body.schoolName},
       res.json({success:'Worked!'});
 
 });
+
+
 
 var regExNums = /[0-9]/g;
 
