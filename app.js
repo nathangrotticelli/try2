@@ -955,32 +955,47 @@ app.post('/privateListEventAdd',function(req,res){
 
 });
 
-// app.post('/loginTry2', function(req, res){
-// 	 var loginTryEmail = req.body.name;
-// 	 console.log(loginTryEmail);
-// 	 loginTryEmail = loginTryEmail.toLowerCase();
-// 	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
-// 			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
-// 			 		schoolFriendCount=301;
-// 			 		// pullSchoolEventsFunc();
-// 			 		res.redirect('/personalEventDisplay');
-// 			 	}
-// 			 	else{
-// 			 		res.redirect('/denied');
-// 			 	}
-// 	 }
+app.post('/loginTry2', function(req, res){
+	 var loginTryEmail = req.body.name;
+	 console.log(loginTryEmail);
+	 loginTryEmail = loginTryEmail.toLowerCase();
+	 if (schoolItem.schoolName=='Central Florida'||schoolItem.schoolName=='Michigan State'||schoolItem.schoolName=='University of Michigan'||schoolItem.schoolName=='University of Hawaii'||schoolItem.schoolName=='Central Michigan'){
+			 	if((loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.length>schoolItem.emailLength)){
+			 		schoolFriendCount=301;
+			 		// pullSchoolEventsFunc();
+			 		res.redirect('/personalEventDisplay');
+			 	}
+			 	else{
+			 		res.redirect('/denied');
+			 	}
+	 }
 
-// 	 else {
-// 		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
-// 			 	schoolFriendCount=301;
-// 			 	res.redirect('/personalEventDisplay');
-// 			  }
-// 		 	else{
-// 		 		res.redirect('/denied');
-// 		 	}
-// 	 }
+	 else {
+		 	if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
+			 	schoolFriendCount=301;
+			 	res.redirect('/personalEventDisplay');
+			  }
+		 	else{
+		 		res.redirect('/denied');
+		 	}
+	 }
 
-// });
+});
+app.post('/singleSend', function(req, res){
+   // var loginTryEmail = req.body.name;
+   console.log(req.body.eventInfo);
+   // loginTryEmail = loginTryEmail.toLowerCase();
+   // else {
+      // if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
+      //   schoolFriendCount=301;
+      //   res.redirect('/personalEventDisplay');
+      //   }
+      // else{
+      //   res.redirect('/denied');
+      // }
+   // }
+
+});
 
 // app.get('/Login2', function(req, res){
 //   res.render("Login2",{schoolName: schoolItem.schoolName});

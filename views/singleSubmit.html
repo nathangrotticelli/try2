@@ -4,33 +4,50 @@
 <!--   <h2> {{title}}</h2> -->
 
 
-<form id="eForm">
+<!--
+"Fall One Acts Festival 2014": {
+            "timeString": "08:00pm",
+            "timeOfEvent": "8:00pm",
+            "startYear": "2014",
 
-     <h3 class="eventForm">Name of the Event:*</h3>
-     <input type="text"/>
+            "id": "863330583678677",
+            "name": "Fall One Acts Festival 2014",
+            "location": "Orlando, Florida",
+            "start_time": "11/06/2014",
+            "privacy": "OPEN",
+            "cover": "https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/t31.0-8/s720x720/1960887_822173737804131_3403307359888005490_o.jpg",
+            "description": "Please join us in Studio 1 of the UCF Performing Arts Center building for a night of student written and directed  performances. \n\nNovember 6-8th Performances at 8:00pm\nNovember 9th Matinee Performance at 2:00pm\n\nThe Plays:\n\n                                   \"Home Invasion\" \n                         Written by Jeannie Matthews\n    Directed by Maximum Ryan Loew and Elizabeth Fay \n\nYou know that moment when you try to break your grandpa out of a nursing home just to find out it's actually an old folk's correctional facility? I hate it when that happens. But seriously folks,  who doesn't love a good, old-fashioned tale about the elderly escaping form prison? It's going to be \"gray\"t!\n\n\n                            \"Hipster: The Musical\" \n                        Written by Alexander Hehr\n                         Directed by Kate Busselle  \n\nAre they hipster or homeless? What's so important about Starbucks?  These questions are answered and asked in this brand new musical, focusing around a young woman finding herself thrown into the hipster cult-ure with no signs of escaping.\n\nTickets are FREE. Donations very much appreciated. \nConcessions will be sold between shows. \n\nWe hope to see you there!"
+        }, -->
 
-     <h3 class="eventForm">Contact Email:*</h3>
-      <input type="email"/>
 
+ <form action="/singleSend" method='post'>
 
-      <h3 class="eventForm">Date/Start Time:*</h3>
-      <input type="date" class="dateInput"/>
-      <input type="time" class="dateInput"/>
+     <h3>Name of the Event:*</h3>
+     <input type="text" name="eventName"/>
+     <br>
 
+      <h3>Date:*</h3>
+      <input type="date" name="eventDate"/>
       <br>
 
-      <h3 class="eventForm">Address:* </h3>
-    <input type="text"/>
+       <h3>Time of Event:*</h3>
+      <input type="time" name="eventTime"/>
+      <br>
+
+      <h3>Cover/event Photo Link:*</h3>
+      <input type="text" name="coverLink"/>
+      <br>
 
 
-    <h3 class="eventForm">Event Info:</h3>
-    <textarea rows="7"> </textarea>
+      <h3>Location Field (address):*</h3>
+    <input type="text" ng-model="eventAddress"/>
     <br>
 
-<br>
-<!-- href="newEventSend(eventForm.name,eventForm.email,eventForm.date,eventForm.time,eventForm.address,eventForm.info)" -->
-    <div class="enterBtn button thing5" >Submit</div>
+    <h3 class="eventForm">Event Info/Description:</h3>
+    <textarea rows="7" ng-model="eventInfo"> </textarea>
+    <br>
 
+    <input type="submit" value="Submit">
 </form>
 
 {% endblock %}
