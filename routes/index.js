@@ -16,12 +16,12 @@
 
 
 // };
-exports.index = function(req, res){
-  res.render('index');
-};
-exports.singleSubmit = function(req, res){
-  res.render('singleSubmit');
-};
+// exports.index = function(req, res){
+//   res.render('index');
+// };
+// exports.singleSubmit = function(req, res){
+//   res.render('singleSubmit');
+// };
 
 
 
