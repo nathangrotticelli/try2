@@ -985,9 +985,6 @@ app.post('/privateListEventAdd',function(req,res){
 
 // });
 app.post('/singleSend', function(req, res){
-   // var loginTryEmail = req.body.name;
-   // console.log(req.body.schoolName);
-   // console.log(req.body.eventDate.split('-')[0]);
 
    var getFormattedTime = function (fourDigitTime) {
     var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
@@ -998,13 +995,11 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 
-var a1 = getFormattedTime(req.body.eventTime).replace(":","");
-// var c1 = req.body.eventDate.split('-')[0].replace(":","");
-var b2 = req.body.eventDate.split('-')[0].replace(":","");
-var c2 = req.body.eventDate.split('-')[1].replace(":","");
-var d2 = req.body.eventDate.split('-')[2].replace(":","");
-var d1 = c2+'/'+d2+'/'+b2;
-// var d1 = req.body.eventDate.split("-").reverse().join("").replace('-','/');
+  var a1 = getFormattedTime(req.body.eventTime).replace(":","");
+  var b2 = req.body.eventDate.split('-')[0].replace(":","");
+  var c2 = req.body.eventDate.split('-')[1].replace(":","");
+  var d2 = req.body.eventDate.split('-')[2].replace(":","");
+  var d1 = c2+'/'+d2+'/'+b2;
 
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
@@ -1013,7 +1008,6 @@ var d1 = c2+'/'+d2+'/'+b2;
       }
       else{
 
-    // user.save();
     school.schoolEvents[req.body.eventName] = {
       "timeString": a1,
             "timeOfEvent":a1,
@@ -1023,9 +1017,8 @@ var d1 = c2+'/'+d2+'/'+b2;
             "start_time": d1,
             "cover": req.body.coverLink,
             "description": req.body.eventInfo
-                };
+      };
 
-    // singleEvent[]
     School.findOneAndUpdate({schoolName: req.body.schoolName},
             {
               schoolEvents: school.schoolEvents
@@ -1042,43 +1035,8 @@ var d1 = c2+'/'+d2+'/'+b2;
                 res.redirect('/');
               }
             });
-      // schoolItem = school;
-      // console.log('Fetched Info for: '+incSchoolName);
-      // res.json({Item: schoolItem, Private:privateEvents});
     }
-
-    });
-
-// User.findById(req.user.id, function(err, user){
-
- //    var houseModel = new House();
- //    houseModel.adresse = "TEST";
- //    user.houses.push(houseModel);
- //    user.save();
- // });
-
-// School.findOneAndUpdate({schoolName: req.body.schoolName},
-//             {
-//               schoolEvents: req.body.schoolEvents
-//             },
-//             {upsert: true},
-//             function(err,res){
-//               if(err){console.log('user maybe doesnt exist?')}
-//               else{console.log("School Events Updated: "+req.body.schoolName);}
-//             });
-      // console.log('stored school event data on server, responding');
-      // res.json({success:'Worked!'});
-   // loginTryEmail = loginTryEmail.toLowerCase();
-   // else {
-      // if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
-      //   schoolFriendCount=301;
-      //   res.redirect('/personalEventDisplay');
-      //   }
-      // else{
-      //   res.redirect('/denied');
-      // }
-   // }
-
+  });
 });
 
 // app.get('/Login2', function(req, res){
