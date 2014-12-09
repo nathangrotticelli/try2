@@ -984,7 +984,7 @@ app.post('/loginTry2', function(req, res){
 app.post('/singleSend', function(req, res){
    // var loginTryEmail = req.body.name;
    // console.log(req.body.schoolName);
-   console.log(req.body.eventDate.split('-')[0]);
+   // console.log(req.body.eventDate.split('-')[0]);
 
    var getFormattedTime = function (fourDigitTime) {
     var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
@@ -995,34 +995,43 @@ app.post('/singleSend', function(req, res){
     return hours + ':' + minutes + amPm;
 };
 var a = req.body.eventTime.replace(':','');
-// var c = req.body.eventDate.split('-')[0];
+var c = req.body.eventDate.split('-')[0];
+
+
   School.findOne({schoolName: req.body.schoolName}, function(err, school){
         if(err){
             console.log('error?: '+err);
+             res.redirect('/uploadFailed');
       }
       else{
 
     // user.save();
-    // singleEvent[req.body.eventName] = {
-    //   "timeString": a,
-    //         "timeOfEvent":a,
-    //         "startYear": "2014",
-    //         "name": req.body.eventName,
-    //         "location": req.body.eventAddress,
-    //         "start_time": req.body.eventDate,
-    //         "cover": req.body.coverLink,
-    //         "description": req.body.eventInfo
-    //             };
+    school.schoolEvents[req.body.eventName] = {
+      "timeString": a,
+            "timeOfEvent":a,
+            "startYear": c,
+            "name": req.body.eventName,
+            "location": req.body.eventAddress,
+            "start_time": req.body.eventDate,
+            "cover": req.body.coverLink,
+            "description": req.body.eventInfo
+                };
+
     // singleEvent[]
-    // School.findOneAndUpdate({schoolName: req.body.schoolName},
-    //         {
-    //           schoolEvents: school.schoolEvents[singleEvent.name]
-    //         },
-    //         {upsert: true},
-    //         function(err,res){
-    //           if(err){console.log('user maybe doesnt exist?')}
-    //           else{console.log("School Events Updated: "+req.body.schoolName);}
-    //         });
+    School.findOneAndUpdate({schoolName: req.body.schoolName},
+            {
+              schoolEvents: school.schoolEvents
+            },
+            {upsert: true},
+            function(err,red){
+              if(err){
+                console.log('School single events failed..........')
+              }
+              else{
+
+                console.log("School single events updated!!!!!!!!!");
+              }
+            });
       // schoolItem = school;
       // console.log('Fetched Info for: '+incSchoolName);
       // res.json({Item: schoolItem, Private:privateEvents});
@@ -1050,7 +1059,7 @@ var a = req.body.eventTime.replace(':','');
       // console.log('stored school event data on server, responding');
       // res.json({success:'Worked!'});
 
-      res.redirect('/');
+      res.redirect('/uploadFailed');
    // loginTryEmail = loginTryEmail.toLowerCase();
    // else {
       // if(loginTryEmail.indexOf(schoolItem.emailEnding)>-1&&loginTryEmail.indexOf(' ')<0&&loginTryEmail[0].indexOf(firstNameLetter)>-1&&loginTryEmail.length>=schoolItem.emailLength&&regExNums.test(loginTryEmail)){
