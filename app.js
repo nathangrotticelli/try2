@@ -997,11 +997,12 @@ app.post('/singleSend', function(req, res){
 
     return hours + ':' + minutes + amPm;
 };
+
 var a1 = getFormattedTime(req.body.eventTime);
 // var c1 = req.body.eventDate.split('-')[0].replace(":","");
-var b2 = req.body.eventTime.split('-')[0].replace(":","");
-var c2 = req.body.eventTime.split('-')[1].replace(":","");
-var d2 = req.body.eventTime.split('-')[2].replace(":","");
+var b2 = req.body.eventDate.split('-')[0].replace(":","");
+var c2 = req.body.eventDate.split('-')[1].replace(":","");
+var d2 = req.body.eventDate.split('-')[2].replace(":","");
 var d1 = c2+'/'+d2+'/'+b2;
 // var d1 = req.body.eventDate.split("-").reverse().join("").replace('-','/');
 
