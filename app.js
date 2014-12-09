@@ -231,7 +231,7 @@ app.get('/singleSubmit', function(req,res){
 });
 
 app.get('/uploadFailed', function(req, res){
-   res.render('/uploadFailed');
+   res.render('uploadFailed');
 });
 
 app.post('/getSchool', function(req,res){
