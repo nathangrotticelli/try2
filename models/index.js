@@ -25,6 +25,11 @@ var userSchema = new Schema({
   userSchool: String
 });
 
+var watchSchema = new Schema({
+ listName: String,
+ watchIndex: []
+
+});
 //event schema
 
 //name of the event is the key
@@ -88,6 +93,7 @@ var User = mongoose.model('User', userSchema);
 var School = mongoose.model('School', schoolSchema);
 
 // var PrivateEvent = mongoose.model('PrivateEvent', privateEventSchema);
+var WatchSchema = mongoose.model('WatchSchema', watchSchema);
 
 var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 
@@ -96,5 +102,6 @@ var SchoolUserSchema = mongoose.model('SchoolUserSchema', schoolUserSchema);
 module.exports = {
   School: School,
   User: User,
-  SchoolUserSchema: SchoolUserSchema
+  SchoolUserSchema: SchoolUserSchema,
+  WatchSchema: WatchSchema
 }

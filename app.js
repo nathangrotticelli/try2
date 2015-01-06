@@ -19,6 +19,7 @@ var School = require('./models')["School"];
 // var PrivateEvent = require('./models')["PrivateEvent"];
 var User = require('./models')["User"];
 var SchoolUserSchema = require('./models')["SchoolUserSchema"];
+var WatchSchema = require('./models')["WatchSchema"];
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -232,6 +233,24 @@ app.get('/singleSubmit', function(req,res){
 
 app.get('/uploadFailed', function(req, res){
    res.render('uploadFailed');
+});
+
+app.post('/watchesGet', function(req,res){
+ testInfo = req.body.testInfo;
+ console.log(testInfo+"this the test info bruddda");
+
+  WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            console.log('Got Watches!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({watchList: watchList});
+      }
+  });
+
 });
 
 app.post('/getSchool', function(req,res){
