@@ -261,8 +261,8 @@ app.post('/createUser',function(req,res){
      console.log(req.headers.username);
      console.log(req.headers.userLikes);
      console.log(req.headers.userCollections);
-     console.log(req.params);
-     console.log(req.options.params==true);
+     // console.log(req.params);
+     // console.log(req.options.params==true);
     // console.dir(req.headers['content-type']);
   // console.log(req.options);
   // console.log('hrere');
