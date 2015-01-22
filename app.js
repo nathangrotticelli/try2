@@ -253,6 +253,34 @@ app.post('/watchesGet', function(req,res){
 
 });
 
+app.post('/createUser',function(req,res){
+  console.log(req.body.options.fileKey);
+  console.log('hrere');
+
+      // User.findOneAndUpdate({userEmail: req.body.userEmail},
+      //       {firstNameLetter: req.body.firstNameLetter,
+      //       userProfId: req.body.userProfId,
+      //       userName: req.body.userName,
+      //       userSchool: req.body.userSchool,
+      //       firstLogin: true,
+      //       watchList:[],
+      //       followers:[],
+      //       following:[],
+      //       // privateEvents: req.body.privateEvents,
+      //       userGender: req.body.userGender,
+      //       entranceEmail: req.body.entranceEmail,
+      //       userEmail: req.body.userEmail},
+      //       {upsert: true},
+      //       function(err,res){
+      //         if(err){console.log(err.message)}
+      //         else{console.log("User Info Updated for: "+req.body.userName);}
+      //       });
+
+      // console.log('stored user data on server, responding');
+      res.json({success:'Worked!'});
+
+});
+
 app.post('/getSchool', function(req,res){
  incSchoolName = req.body.schoolName;
 
