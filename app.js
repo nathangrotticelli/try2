@@ -254,7 +254,7 @@ app.post('/watchesGet', function(req,res){
 });
 
 app.post('/createUser',function(req,res){
-    console.log(req.body.options.mimeType);
+    console.log(req.URL);
   // console.log(req.options);
   console.log('hrere');
 
