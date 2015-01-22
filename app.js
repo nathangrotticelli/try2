@@ -257,6 +257,7 @@ app.post('/createUser',function(req,res){
   // console.log(req);
     // console.log(req.options);
      console.log(req.params);
+     console.log(req.headerParam);
     // console.dir(req.headers['content-type']);
   // console.log(req.options);
   console.log('hrere');
