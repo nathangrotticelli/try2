@@ -255,17 +255,11 @@ app.post('/watchesGet', function(req,res){
 
 app.post('/createUser',function(req,res){
   // console.log(req);
-    // console.log(req.headers);
+    console.log(req.headers.headerparam);
      // console.log(req.params);
     // console.dir(req.headers['content-type']);
   // console.log(req.options);
-  // console.log('hrere');
-  // var file = req.file.file;
-  console.log(req.file);
-  // console.log(file.path);
-  // var content = fs.readFileSync(file.path);
-  // console.log(content.toString());
-  res.send(200);
+  console.log('hrere');
 
       // User.findOneAndUpdate({userEmail: req.body.userEmail},
       //       {firstNameLetter: req.body.firstNameLetter,
@@ -287,7 +281,7 @@ app.post('/createUser',function(req,res){
       //       });
 
       // console.log('stored user data on server, responding');
-      // res.json({success:'Worked!'});
+      res.json({success:'Worked!'});
 
 });
 
