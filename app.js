@@ -260,9 +260,9 @@ app.post('/createUser',function(req,res){
     // console.dir(req.headers['content-type']);
   // console.log(req.options);
   // console.log('hrere');
-  var file = req.files.file;
-  console.log(file);
-  console.log(file.path);
+  // var file = req.file.file;
+  console.log(req.file);
+  // console.log(file.path);
   // var content = fs.readFileSync(file.path);
   // console.log(content.toString());
   res.send(200);
