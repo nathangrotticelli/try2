@@ -254,7 +254,7 @@ app.post('/watchesGet', function(req,res){
 });
 
 app.post('/createUser',function(req,res){
-  console.log(req.body.options);
+  console.log(req.body);
   console.log('hrere');
 
       // User.findOneAndUpdate({userEmail: req.body.userEmail},
