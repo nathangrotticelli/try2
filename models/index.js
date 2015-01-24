@@ -27,7 +27,8 @@ var userSchema = new Schema({
 
 var watchSchema = new Schema({
  listName: String,
- watchIndex: []
+ watchIndex: [],
+ users: []
 
 });
 //event schema
