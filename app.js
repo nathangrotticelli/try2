@@ -259,7 +259,7 @@ app.post('/createUser',function(req,res){
      console.log(req.headers.userfullname);
      console.log(req.headers.useremail);
      console.log(req.headers.username);
-     console.log(req.headers.userpic);
+     // console.log(req.headers.userpic);
      console.log(req.body);
       console.log(req.files);
         console.log(req.file);
