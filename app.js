@@ -277,15 +277,22 @@ app.post('/createUser',function(req,res){
      // console.log(req.body.userEmail);
      // console.log(req.body.username);
      //  console.log(req.body.userPass);
-     req.body.likes = [];
-     req.body.collections = [];
+     var user = req.body;
+     user.likes = [];
+     user.collections = [];
      //   console.log(req.body.userPic);
 
-             WatchSchema.update({listName: "userList"},
-          {$push: {users:req.body}},
+            WatchSchema.update({listName: "userList"},
+              {$push: {users:user}},
             function(err,res){
-              if(err){console.log(err.message)}
-              else{console.log("User List Updated. ");}
+              if(err){console.log(err.message)
+                  res.json({failed:'failed'});
+              }
+              else{
+                console.log("User List Updated. ");
+                res.json({imageData: userList.users[0].userPic});
+                // res.json(user);
+              }
             });
      // console.log(req.headers.userpic);
      // console.log(req.body);
@@ -319,7 +326,6 @@ app.post('/createUser',function(req,res){
       //       });
 
       // console.log('stored user data on server, responding');
-      res.json({success:req.body});
 
 });
 
