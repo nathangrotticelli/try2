@@ -269,6 +269,24 @@ app.post('/picGet', function(req,res){
   });
 
 });
+app.post('/picUpdate',function(req,res){
+  WatchSchema.findOneAndUpdate({user: req.body.username},
+            {
+            userPic: req.body.userPic
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{
+
+                  console.log("workeddd");
+
+              }
+            });
+
+      res.json({success:'Worked!'});
+
+  });
 
 app.post('/createUser',function(req,res){
   // console.log(req);
