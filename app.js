@@ -256,13 +256,14 @@ app.post('/watchesGet', function(req,res){
 app.post('/createUser',function(req,res){
   // console.log(req);
     // console.log(req.headers.headerparam);
-     console.log(req.headers.userfullname);
-     console.log(req.headers.useremail);
-     console.log(req.headers.username);
+     console.log(req.body.userfullname);
+     console.log(req.body.useremail);
+     console.log(req.body.username);
+      console.log(req.body.userpass);
      // console.log(req.headers.userpic);
-     console.log(req.body);
-      console.log(req.files);
-        console.log(req.file);
+     // console.log(req.body);
+      // console.log(req.files);
+        // console.log(req.file);
      // console.log(req.headers.userlikes);
      // console.log(req.headers.usercollections);
      // console.log(req.params);
