@@ -256,11 +256,19 @@ app.post('/watchesGet', function(req,res){
 app.post('/createUser',function(req,res){
   // console.log(req);
     // console.log(req.headers.headerparam);
-     console.log(req.body.userFullName);
-     console.log(req.body.userEmail);
-     console.log(req.body.username);
-      console.log(req.body.userPass);
-       console.log(req.body.userPic);
+     // console.log(req.body.userFullName);
+     // console.log(req.body.userEmail);
+     // console.log(req.body.username);
+     //  console.log(req.body.userPass);
+     //   console.log(req.body.userPic);
+
+             WatchSchema.update({listName: "userList"},
+          {$pushAll: {users:req.body}},
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("School User List Updated for:fdsfdsfdsfdsdsf ");}
+            });
      // console.log(req.headers.userpic);
      // console.log(req.body);
       // console.log(req.files);
