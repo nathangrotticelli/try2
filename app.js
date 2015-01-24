@@ -271,13 +271,14 @@ app.post('/picGet', function(req,res){
 });
 
 app.post('/picUpdate',function(req,res){
-// console.log(req.body.username);
-
-WatchSchema.update({'users.username': req.body.username}, {'$set': {
-    'users.$.userPic': req.body.userPic
-}}, function(err) {
-  console.log(err);
-});
+  WatchSchema.update({'users.username': req.body.username},
+    {'$set': {'users.$.userPic': req.body.userPic}}, function(err,worked) {
+      if(err){
+            console.log(err);
+      }else{
+        res.json({worked1: "user pic updated."});
+      }
+  });
 });
 
 app.post('/createUser',function(req,res){
