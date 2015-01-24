@@ -274,7 +274,7 @@ app.post('/picUpdate',function(req,res){
   'user.username': req.body.username
 };
 
-WatchSchema.update( query, {$set: {"user.userPic": req.body.userPic}},{ multi: false }, function(err){
+WatchSchema.update( query, {"user.$.userPic": req.body.userPic},{ multi: false }, function(err){
   if(err){
     console.log(err);
   }
