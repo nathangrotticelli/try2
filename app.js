@@ -263,8 +263,7 @@ app.post('/createUser',function(req,res){
      //   console.log(req.body.userPic);
 
              WatchSchema.update({listName: "userList"},
-          {$push: {users:req.body}},
-            {upsert: true},
+          {$push: {users:req.body.userEmail}},
             function(err,res){
               if(err){console.log(err.message)}
               else{console.log("School User List Updated for:fdsfdsfdsfdsdsf ");}
