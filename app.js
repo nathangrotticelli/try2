@@ -271,15 +271,14 @@ app.post('/picGet', function(req,res){
 });
 
 app.post('/picUpdate',function(req,res){
-console.log(req.body.username);
+// console.log(req.body.username);
 
-WatchSchema.update({ listname: 'userList'}, { 'user.userPic': req.body.userPic }, function(){
-  console.log('worked like a charm');
-  res.json({success:'Worked!'});
-})
-
-
-  });
+WatchSchema.update({'users.username': req.body.username}, {'$set': {
+    'users.$.userPic': req.body.userPic
+}}, function(err) {
+  console.log(err);
+});
+});
 
 app.post('/createUser',function(req,res){
   // console.log(req);
@@ -291,19 +290,10 @@ app.post('/createUser',function(req,res){
      var user = req.body;
      user.likes = [];
      user.collections = [];
-     // var myObj = ...;
-WatchSchema.findOneAndUpdate(
-    {username: req.body.username},
-    req.body,
-    {upsert: true},
-    function() {
-      console.log('worked');
-    }
-);
      //   console.log(req.body.userPic);
 
             WatchSchema.update({listName: "userList"},
-              {$push: {users.user:user}},
+              {$push: {users:user}},
             function(err){
               if(err){console.log(err.message)
                   res.json({failed:'failed'});
