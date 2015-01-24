@@ -290,7 +290,7 @@ app.post('/createUser',function(req,res){
               }
               else{
                 console.log("User List Updated. ");
-                res.json(user);
+                res.json({user: user});
                 // res.json(user);
               }
             });
