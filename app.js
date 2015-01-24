@@ -269,10 +269,11 @@ app.post('/picGet', function(req,res){
   });
 
 });
+
 app.post('/picUpdate',function(req,res){
 console.log(req.body.username);
 
-WatchSchema.update({ username: req.body.username}, { 'user.userPic': req.body.userPic }, function(){
+WatchSchema.update({ listname: 'userList', username: req.body.username}, { 'user.userPic': req.body.userPic }, function(){
   console.log('worked like a charm');
   res.json({success:'Worked!'});
 })
