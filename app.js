@@ -252,6 +252,23 @@ app.post('/watchesGet', function(req,res){
   });
 
 });
+app.post('/picGet', function(req,res){
+ testInfo = req.body.testInfo;
+ console.log(testInfo+"this the test info bruddda");
+
+  WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            console.log('Got pic!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({imageData: userList.users[0].userPic});
+      }
+  });
+
+});
 
 app.post('/createUser',function(req,res){
   // console.log(req);
@@ -260,6 +277,8 @@ app.post('/createUser',function(req,res){
      // console.log(req.body.userEmail);
      // console.log(req.body.username);
      //  console.log(req.body.userPass);
+     req.body.likes = [];
+     req.body.collections = [];
      //   console.log(req.body.userPic);
 
              WatchSchema.update({listName: "userList"},
