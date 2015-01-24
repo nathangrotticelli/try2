@@ -270,19 +270,16 @@ app.post('/picGet', function(req,res){
 
 });
 app.post('/picUpdate',function(req,res){
-  WatchSchema.findOneAndUpdate({user: req.body.username},
-            {
-            userPic: req.body.userPic
-            },
-            {upsert: true},
-            function(err,res){
-              if(err){console.log(err.message)}
-              else{
+  var query = {
+  'user.username': req.body.username
+};
 
-                  console.log("workeddd");
+WatchSchema.update( query, {$set: {"score.$.userPic": req.body.userPic}},{ multi: false }, function(err){
+  if(err){
+    console.log(err);
+  }
+});
 
-              }
-            });
 
       res.json({success:'Worked!'});
 
