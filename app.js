@@ -284,7 +284,7 @@ app.post('/createUser',function(req,res){
 
             WatchSchema.update({listName: "userList"},
               {$push: {users:user}},
-            function(err,res){
+            function(err){
               if(err){console.log(err.message)
                   res.json({failed:'failed'});
               }
