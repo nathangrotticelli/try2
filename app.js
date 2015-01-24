@@ -319,7 +319,7 @@ app.post('/createUser',function(req,res){
       //       });
 
       // console.log('stored user data on server, responding');
-      res.json({success:'Worked!'});
+      res.json({success:req.body});
 
 });
 
