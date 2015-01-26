@@ -273,14 +273,14 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
- WatchSchema.findOne({ username: username},function(err,appUser){
+ WatchSchema.findOne({ 'users.username': username},function(err,appUser){
   if(err){
     console.log('error?: '+err);
   }
   else{
 
     // if(appUser.following.indexOf(followingId)>-1){
-      console.log(appUser.username);
+      console.log(appUser);
       // res.json({success:'follow already'});
     // }
 
