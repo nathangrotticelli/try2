@@ -284,24 +284,23 @@ app.post('/liked', function(req,res){
     //     }
     //         });
 
- WatchSchema.update({'users.username': user.username},{'$push': {'users.$.likes': watch}},function(err,worked){
-      if(err){
-            console.log(err);
-      }else{
-          console.log('user like updated.');
-          // WatchSchema.update({'watchesIndex.watchName': watch.watchName},
-          //   {$push: {'watchesIndex.watchLikes':user}},function(err2,worked2) {
-          //     if(err2){
-          //           console.log(err2);
-          //     }else{
-          //       console.log('watch like updated.');
-          //       res.json({worked1: "watch likes updated."});
-          //     }
-          // });
-      res.json(200);
-      }
-  });
+  WatchSchema.update({'watchesIndex.watchName': watch.watchName},
+            {'$push': {'watchesIndex.$.watchLikes': user}},function(err2,worked2) {
+              if(err2){
+                    console.log(err2);
+              }else{
+                console.log('watch like updated.');
+                 WatchSchema.update({'users.username': user.username},{'$push': {'users.$.likes': watch}},function(err,worked){
+                      if(err){
+                            console.log(err);
+                      }else{
+                          console.log('user like updated.');
 
+                      res.json(200);
+                      }
+                  });
+              }
+          });
 
 
 });
