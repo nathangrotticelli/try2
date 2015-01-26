@@ -294,8 +294,9 @@ app.post('/liked', function(req,res){
       else{
             // console.log(userList);
             for(x=0;watchList.watchesIndex.length;x++){
-              if(watchList.watchesIndex[x].watchLikes.indexOf(username)>-1){
+              if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
                 console.log('includedddd');
+                // console.log('includedddd');
               }
             }
             // }
