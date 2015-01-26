@@ -280,11 +280,13 @@ app.post('/liked', function(req,res){
       }
       else{
             // console.log(userList);
-            for(x=0;userList.length;x++){
-              if(userList[x].username==username){
-                console.log(userList[x]);
+            // for(x=0;userList.length;x++){
+              if(userList.indexOf(username)>-1){
+                console.log('includedddd');
               }
-            }
+                // console.log(userList[x]);
+              }
+            // }
             // var watchIndex = watchList.watchIndex;
             // res.json({imageData: userList.users[0].userPic});
       }
