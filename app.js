@@ -292,8 +292,22 @@ app.post('/liked', function(req,res){
         // var privateEvents = null;
       }
       else{
-            console.log(watchList);
-             console.log(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)]);
+            // console.log(watchList);
+            var watch2 = {
+                    "tags": [
+                        "MDR",
+                        "BF"
+                    ],
+                    "watchLikes": [
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/Invicta-Collection-Stainless-Steel-Watch/dp/B002PAPT1S/ref=swr_wa_1_ses",
+                    "watchPrice": "$74",
+                    "watchPhoto": "http://i57.tinypic.com/2vn11mq.jpg",
+                    "watchName": "Invicta Stainless 6620",
+                    "showPrice": false
+                };
+             console.log(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch2)]);
             // for(x=0;watchList.watchesIndex.length;x++){
               // if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
               //   console.log('includedddd');
