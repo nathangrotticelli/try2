@@ -273,19 +273,17 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
- WatchSchema.findOne({ 'users.username': username},function(err,appUser){
-  if(err){
-    console.log('error?: '+err);
-  }
-  else{
-
-    // if(appUser.following.indexOf(followingId)>-1){
-      console.log(appUser);
-      // res.json({success:'follow already'});
-    // }
-
-   }
-  })
+ WatchSchema.findOne({ users.username: username }).exec(function (err, userList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            console.log('Got pic!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({imageData: userList.users[0].userPic});
+      }
+  });
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': username}},function(err1) {
               if(err1){
                     console.log(err1);
