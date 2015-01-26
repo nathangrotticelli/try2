@@ -285,7 +285,7 @@ app.post('/liked', function(req,res){
     //         });
 
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchLikes': user}},function(err,worked) {
-              if(err2){
+              if(err){
                     console.log(err);
               }else{
                 console.log('watch like updated.');
