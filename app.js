@@ -307,7 +307,7 @@ app.post('/liked', function(req,res){
                     "watchName": "Invicta Stainless 6620",
                     "showPrice": false
                 };
-             console.log(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch2)]);
+             console.log(watchList.watchesIndex.indexOf(watch2));
             // for(x=0;watchList.watchesIndex.length;x++){
               // if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
               //   console.log('includedddd');
