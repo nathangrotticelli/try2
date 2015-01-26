@@ -27,7 +27,7 @@ var userSchema = new Schema({
 
 var watchSchema = new Schema({
  listName: String,
- watchIndex: [],
+ watchesIndex: [],
  users: []
 
 });
