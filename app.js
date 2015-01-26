@@ -274,15 +274,15 @@ app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var user = req.body.user;
  console.log("this the test fsdsfdsdfdfsinfosdfdfs brudfsdddda");
-    User.update({userProfId: fbFriends[z].userProfId},
-    {$pushAll: {notifications:[{message:message,date:notDate,tap:tap,followId:userProfId}]}},
-            { multi: false },
-            function(err,red){
-              if(err){console.log('friend joined un notifications update failed')}
-              else{console.log("workeddddddddddddddddd");
-          res.json({success:'Worked!'});
-        }
-            });
+    // User.update({userProfId: fbFriends[z].userProfId},
+    // {$pushAll: {notifications:[{message:message,date:notDate,tap:tap,followId:userProfId}]}},
+    //         { multi: false },
+    //         function(err,red){
+    //           if(err){console.log('friend joined un notifications update failed')}
+    //           else{console.log("workeddddddddddddddddd");
+    //       res.json({success:'Worked!'});
+    //     }
+    //         });
 
  WatchSchema.update({username: user.username},{$push: {likes: watch}},function(err,worked){
       if(err){
