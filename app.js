@@ -274,54 +274,6 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
-  //  WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
-  //     if(err){
-  //       console.log('error?'+err);
-  //       // var privateEvents = null;
-  //     }
-  //     else{
-  //           console.log('Got Watches!');
-  //           // var watchIndex = watchList.watchIndex;
-  //           res.json({watchList: watchList});
-  //     }
-  // });
-
- WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
-      if(err){
-        console.log('error?'+err);
-        // var privateEvents = null;
-      }
-      else{
-            // console.log(watchList);
-            // var watch2 = {
-            //         "tags": [
-            //             "MDR",
-            //             "BF"
-            //         ],
-            //         "watchLikes": [
-            //             "ng225"
-            //         ],
-            //         "watchLink": "http://www.amazon.com/Invicta-Collection-Stainless-Steel-Watch/dp/B002PAPT1S/ref=swr_wa_1_ses",
-            //         "watchPrice": "$74",
-            //         "watchPhoto": "http://i57.tinypic.com/2vn11mq.jpg",
-            //         "watchName": "Invicta Stainless 6620",
-            //         "showPrice": false
-            //     };
-             // console.log(watchList.watchesIndex.indexOf(watch));
-            for(x=0;watchList.watchesIndex.length;x++){
-              if(watchList.watchesIndex[x]==watch){
-                console.log('gsdf include');
-              }
-              // if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
-              //   console.log('includedddd');
-              //   // console.log('includedddd');
-              // }
-            }
-            // }
-            // var watchIndex = watchList.watchIndex;
-            // res.json({imageData: userList.users[0].userPic});
-      }
-  });
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': username}},function(err1) {
               if(err1){
                     console.log(err1);
