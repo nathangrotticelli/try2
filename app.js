@@ -270,9 +270,9 @@ app.post('/picGet', function(req,res){
 
 });
 
-app.post('/liked', function(req,res){
- var watch = req.body.watchObj;
- var username = req.body.username;
+app.post('/unliked', function(req,res){
+ // var watch = req.body.watchObj;
+ // var username = req.body.username;
  console.log("this the test fsdsfdsdfdfsinfo bruddda");
 
  // WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
