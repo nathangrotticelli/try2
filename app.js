@@ -273,19 +273,19 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
- WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+ WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
       }
       else{
             // console.log(userList);
-            // for(x=0;userList.length;x++){
-              if(userList.indexOf(username)>-1){
+            for(x=0;watchList.watchesIndex.length;x++){
+              if(watchList.watchIndex[x].watchLikes.indexOf(username)>-1){
                 console.log('includedddd');
               }
                 // console.log(userList[x]);
-              // }
+            }
             // }
             // var watchIndex = watchList.watchIndex;
             // res.json({imageData: userList.users[0].userPic});
