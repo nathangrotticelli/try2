@@ -272,28 +272,28 @@ app.post('/picGet', function(req,res){
 
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
- var username = req.body.username;
- console.log("this the test fsdsfdsdfdfsinfo bruddda");
-  console.log(watch);
+ var user = req.body.user;
+ console.log("this the test fsdsfdsdfdfsinfosdfdfs brudfsdddda");
 
- // WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
- //      if(err){
- //            console.log(err);
- //      }else{
- //          console.log('user like updated.');
-        res.json(200);
- //      }
- //  });
+ WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
+      if(err){
+            console.log(err);
+      }else{
+          console.log('user like updated.');
+          WatchSchema.update({'watchesIndex': watch},
+            {$push: {'watchesIndex.watchLikes':user}},function(err2,worked2) {
+              if(err2){
+                    console.log(err2);
+              }else{
+                console.log('watch like updated.');
+                res.json({worked1: "watch likes updated."});
+              }
+          });
+        // res.json({worked1: "user likes updated."});
+      }
+  });
 
-  // WatchSchema.update({'watchesIndex': watch},
-  //   {$push: {'watchesIndex.watchLikes':user}},function(err2,worked2) {
-  //     if(err2){
-  //           console.log(err);
-  //     }else{
-  //       console.log('watch like updated.');
-  //       res.json({worked1: "watch likes updated."});
-  //     }
-  // });
+
 
 });
 
