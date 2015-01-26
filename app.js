@@ -284,7 +284,7 @@ app.post('/liked', function(req,res){
     //     }
     //         });
 
-  WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchLikes': user}},function(err,worked) {
+  WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': user}},function(err,worked) {
               if(err){
                     console.log(err);
               }else{
