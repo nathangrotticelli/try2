@@ -291,6 +291,27 @@ app.post('/liked', function(req,res){
           });
 });
 
+app.post('/unliked', function(req,res){
+ var watch = req.body.watchObj;
+ var username = req.body.username;
+
+  WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$pull': {'watchesIndex.$.watchLikes': username}},function(err1) {
+              if(err1){
+                    console.log(err1);
+              }else{
+                console.log('watch unlike updated.');
+                 WatchSchema.update({'users.username': username},{'$pull': {'users.$.likes': watch}},function(err2){
+                      if(err2){
+                            console.log(err2);
+                      }else{
+                          console.log('user unlike updated.');
+                          res.json(200);
+                      }
+                  });
+              }
+          });
+});
+
 app.post('/picUpdate',function(req,res){
   WatchSchema.update({'users.username': req.body.username},
     {'$set': {'users.$.userPic': req.body.userPic}}, function(err,worked) {
