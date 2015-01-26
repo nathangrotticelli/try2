@@ -256,6 +256,7 @@ app.post('/picGet', function(req,res){
  var testInfo = req.body.testInfo;
  console.log(testInfo+"this the test info bruddda");
 
+
   WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
       if(err){
         console.log('error?'+err);
@@ -273,6 +274,18 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
+   WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            console.log('Got Watches!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({watchList: watchList});
+      }
+  });
+
  WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
       if(err){
         console.log('error?'+err);
@@ -281,10 +294,9 @@ app.post('/liked', function(req,res){
       else{
             // console.log(userList);
             for(x=0;watchList.watchesIndex.length;x++){
-              if(watchList.watchIndex[x].watchLikes.indexOf(username)>-1){
+              if(watchList.watchesIndex[x].watchLikes.indexOf(username)>-1){
                 console.log('includedddd');
               }
-                // console.log(userList[x]);
             }
             // }
             // var watchIndex = watchList.watchIndex;
