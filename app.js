@@ -283,9 +283,7 @@ app.post('/liked', function(req,res){
       console.log(appUser.username);
       // res.json({success:'follow already'});
     // }
-    else{
 
-    }
    }
   })
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': username}},function(err1) {
