@@ -281,7 +281,7 @@ app.post('/liked', function(req,res){
  //            console.log(err);
  //      }else{
  //          console.log('user like updated.');
- //        res.json({worked1: "user likes updated."});
+        res.json(200);
  //      }
  //  });
 
