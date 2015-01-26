@@ -269,19 +269,20 @@ app.post('/picGet', function(req,res){
   });
 
 });
+
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var username = req.body.username;
  console.log("this the test fsdsfdsdfdfsinfo bruddda");
 
- WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
-      if(err){
-            console.log(err);
-      }else{
-          console.log('user like updated.');
-        res.json({worked1: "user likes updated."});
-      }
-  });
+ // WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
+ //      if(err){
+ //            console.log(err);
+ //      }else{
+ //          console.log('user like updated.');
+ //        res.json({worked1: "user likes updated."});
+ //      }
+ //  });
 
   // WatchSchema.update({'watchesIndex': watch},
   //   {$push: {'watchesIndex.watchLikes':user}},function(err2,worked2) {
@@ -294,6 +295,7 @@ app.post('/liked', function(req,res){
   // });
 
 });
+
 app.post('/picUpdate',function(req,res){
   WatchSchema.update({'users.username': req.body.username},
     {'$set': {'users.$.userPic': req.body.userPic}}, function(err,worked) {
