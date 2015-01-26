@@ -275,12 +275,12 @@ app.post('/liked', function(req,res){
  var user = req.body.user;
  console.log("this the test fsdsfdsdfdfsinfosdfdfs brudfsdddda");
 
- WatchSchema.update({'users': user},{$push: {'users.$.likes':watch}},function(err,worked){
+ WatchSchema.update({'users.username': user.username},{$push: {'users.$.likes':watch}},function(err,worked){
       if(err){
             console.log(err);
       }else{
           console.log('user like updated.');
-          WatchSchema.update({'watchesIndex': watch},
+          WatchSchema.update({'watchesIndex.watchName': watch.watchName},
             {$push: {'watchesIndex.watchLikes':user}},function(err2,worked2) {
               if(err2){
                     console.log(err2);
