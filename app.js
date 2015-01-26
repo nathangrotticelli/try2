@@ -273,8 +273,8 @@ app.post('/picGet', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var user = req.body.user;
- console.log("this the test fsdsfdsdfdfsinfosdfdfs brudfsdddda");
-
+ watch.watchLikes.push(user);
+ user.likes.push(watch);
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': user}},function(err1) {
               if(err1){
                     console.log(err1);
