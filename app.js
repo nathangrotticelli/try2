@@ -275,7 +275,7 @@ app.post('/liked', function(req,res){
  var user = req.body.user;
  console.log("this the test fsdsfdsdfdfsinfosdfdfs brudfsdddda");
 
- WatchSchema.update({'users.username': username},{$push: {'users.$.likes':watch}},function(err,worked){
+ WatchSchema.update({'users': user},{$push: {'users.$.likes':watch}},function(err,worked){
       if(err){
             console.log(err);
       }else{
@@ -289,7 +289,6 @@ app.post('/liked', function(req,res){
                 res.json({worked1: "watch likes updated."});
               }
           });
-        // res.json({worked1: "user likes updated."});
       }
   });
 
