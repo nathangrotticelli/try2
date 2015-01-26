@@ -292,13 +292,14 @@ app.post('/liked', function(req,res){
         // var privateEvents = null;
       }
       else{
-            // console.log(userList);
-            for(x=0;watchList.watchesIndex.length;x++){
-              if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
-                console.log('includedddd');
-                // console.log('includedddd');
-              }
-            }
+            console.log(watchList);
+             console.log(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)]);
+            // for(x=0;watchList.watchesIndex.length;x++){
+              // if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
+              //   console.log('includedddd');
+              //   // console.log('includedddd');
+              // }
+            // }
             // }
             // var watchIndex = watchList.watchIndex;
             // res.json({imageData: userList.users[0].userPic});
