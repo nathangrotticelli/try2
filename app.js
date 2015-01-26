@@ -307,13 +307,16 @@ app.post('/liked', function(req,res){
             //         "watchName": "Invicta Stainless 6620",
             //         "showPrice": false
             //     };
-             console.log(watchList.watchesIndex.indexOf(watch));
-            // for(x=0;watchList.watchesIndex.length;x++){
+             // console.log(watchList.watchesIndex.indexOf(watch));
+            for(x=0;watchList.watchesIndex.length;x++){
+              if(watchList.watchesIndex[x]==watch){
+                console.log('gsdf include');
+              }
               // if(watchList.watchesIndex[watchList.watchesIndex.indexOf(watch)].watchLikes.indexOf(username)){
               //   console.log('includedddd');
               //   // console.log('includedddd');
               // }
-            // }
+            }
             // }
             // var watchIndex = watchList.watchIndex;
             // res.json({imageData: userList.users[0].userPic});
