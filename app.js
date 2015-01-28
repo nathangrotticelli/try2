@@ -273,9 +273,9 @@ for(x=0;x<req.body.likes.length;x++){
       }
   });
 }
-      if(req.body.watchLikes.length==x){
+      if(req.body.likes.length==x){
         console.log(x);
-        req.body.watchLikes.length
+        // req.body.likes.length
                 res.json({likeArray:userLikeArray});
             }
 
