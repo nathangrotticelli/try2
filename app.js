@@ -265,7 +265,10 @@ for(x=0;x<req.body.watchLikes.length;x++){
       else{
             console.log('Got like user!');
             userLikeArray.push(user);
-            if(req.body.watchLikes.length-1==x){
+            var y = x+1;
+            console.log(req.body.watchLikes.length);
+            console.log(y);
+            if(req.body.watchLikes.length==y){
                 res.json({likeArray:userLikeArray});
             }
             // var watchIndex = watchList.watchIndex;
