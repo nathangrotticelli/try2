@@ -324,7 +324,7 @@ app.post('/getLikes', function(req,res){
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var user = req.body.user;
- if(watch.watchLikes.length>0){
+ if(watch.watchLikes.length>1){
   user.userPic = '';
  }
   WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': {'username': user.username, 'userPic':user.userPic}} },function(err1){
