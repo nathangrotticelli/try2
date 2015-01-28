@@ -256,18 +256,24 @@ app.post('/getLikes', function(req,res){
  // var testInfo = req.body.testInfo;
  // console.log(testInfo+"this the test info bruddda");
 var userLikeArray = [];
-var query  = WatchSchema.where({ 'users.$.username': 'ng225' });
-query.findOne(function (err, kitten) {
-  if (err){
-    console.log(err);
-    res.json(200)
-  }
-  if (kitten) {
-    console.log(kitten);
-    res.json(200);
-    // doc may be null if no document matched
-  }
-});
+  WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            // console.log('Got Watches!');
+      for(y=0;y<req.body.likes.length:y++){
+          for(x=0;x<userList.length;x++){
+            if(userList[x].watchLikes.indexOf(req.body.likes[y]){
+              console.log(userList[x]);
+            }
+          }
+        }
+            // var watchIndex = watchList.watchIndex;
+            res.json({watchList: watchList});
+      }
+  });
 // var x = 0;
 // console.log(req.body.likes);
 // for(x=0;x<req.body.likes.length;x++){
