@@ -275,7 +275,7 @@ for(x=0;x<req.body.likes.length;x++){
   });
 }
       if(req.body.likes.length==x){
-        console.log(x);
+        // console.log(x);
         // req.body.likes.length
                 res.json({likeArray:userLikeArray});
             }
