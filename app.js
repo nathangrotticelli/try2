@@ -267,11 +267,12 @@ var userLikeArray = [];
           for(x=0;x<userList.length;x++){
             if(req.body.likes[y].indexOf(userList[x].username)>-1){
               console.log(userList[x]);
+               res.json(200);
             }
           }
         }
             // var watchIndex = watchList.watchIndex;
-            res.json(200);
+
       }
   });
 // var x = 0;
