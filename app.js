@@ -252,22 +252,26 @@ app.post('/watchesGet', function(req,res){
   });
 
 });
-app.post('/picGet', function(req,res){
- var testInfo = req.body.testInfo;
- console.log(testInfo+"this the test info bruddda");
-
-
-  WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+app.post('/getLikes', function(req,res){
+ // var testInfo = req.body.testInfo;
+ // console.log(testInfo+"this the test info bruddda");
+var userLikeArray = [];
+for(x=0;x<req.body.watchLikes.length;x++){
+    WatchSchema.findOne({'users.username': req.body.watchLikes[x]}).exec(function (err, user) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
       }
       else{
-            console.log('Got pic!');
+            console.log('Got like user!');
+            userLikeArray.push(user);
             // var watchIndex = watchList.watchIndex;
-            res.json({imageData: userList.users[0].userPic});
       }
   });
+}
+if(req.body.watchLikes.length==x){
+    res.json({likeArray:userLikeArray});
+}
 
 });
 
