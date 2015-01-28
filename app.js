@@ -257,14 +257,14 @@ app.post('/getLikes', function(req,res){
  // console.log(testInfo+"this the test info bruddda");
 var userLikeArray = [];
 // var x = 0;
-for(x=0;x<req.body.watchLikes.length;x++){
-    WatchSchema.findOne({'users.username': req.body.watchLikes[x]}).exec(function (err, user) {
+for(x=0;x<req.body.likes.length;x++){
+    WatchSchema.findOne({'users.username': req.body.likes[x] }).exec(function (err, user) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
       }
       else{
-            console.log('Got like user!'+user);
+            console.log(user);
             userLikeArray.push(user);
             // var y = x+1;
             // console.log(req.body.watchLikes.length);
