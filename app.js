@@ -263,7 +263,7 @@ app.post('/getLikes', function(req,res){
       }
       else{
             // console.log('Got Watches!');
-        if(req.body.likes.length<5){
+        if(req.body.likes.length<=5){
           for(y=0;y<req.body.likes.length;y++){
             for(x=0;x<userList.users.length;x++){
               if(req.body.likes[y] == userList.users[x].username){
@@ -323,13 +323,13 @@ app.post('/getLikes', function(req,res){
 
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
- var username = req.body.username;
-  WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': username}},function(err1) {
+ var user = req.body.user;
+  WatchSchema.update({'watchesIndex.watchName': watch.watchName},{'$push': {'watchesIndex.$.watchLikes': {'username': user.username, 'userPic':user.userPic}},function(err1) {
               if(err1){
                     console.log(err1);
               }else{
                 console.log('watch like updated.');
-                 WatchSchema.update({'users.username': username},{'$push': {'users.$.likes': watch}},function(err2){
+                 WatchSchema.update({'users.username': user.username},{'$push': {'users.$.likes': watch}},function(err2){
                       if(err2){
                             console.log(err2);
                       }else{
