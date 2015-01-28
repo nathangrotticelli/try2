@@ -256,9 +256,12 @@ app.post('/getLikes', function(req,res){
  // var testInfo = req.body.testInfo;
  // console.log(testInfo+"this the test info bruddda");
 var userLikeArray = [];
-var query  = WatchSchema.where({ 'users.username': 'ng225' });
+var query  = WatchSchema.where({ 'username': 'ng225' });
 query.findOne(function (err, kitten) {
-  if (err) return handleError(err);
+  if (err){
+    console.log(err);
+    res.json(200);
+  }
   if (kitten) {
     console.log(kitten);
     res.json(200);
