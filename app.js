@@ -265,7 +265,7 @@ var userLikeArray = [];
             // console.log('Got Watches!');
       for(y=0;y<req.body.likes.length;y++){
           for(x=0;x<userList.length;x++){
-            if(userList[x].watchLikes.indexOf(req.body.likes[y]){
+            if(userList[x].watchLikes.indexOf(req.body.likes[y])){
               console.log(userList[x]);
             }
           }
