@@ -263,6 +263,11 @@ var userLikeArray = [];
       }
       else{
             // console.log('Got Watches!');
+      // if(req.body.likes.length<5){
+
+      // }
+      console.log(userList);
+      console.log(req.body.likes[0]);
       for(y=0;y<req.body.likes.length;y++){
           for(x=0;x<userList.length;x++){
             if(req.body.likes[y] == userList[x].username){
