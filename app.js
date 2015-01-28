@@ -279,7 +279,7 @@ for(x=0;x<req.body.likes.length;x++){
         // req.body.likes.length
                 res.json({likeArray:userLikeArray});
             }
-res.json(200);
+// res.json(200);
 });
 
 app.post('/liked', function(req,res){
