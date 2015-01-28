@@ -256,6 +256,7 @@ app.post('/getLikes', function(req,res){
  // var testInfo = req.body.testInfo;
  // console.log(testInfo+"this the test info bruddda");
 var userLikeArray = [];
+// var x = 0;
 for(x=0;x<req.body.watchLikes.length;x++){
     WatchSchema.findOne({'users.username': req.body.watchLikes[x]}).exec(function (err, user) {
       if(err){
@@ -263,18 +264,20 @@ for(x=0;x<req.body.watchLikes.length;x++){
         // var privateEvents = null;
       }
       else{
-            console.log('Got like user!');
+            console.log('Got like user!'+user);
             userLikeArray.push(user);
-            var y = x+1;
-            console.log(req.body.watchLikes.length);
-            console.log(y);
-            if(req.body.watchLikes.length==y){
-                res.json({likeArray:userLikeArray});
-            }
+            // var y = x+1;
+            // console.log(req.body.watchLikes.length);
+            // console.log(y)
             // var watchIndex = watchList.watchIndex;
       }
   });
 }
+      if(req.body.watchLikes.length==x){
+        console.log(x);
+        req.body.watchLikes.length
+                res.json({likeArray:userLikeArray});
+            }
 
 });
 
