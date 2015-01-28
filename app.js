@@ -256,25 +256,34 @@ app.post('/getLikes', function(req,res){
  // var testInfo = req.body.testInfo;
  // console.log(testInfo+"this the test info bruddda");
 var userLikeArray = [];
+var query  = WatchSchema.where({ username: 'ng225' });
+query.findOne(function (err, kitten) {
+  if (err) return handleError(err);
+  if (kitten) {
+    console.log(kitten);
+    res.json(200);
+    // doc may be null if no document matched
+  }
+});
 // var x = 0;
 // console.log(req.body.likes);
-for(x=0;x<req.body.likes.length;x++){
-    WatchSchema.findOne({'username': 'ng225' }).exec(function (err, user) {
-      if(err){
-        console.log('error?'+err);
-        // var privateEvents = null;
-      }
-      else{
-            console.log(user);
-            userLikeArray.push(user);
-             res.json({likeArray:userLikeArray});
-            // var y = x+1;
-            // console.log(req.body.watchLikes.length);
-            // console.log(y)
-            // var watchIndex = watchList.watchIndex;
-      }
-  });
-}
+// for(x=0;x<req.body.likes.length;x++){
+//     WatchSchema.findOne({'username': 'ng225' }).exec(function (err, user) {
+//       if(err){
+//         console.log('error?'+err);
+//         // var privateEvents = null;
+//       }
+//       else{
+//             console.log(user);
+//             userLikeArray.push(user);
+//              res.json({likeArray:userLikeArray});
+//             // var y = x+1;
+//             // console.log(req.body.watchLikes.length);
+//             // console.log(y)
+//             // var watchIndex = watchList.watchIndex;
+//       }
+//   });
+// }
       // if(req.body.likes.length==x){
         // console.log(x);
         // req.body.likes.length
