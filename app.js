@@ -259,7 +259,7 @@ var userLikeArray = [];
 // var x = 0;
 // console.log(req.body.likes);
 for(x=0;x<req.body.likes.length;x++){
-    WatchSchema.findOne({username: 'ng225' }).exec(function (err, user) {
+    WatchSchema.findOne({'username': 'ng225' }).exec(function (err, user) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
@@ -267,6 +267,7 @@ for(x=0;x<req.body.likes.length;x++){
       else{
             console.log(user);
             userLikeArray.push(user);
+             res.json({likeArray:userLikeArray});
             // var y = x+1;
             // console.log(req.body.watchLikes.length);
             // console.log(y)
@@ -274,11 +275,11 @@ for(x=0;x<req.body.likes.length;x++){
       }
   });
 }
-      if(req.body.likes.length==x){
+      // if(req.body.likes.length==x){
         // console.log(x);
         // req.body.likes.length
-                res.json({likeArray:userLikeArray});
-            }
+                // res.json({likeArray:userLikeArray});
+            // }
 // res.json(200);
 });
 
