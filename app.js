@@ -268,16 +268,21 @@ app.post('/getLikes', function(req,res){
           for(x=0;x<userList.users.length;x++){
             if(req.body.likes[y] == userList.users[x].username){
               userLikeArray.push(userList.users[x]);
+              if(userLikeArray.length==req.body.likes){
+                res.json({userLikes:userLikeArray});
+              }
             }
           }
         }
       }
       else{
-        for(y=0;y<5;y++){
+        for(y=0;y<6;y++){
           for(x=0;x<userList.users.length;x++){
             if(req.body.likes[y] == userList.users[x].username){
               userLikeArray.push(userList.users[x]);
-
+              if(userLikeArray.length==5){
+                res.json({userLikes:userLikeArray});
+              }
             }
           }
         }
@@ -288,8 +293,6 @@ app.post('/getLikes', function(req,res){
             // var watchIndex = watchList.watchIndex;
 
     }
-  }).exec(function(){
-    res.json({userLikes:userLikeArray});
   });
 // var x = 0;
 // console.log(req.body.likes);
