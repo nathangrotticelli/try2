@@ -263,16 +263,16 @@ app.post('/getLikes', function(req,res){
       }
       else{
             // console.log('Got Watches!');
-      if(req.body.likes.length<5){
-          for(y=0;y<req.body.likes.length;y++){
-          for(x=0;x<userList.users.length;x++){
-            if(req.body.likes[y] == userList.users[x].username){
-              userLikeArray.push(userList.users[x]);
-              if(userLikeArray.length==req.body.likes){
-                res.json({userLikes:userLikeArray});
+        if(req.body.likes.length<5){
+          for(y=0;y<=req.body.likes.length;y++){
+            for(x=0;x<userList.users.length;x++){
+              if(req.body.likes[y] == userList.users[x].username){
+                userLikeArray.push(userList.users[x]);
+                if(userLikeArray.length==req.body.likes){
+                  res.json({userLikes:userLikeArray});
+                }
               }
             }
-          }
         }
       }
       else{
