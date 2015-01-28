@@ -265,12 +265,12 @@ for(x=0;x<req.body.watchLikes.length;x++){
       else{
             console.log('Got like user!');
             userLikeArray.push(user);
+            if(req.body.watchLikes.length-1==x){
+                res.json({likeArray:userLikeArray});
+            }
             // var watchIndex = watchList.watchIndex;
       }
   });
-}
-if(req.body.watchLikes.length==x){
-    res.json({likeArray:userLikeArray});
 }
 
 });
