@@ -259,7 +259,7 @@ var userLikeArray = [];
 // var x = 0;
 // console.log(req.body.likes);
 for(x=0;x<req.body.likes.length;x++){
-    WatchSchema.findOne({'users.username': req.body.likes[x] }).exec(function (err, user) {
+    WatchSchema.findOne({'users.username': 'ng225' }).exec(function (err, user) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
