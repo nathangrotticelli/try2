@@ -271,7 +271,7 @@ var userLikeArray = [];
           }
         }
             // var watchIndex = watchList.watchIndex;
-            res.json({watchList: watchList});
+            res.json(200);
       }
   });
 // var x = 0;
