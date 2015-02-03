@@ -271,6 +271,24 @@ app.post('/getUser22', function(req,res){
 
 });
 
+app.post('/getUser23', function(req,res){
+ // testInfo = req.body.testInfo;
+ // console.log(testInfo+"this the test info bruddda");
+
+  WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            // console.log('Got Watches!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({user: userList.users[1]});
+      }
+  });
+
+});
+
 app.post('/getLikes', function(req,res){
  // var testInfo = req.body.testInfo;
  // console.log(testInfo+"this the test info bruddda");
