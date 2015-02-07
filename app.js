@@ -254,7 +254,7 @@ app.post('/watchesGet', function(req,res){
 });
 
 app.post('/getUser22', function(req,res){
- // testInfo = req.body.testInfo;
+ username = req.body.username;
  // console.log(testInfo+"this the test info bruddda");
 
   WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
@@ -263,9 +263,19 @@ app.post('/getUser22', function(req,res){
         // var privateEvents = null;
       }
       else{
+         for(y=0;y<userList.users.length;y++){
+            // for(x=0;x<userList.users.length;x++){
+              if(userList.users[y].username == username){
+                // userLikeArray.push(userList.users[x]);
+                // if(userLikeArray.length==req.body.likes.length){
+                  res.json({user:userList.users[y]});
+                // }
+              }
+            // }
+        }
             // console.log('Got Watches!');
             // var watchIndex = watchList.watchIndex;
-            res.json({user: userList.users[0]});
+            // res.json({user: userList.users[userList.users.indexOf(user)]});
       }
   });
 
