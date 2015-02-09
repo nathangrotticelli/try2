@@ -276,7 +276,7 @@ app.post('/getUser22', function(req,res){
               }
             // }
         }
-        res.json(200);
+        res.json({user:'false'});
             // console.log('Got Watches!');
             // var watchIndex = watchList.watchIndex;
             // res.json({user: userList.users[userList.users.indexOf(user)]});
