@@ -254,20 +254,21 @@ app.post('/watchesGet', function(req,res){
 });
 
 app.post('/getUser22', function(req,res){
- username = req.body.username;
+ username = req.body.userInfo.username.toLowerCase();
+ password = req.body.userInfo.password.toLowerCase();
  // console.log(testInfo+"this the test info bruddda");
 
   WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
       if(err){
         console.log('error?'+err);
-        res.json(200);
+        res.json(300);
         // var privateEvents = null;
       }
       else{
-        console.log(userList.users[0]);
+        // console.log(userList.users[y].username);
          for(y=0;y<userList.users.length;y++){
             // for(x=0;x<userList.users.length;x++){
-              if(userList.users[y].username == username){
+              if(userList.users[y].username == username&&userList.users[y].userPass==password){
                 // userLikeArray.push(userList.users[x]);
                 // if(userLikeArray.length==req.body.likes.length){
                   res.json({user:userList.users[y]});
@@ -275,6 +276,7 @@ app.post('/getUser22', function(req,res){
               }
             // }
         }
+        res.json(200);
             // console.log('Got Watches!');
             // var watchIndex = watchList.watchIndex;
             // res.json({user: userList.users[userList.users.indexOf(user)]});
