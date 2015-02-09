@@ -264,7 +264,7 @@ app.post('/getUser22', function(req,res){
         // var privateEvents = null;
       }
       else{
-        console.log(username);
+        console.log(userList.users[0]);
          for(y=0;y<userList.users.length;y++){
             // for(x=0;x<userList.users.length;x++){
               if(userList.users[y].username == username){
