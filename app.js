@@ -260,9 +260,11 @@ app.post('/getUser22', function(req,res){
   WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
       if(err){
         console.log('error?'+err);
+        res.json(200);
         // var privateEvents = null;
       }
       else{
+        console.log(username);
          for(y=0;y<userList.users.length;y++){
             // for(x=0;x<userList.users.length;x++){
               if(userList.users[y].username == username){
