@@ -253,15 +253,15 @@ app.post('/watchesGet', function(req,res){
 
 });
 
-app.post('/getUser22', function(req,res){
+app.post('/logInDP', function(req,res){
  username = req.body.userInfo.username.toLowerCase();
- password = req.body.userInfo.password.toLowerCase();
+ password = req.body.userInfo.password;
  // console.log(testInfo+"this the test info bruddda");
 
   WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
       if(err){
         console.log('error?'+err);
-        res.json(300);
+        res.json(400);
         // var privateEvents = null;
       }
       else{
