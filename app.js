@@ -401,7 +401,7 @@ app.post('/getLikes', function(req,res){
 // res.json(200);
 });
 
-app.post('/addCollection', function(req,res){
+app.post('/updateCollection', function(req,res){
  // var watch = req.body.watchObj;
  var user = req.body.user;
  // var collectionName = req.body.collectionName;
