@@ -413,7 +413,7 @@ app.post('/addCollection', function(req,res){
             {upsert: true},
             function(err,res){
               if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("user collections Updated: "+req.body.schoolName);}
+              else{console.log("user collections Updated");}
             });
       console.log('stored collection data on server, responding');
       res.json({success:'Worked!'});
