@@ -406,7 +406,7 @@ app.post('/addCollection', function(req,res){
  var user = req.body.user;
  var collectionName = req.body.collectionName;
 
-  WatchSchema.update({'users.username': req.body.user.username},{'$push': {'users.$.collections': {'collectionName': collectionName, 'watches':watch.watchPhoto}} },function(err1){
+  WatchSchema.update({'users.collections.collectionName': collectionName},{'$push': {'users.$.collections.watches': watch.watchName } },function(err1){
               if(err1){
                     console.log(err1);
               }else{
