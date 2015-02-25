@@ -406,14 +406,27 @@ app.post('/addCollection', function(req,res){
  var user = req.body.user;
  var collectionName = req.body.collectionName;
 
-  WatchSchema.update({'collections.collectionName': collectionName},{'$push': {'users.$.collections.watches': watch.watchName } },function(err1){
-              if(err1){
-                    console.log(err1);
-              }else{
-                console.log('collection updated.');
-                 res.json(200);
-              }
-          });
+ WatchSchema.findOneAndUpdate({username: user.username},
+            {
+              collections: user.collections
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('user maybe doesnt exist?')}
+              else{console.log("user collections Updated: "+req.body.schoolName);}
+            });
+      console.log('stored collection data on server, responding');
+      res.json({success:'Worked!'});
+
+
+  // WatchSchema.update({'collections.collectionName': collectionName},{'$push': {'users.$.collections.watches': watch.watchName } },function(err1){
+  //             if(err1){
+  //                   console.log(err1);
+  //             }else{
+  //               console.log('collection updated.');
+  //                res.json(200);
+  //             }
+  //         });
 });
 
 app.post('/liked', function(req,res){
