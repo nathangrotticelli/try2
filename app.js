@@ -406,17 +406,14 @@ app.post('/addCollection', function(req,res){
  var user = req.body.user;
  var collectionName = req.body.collectionName;
 
- WatchSchema.findOneAndUpdate({'users.username': user.username},
-            {
-              collections: user.collections
-            },
-            {upsert: true},
-            function(err,res){
-              if(err){console.log('user maybe doesnt exist?')}
-              else{console.log("user collections Updated");}
-            });
-      console.log('stored collection data on server, responding');
-      res.json({success:'Worked!'});
+  WatchSchema.update({'users.username': user.username},
+    {'$set': {'users.$.collections': user.collections}}, function(err,worked) {
+      if(err){
+            console.log(err);
+      }else{
+        res.json({worked1: "user collections updated."});
+      }
+  });
 
 
   // WatchSchema.update({'collections.collectionName': collectionName},{'$push': {'users.$.collections.watches': watch.watchName } },function(err1){
