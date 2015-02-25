@@ -401,6 +401,21 @@ app.post('/getLikes', function(req,res){
 // res.json(200);
 });
 
+app.post('/addCollection', function(req,res){
+ var watch = req.body.watchObj;
+ var user = req.body.user;
+ var collectionName = req.body.collectionName;
+
+  WatchSchema.update({'users.username': req.body.user.username},{'$push': {'users.$.collections': {'collectionName': collectionName, 'watches':watch.watchPhoto}} },function(err1){
+              if(err1){
+                    console.log(err1);
+              }else{
+                console.log('collection updated.');
+                 res.json(200);
+              }
+          });
+});
+
 app.post('/liked', function(req,res){
  var watch = req.body.watchObj;
  var user = req.body.user;
