@@ -406,7 +406,7 @@ app.post('/addCollection', function(req,res){
  var user = req.body.user;
  var collectionName = req.body.collectionName;
 
- WatchSchema.findOneAndUpdate({username: user.username},
+ WatchSchema.findOneAndUpdate({'users.username': user.username},
             {
               collections: user.collections
             },
