@@ -402,9 +402,9 @@ app.post('/getLikes', function(req,res){
 });
 
 app.post('/addCollection', function(req,res){
- var watch = req.body.watchObj;
+ // var watch = req.body.watchObj;
  var user = req.body.user;
- var collectionName = req.body.collectionName;
+ // var collectionName = req.body.collectionName;
 
   WatchSchema.update({'users.username': user.username},
     {'$set': {'users.$.collections': user.collections}}, function(err,worked) {
