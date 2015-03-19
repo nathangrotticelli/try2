@@ -659,26 +659,8 @@ app.post('/userContactFormMessage',function(req,res){
   var mailOptions2 = {
       from: 'DP App', // sender address
       to: 'DimepieceApp@gmail.com', // list of receivers
-      text: 'Hello world ✔',
       subject: 'New Message from Dimepiece User', // Subject line // plaintext body
-      html: '<table style="width: 500px; font-family: arial; font-size: 14px;" border="1">
-        <tr style="height: 32px;">
-          <th align="center" style="width:140px;">Name:</th>
-          <td align="left" style="padding-left:10px; line-height: 20px;">'+ req.body.fullName +'</td>
-        </tr>
-        <tr style="height: 32px;">
-          <th align="center" style="width:140px;">UserName:</th>
-          <td align="left" style="padding-left:10px; line-height: 20px;">'+ req.body.username +'</td>
-        </tr>
-        <tr style="height: 32px;">
-          <th align="center" style="width:140px;">E-mail:</th>
-          <td align="left" style="padding-left:10px; line-height: 20px;">'+ req.body.emailAddress +'</td>
-        </tr>
-        <tr style="height: 32px;">
-          <th align="center" style="width:140px;">Message:</th>
-          <td align="left" style="padding-left:10px; line-height: 20px;">'+ req.body.message +'</td>
-        </tr>
-        </table>'// html body
+      html: 'Full Name: '+req.body.fullName+'<br><br>Username: '+ req.body.username +'<br><br>Email Address:'+ req.body.emailAddress +'<br><br>Message: '+ req.body.message// html body
   };
 
   // send mail with defined transport object
