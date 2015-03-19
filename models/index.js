@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 if(process.env.NODE_ENV === "production") {
-	mongoose.connect(process.env.MONGOLAB_URI);
+  mongoose.connect(process.env.MONGOLAB_URI);
 } else {
   mongoose.connect('mongodb://localhost/UNApp');
 }
@@ -80,13 +80,13 @@ var schoolUserSchema = new Schema({
 // })
 
 // var binghamtonSchema = new schoolSchema({
-// 	schoolLongMax:'-75.4',
-// 	schoolLongMin: '-76.1',
-// 	schoolLatMax: '42.4',
-// 	schoolLatMin: '41.7',
-// 	schoolFriendMin: 60,
-// 	schoolName: 'Binghamton',
-// 	emailEnding:'@binghamton.edu'
+//  schoolLongMax:'-75.4',
+//  schoolLongMin: '-76.1',
+//  schoolLatMax: '42.4',
+//  schoolLatMin: '41.7',
+//  schoolFriendMin: 60,
+//  schoolName: 'Binghamton',
+//  emailEnding:'@binghamton.edu'
 // });
 
 var User = mongoose.model('User', userSchema);
