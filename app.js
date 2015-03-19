@@ -645,7 +645,7 @@ var dpTransporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'DimepieceApp@gmail.com',
-        pass: 'Housetrap123'
+        pass: 'Hotwatch123'
     }
 });
 
@@ -660,7 +660,7 @@ app.post('/userContactFormMessage',function(req,res){
       from: 'DP App', // sender address
       to: 'DimepieceApp@gmail.com', // list of receivers
       subject: 'New Message from Dimepiece User', // Subject line // plaintext body
-      html: 'Full Name: '+req.body.fullName+'<br><br>Username: '+ req.body.username +'<br><br>Email Address:'+ req.body.emailAddress +'<br><br>Message: '+ req.body.message// html body
+      html: 'Full Name: '+req.body.fullName+'<br><br>Username: '+ req.body.username +'<br><br>Email Address: '+ req.body.emailAddress +'<br><br>Message: '+ req.body.message// html body
   };
 
   // send mail with defined transport object
