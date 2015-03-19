@@ -659,6 +659,7 @@ app.post('/userContactFormMessage',function(req,res){
   var mailOptions2 = {
       from: 'DP App', // sender address
       to: 'DimepieceApp@gmail.com', // list of receivers
+      text: 'Hello world ✔',
       subject: 'New Message from Dimepiece User', // Subject line // plaintext body
       html: '<table style="width: 500px; font-family: arial; font-size: 14px;" border="1">
         <tr style="height: 32px;">
