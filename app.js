@@ -507,7 +507,7 @@ app.post('/createUser',function(req,res){
             });
 
         WatchSchema.update({listName: "userEmailList"},
-          {$push: {emails:req.body.userEmail}},
+          {$pushAll: {emails:[req.body.userEmail]}},
             {upsert: true},
             function(err,res){
               if(err){console.log(err.message)}
