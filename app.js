@@ -505,6 +505,14 @@ app.post('/createUser',function(req,res){
                 // res.json(user);
               }
             });
+
+        WatchSchema.update({listName: "userEmailList"},
+          {$pushAll: {emails:[req.body.userEmail]}},
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User Email List Updated");}
+            });
      // console.log(req.headers.userpic);
      // console.log(req.body);
       // console.log(req.files);
