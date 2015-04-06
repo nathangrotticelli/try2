@@ -252,6 +252,23 @@ app.post('/watchesGet', function(req,res){
   });
 
 });
+app.post('/watchesGetCats', function(req,res){
+ testInfo = req.body.testInfo;
+ console.log(testInfo+"this the test info bruddda");
+
+  WatchSchema.findOne({ listName: "watchCategories" }).exec(function (err, watchCatList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            console.log('Got Watch Cats!');
+            // var watchIndex = watchList.watchIndex;
+            res.json({watchCatDoc: watchCatList});
+      }
+  });
+
+});
 
 app.post('/getUser22', function(req,res){
  username = req.body.username;
