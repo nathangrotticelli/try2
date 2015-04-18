@@ -318,10 +318,6 @@ app.post('/logInDP', function(req,res){
               if(userList.users[y].username == username||userList.users[y].userEmail == username){
                 if(userList.users[y].userPass==password){
                      res.json({user:userList.users[y]});
-                }else{
-                  if(y==userList.users.length-1){
-                    res.json({user:'false'});
-                  }
                 }
                 // userLikeArray.push(userList.users[x]);
                 // if(userLikeArray.length==req.body.likes.length){
@@ -330,7 +326,7 @@ app.post('/logInDP', function(req,res){
               }
             // }
         }
-
+        res.json({user:'false'});
             // console.log('Got Watches!');
             // var watchIndex = watchList.watchIndex;
             // res.json({user: userList.users[userList.users.indexOf(user)]});
