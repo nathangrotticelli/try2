@@ -527,14 +527,21 @@ app.post('/createUser',function(req,res){
             // console.log('Got Watches!');
 
 
-        for(y=0;y<userList.users.length;y++){
-          // for(x=0;x<userList.users.length;x++){
-            if(userList.users[y].username.toLowerCase() == user.username.toLowerCase()){
-              res.json({failed:'Username already taken.'});
-            }else if(userList.users[y].userEmail.toLowerCase() == user.userEmail.toLowerCase()){
-              res.json({failed:'Email already in use.'});
-            }else{
-               WatchSchema.update({listName: "userList"},
+        // for(y=0;y<userList.users.length;y++){
+        //   // for(x=0;x<userList.users.length;x++){
+        //     if(userList.users[y].username.toLowerCase() == user.username.toLowerCase()){
+        //       res.json({failed:'Username already taken.'});
+        //     }else if(userList.users[y].userEmail.toLowerCase() == user.userEmail.toLowerCase()){
+        //       res.json({failed:'Email already in use.'});
+        //     }
+        //   // }
+        // }
+        pos = userList.users.map(function(e) { return e.username; }).indexOf(user.username);
+        pos2 = userList.users.map(function(e) { return e.username; }).indexOf(user.username);
+        console.log(pos);
+        console.log(pos2);
+
+         WatchSchema.update({listName: "userList"},
               {$push: {users:user}},
             function(err){
               if(err){console.log(err.message)
@@ -554,9 +561,7 @@ app.post('/createUser',function(req,res){
               if(err){console.log(err.message)}
               else{console.log("User Email List Updated");}
             });
-            }
-          // }
-        }
+
 
       // console.log(userList);
       // console.log(req.body.likes[0]);
