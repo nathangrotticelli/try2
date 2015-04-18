@@ -315,15 +315,22 @@ app.post('/logInDP', function(req,res){
         // console.log(userList.users[y].username);
          for(y=0;y<userList.users.length;y++){
             // for(x=0;x<userList.users.length;x++){
-              if(userList.users[y].username == username&&userList.users[y].userPass==password){
+              if(userList.users[y].username == username||userList.users[y].userEmail == username){
+                if(userList.users[y].userPass==password){
+                     res.json({user:userList.users[y]});
+                }else{
+                  if(y==userList.users.length-1){
+                    res.json({user:'false'});
+                  }
+                }
                 // userLikeArray.push(userList.users[x]);
                 // if(userLikeArray.length==req.body.likes.length){
-                  res.json({user:userList.users[y]});
+
                 // }
               }
             // }
         }
-        res.json({user:'false'});
+
             // console.log('Got Watches!');
             // var watchIndex = watchList.watchIndex;
             // res.json({user: userList.users[userList.users.indexOf(user)]});
