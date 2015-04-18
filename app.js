@@ -514,16 +514,31 @@ app.post('/createUser',function(req,res){
      // console.log(req.body.userEmail);
      // console.log(req.body.username);
      //  console.log(req.body.userPass);
-     var user = req.body;
+       var user = req.body;
      user.likes = [];
      user.collections = [];
-     //   console.log(req.body.userPic);
 
-            WatchSchema.update({listName: "userList"},
+       WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
+      if(err){
+        console.log('error?'+err);
+        // var privateEvents = null;
+      }
+      else{
+            // console.log('Got Watches!');
+
+
+        for(y=0;y<userList.users.length;y++){
+          // for(x=0;x<userList.users.length;x++){
+            if(userList.users[y].username == user.username){
+              res.json({failed:'Username already taken.'});
+            }else if(userList.users[y].userEmail == user.userEmail){
+              res.json({failed:'Email already in use.'});
+            }else{
+               WatchSchema.update({listName: "userList"},
               {$push: {users:user}},
             function(err){
               if(err){console.log(err.message)
-                  res.json({failed:'failed'});
+                  res.json({failed:'Connection Failed.'});
               }
               else{
                 console.log("User List Updated. ");
@@ -539,6 +554,22 @@ app.post('/createUser',function(req,res){
               if(err){console.log(err.message)}
               else{console.log("User Email List Updated");}
             });
+            }
+          // }
+        }
+
+      // console.log(userList);
+      // console.log(req.body.likes[0]);
+
+            // var watchIndex = watchList.watchIndex;
+
+    }
+  });
+
+
+     //   console.log(req.body.userPic);
+
+
      // console.log(req.headers.userpic);
      // console.log(req.body);
       // console.log(req.files);
