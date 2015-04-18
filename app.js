@@ -316,11 +316,11 @@ app.post('/logInDP', function(req,res){
          for(y=0;y<userList.users.length;y++){
             // for(x=0;x<userList.users.length;x++){
               // console.log(username);
-              console.log(userList.users[y].username);
-              console.log(userList.users[y].username == username);
+              // console.log(userList.users[y].username);
+              // console.log(userList.users[y].username == username);
 
-              if(userList.users[y].username == username||userList.users[y].userEmail == username){
-                console.log('hereeeee');
+              if(userList.users[y].username.toLowerCase() == username||userList.users[y].userEmail.toLowerCase() == username){
+                // console.log('hereeeee');
                 if(userList.users[y].userPass==password){
                      res.json({user:userList.users[y]});
                 }
