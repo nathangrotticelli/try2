@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
+var url = require('url');
 var nodemailer = require('nodemailer');
 var path = require('path');
 var graph = require('fbgraph');
@@ -591,6 +592,26 @@ app.post('/getSchool', function(req,res){
 
   });
 
+});
+
+app.post('/openCount', function(req,res){
+  // req.body.schoolname
+  // incSchoolName = req.body.schoolName;
+ WatchSchema.findOne({listName: "userList"},function(err,uL){
+  console.log('error?: '+err);
+    // schoolItem = school;
+    upCount = uL.openCount+=1;
+
+    WatchSchema.findOneAndUpdate({listname: "userList"},
+            {
+             openCount: upCount
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('app open upCount failed')}
+              else{console.log("upCount success for app open.");}
+            });
+ });
 });
 
 app.post('/ticketCount', function(req,res){
