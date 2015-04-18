@@ -32,6 +32,7 @@ var watchSchema = new Schema({
  emails: [],
  loginCount: Number,
   openCount: Number,
+  productLinkCount: Number,
    shareCount: Number
 });
 //event schema
