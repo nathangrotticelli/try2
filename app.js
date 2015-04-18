@@ -599,6 +599,7 @@ app.post('/openCount', function(req,res){
   // incSchoolName = req.body.schoolName;
  WatchSchema.findOne({listName: "userList"},function(err,uL){
   console.log('error?: '+err);
+  console.log('current open count: '+uL.openCount);
     // schoolItem = school;
     upCount = uL.openCount+=1;
 
