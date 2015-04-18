@@ -529,26 +529,35 @@ app.post('/createUser',function(req,res){
 
         // for(y=0;y<userList.users.length;y++){
         //   // for(x=0;x<userList.users.length;x++){
-        //     if(userList.users[y].username.toLowerCase() == user.username.toLowerCase()){
-        //       res.json({failed:'Username already taken.'});
-        //     }else if(userList.users[y].userEmail.toLowerCase() == user.userEmail.toLowerCase()){
-        //       res.json({failed:'Email already in use.'});
-        //     }
+        //
         //   // }
         // }
         // pos = userList.users.map(function(e) { return e.username; }).indexOf(user.username);
         pos = userList.users.map(function(e) { return e.username.toLowerCase(); }).indexOf(user.username.toLowerCase());
         // pos2 = userList.users.map(function(e) { return e.username.toLowerCase(); }).match(user.username.toLowerCase());
-        console.log(pos);
+        // console.log(pos);
         // console.log(pos2);
 
 
          sos = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).indexOf(user.userEmail.toLowerCase());
         // sos2 = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).match(user.userEmail.toLowerCase());
-        console.log(sos);
+        // console.log(sos);
         // console.log(sos2);
+          if(pos>0){
+               res.json({failed:'Username already taken.'});
+            }else if(sos>0){
+              res.json({failed:'Email already in use.'});
+            }else{
 
-         WatchSchema.update({listName: "userList"},
+               WatchSchema.update({listName: "userEmailList"},
+          {$pushAll: {emails:[req.body.userEmail]}},
+            {upsert: true},
+            function(err,res){
+              if(err){console.log(err.message)}
+              else{console.log("User Email List Updated");}
+            });
+
+                 WatchSchema.update({listName: "userList"},
               {$push: {users:user}},
             function(err){
               if(err){console.log(err.message)
@@ -561,13 +570,10 @@ app.post('/createUser',function(req,res){
               }
             });
 
-        WatchSchema.update({listName: "userEmailList"},
-          {$pushAll: {emails:[req.body.userEmail]}},
-            {upsert: true},
-            function(err,res){
-              if(err){console.log(err.message)}
-              else{console.log("User Email List Updated");}
-            });
+            }
+
+
+
 
 
       // console.log(userList);
