@@ -603,7 +603,7 @@ app.post('/openCount', function(req,res){
     // schoolItem = school;
     upCount = uL.openCount+=1;
 
-    WatchSchema.findOneAndUpdate({listname: "userList"},
+    WatchSchema.findOneAndUpdate({listName: "userList"},
             {
              openCount: upCount
             },
