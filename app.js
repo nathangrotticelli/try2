@@ -538,15 +538,15 @@ app.post('/createUser',function(req,res){
         // }
         // pos = userList.users.map(function(e) { return e.username; }).indexOf(user.username);
         pos = userList.users.map(function(e) { return e.username.toLowerCase(); }).indexOf(user.username.toLowerCase());
-        pos2 = userList.users.map(function(e) { return e.username.toLowerCase(); }).match(user.username.toLowerCase());
+        // pos2 = userList.users.map(function(e) { return e.username.toLowerCase(); }).match(user.username.toLowerCase());
         console.log(pos);
-        console.log(pos2);
+        // console.log(pos2);
 
 
          sos = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).indexOf(user.userEmail.toLowerCase());
-        sos2 = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).match(user.userEmail.toLowerCase());
+        // sos2 = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).match(user.userEmail.toLowerCase());
         console.log(sos);
-        console.log(sos2);
+        // console.log(sos2);
 
          WatchSchema.update({listName: "userList"},
               {$push: {users:user}},
