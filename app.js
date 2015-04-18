@@ -508,47 +508,23 @@ app.post('/picUpdate',function(req,res){
 });
 
 app.post('/createUser',function(req,res){
-  // console.log(req);
-    // console.log(req.headers.headerparam);
-     // console.log(req.body.userFullName);
-     // console.log(req.body.userEmail);
-     // console.log(req.body.username);
-     //  console.log(req.body.userPass);
        var user = req.body;
      user.likes = [];
      user.collections = [];
-
        WatchSchema.findOne({ listName: "userList" }).exec(function (err, userList) {
       if(err){
         console.log('error?'+err);
         // var privateEvents = null;
       }
       else{
-            // console.log('Got Watches!');
-
-
-        // for(y=0;y<userList.users.length;y++){
-        //   // for(x=0;x<userList.users.length;x++){
-        //
-        //   // }
-        // }
-        // pos = userList.users.map(function(e) { return e.username; }).indexOf(user.username);
         pos = userList.users.map(function(e) { return e.username.toLowerCase(); }).indexOf(user.username.toLowerCase());
-        // pos2 = userList.users.map(function(e) { return e.username.toLowerCase(); }).match(user.username.toLowerCase());
-        // console.log(pos);
-        // console.log(pos2);
-
-
          sos = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).indexOf(user.userEmail.toLowerCase());
-        // sos2 = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).match(user.userEmail.toLowerCase());
-        // console.log(sos);
-        // console.log(sos2);
+
           if(pos>0){
                res.json({failed:'Username already taken.'});
             }else if(sos>0){
               res.json({failed:'Email already in use.'});
             }else{
-
                WatchSchema.update({listName: "userEmailList"},
           {$pushAll: {emails:[req.body.userEmail]}},
             {upsert: true},
@@ -569,17 +545,7 @@ app.post('/createUser',function(req,res){
                 // res.json(user);
               }
             });
-
-            }
-
-
-
-
-
-      // console.log(userList);
-      // console.log(req.body.likes[0]);
-
-            // var watchIndex = watchList.watchIndex;
+           }
 
     }
   });
