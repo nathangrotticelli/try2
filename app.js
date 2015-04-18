@@ -614,6 +614,46 @@ app.post('/openCount', function(req,res){
             });
  });
 });
+app.post('/loginCount', function(req,res){
+  // req.body.schoolname
+  // incSchoolName = req.body.schoolName;
+ WatchSchema.findOne({listName: "userList"},function(err,uL){
+  console.log('error?: '+err);
+  console.log('current login count: '+uL.loginCount);
+    // schoolItem = school;
+    upCount = uL.loginCount+=1;
+
+    WatchSchema.findOneAndUpdate({listName: "userList"},
+            {
+             loginCount: upCount
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('app login upCount failed')}
+              else{console.log("upCount success for app login.");}
+            });
+ });
+});
+app.post('/shareCount', function(req,res){
+  // req.body.schoolname
+  // incSchoolName = req.body.schoolName;
+ WatchSchema.findOne({listName: "userList"},function(err,uL){
+  console.log('error?: '+err);
+  console.log('current share count: '+uL.shareCount);
+    // schoolItem = school;
+    upCount = uL.shareCount+=1;
+
+    WatchSchema.findOneAndUpdate({listName: "userList"},
+            {
+             shareCount: upCount
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('app share upCount failed')}
+              else{console.log("upCount success for app share.");}
+            });
+ });
+});
 
 app.post('/ticketCount', function(req,res){
   incSchoolName = req.body.schoolName;

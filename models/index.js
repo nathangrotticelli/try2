@@ -30,7 +30,9 @@ var watchSchema = new Schema({
  watchesIndex: [],
  users: [],
  emails: [],
- openCount: Number
+ loginCount: Number,
+  openCount: Number,
+   shareCount: Number
 });
 //event schema
 
