@@ -529,9 +529,9 @@ app.post('/createUser',function(req,res){
 
         for(y=0;y<userList.users.length;y++){
           // for(x=0;x<userList.users.length;x++){
-            if(userList.users[y].username == user.username){
+            if(userList.users[y].username.toLowerCase() == user.username.toLowerCase()){
               res.json({failed:'Username already taken.'});
-            }else if(userList.users[y].userEmail == user.userEmail){
+            }else if(userList.users[y].userEmail.toLowerCase() == user.userEmail.toLowerCase()){
               res.json({failed:'Email already in use.'});
             }else{
                WatchSchema.update({listName: "userList"},
