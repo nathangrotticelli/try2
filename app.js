@@ -634,6 +634,26 @@ app.post('/loginCount', function(req,res){
             });
  });
 });
+app.post('/productLinkCount', function(req,res){
+  // req.body.schoolname
+  // incSchoolName = req.body.schoolName;
+ WatchSchema.findOne({listName: "userList"},function(err,uL){
+  console.log('error?: '+err);
+  console.log('current login count: '+uL.productLinkCount);
+    // schoolItem = school;
+    upCount = uL.productLinkCount+=1;
+
+    WatchSchema.findOneAndUpdate({listName: "userList"},
+            {
+             productLinkCount: upCount
+            },
+            {upsert: true},
+            function(err,res){
+              if(err){console.log('app productLink upCount failed')}
+              else{console.log("upCount success for app productLink.");}
+            });
+ });
+});
 app.post('/shareCount', function(req,res){
   // req.body.schoolname
   // incSchoolName = req.body.schoolName;
