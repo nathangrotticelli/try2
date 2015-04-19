@@ -210,25 +210,8 @@ app.get('/', function(req, res){
   res.render("index");
 });
 
-// app.get('/denied', function(req, res){
-//   res.render("denied",{schoolName: schoolItem.schoolName});
-// });
 app.get('/singleSubmit', function(req,res){
     res.render("singleSubmit");
-
-// console.log('looking for ' + req.body.schoolName);
-
-// School.findOneAndUpdate({schoolName: req.body.schoolName},
-//             {
-//               schoolEvents: req.body.schoolEvents
-//             },
-//             {upsert: true},
-//             function(err,res){
-//               if(err){console.log('user maybe doesnt exist?')}
-//               else{console.log("School Events Updated: "+req.body.schoolName);}
-//             });
-//       console.log('stored school event data on server, responding');
-//       res.json({success:'Worked!'});
 
 });
 
@@ -292,9 +275,7 @@ app.post('/getUser22', function(req,res){
             // }
         }
          res.json({user:'false'});
-            // console.log('Got Watches!');
-            // var watchIndex = watchList.watchIndex;
-            // res.json({user: userList.users[userList.users.indexOf(user)]});
+
       }
   });
 
@@ -332,9 +313,7 @@ app.post('/logInDP', function(req,res){
             // }
         }
         res.json({user:'false'});
-            // console.log('Got Watches!');
-            // var watchIndex = watchList.watchIndex;
-            // res.json({user: userList.users[userList.users.indexOf(user)]});
+
       }
   });
 
@@ -400,31 +379,7 @@ app.post('/getLikes', function(req,res){
 
     }
   });
-// var x = 0;
-// console.log(req.body.likes);
-// for(x=0;x<req.body.likes.length;x++){
-//     WatchSchema.findOne({'username': 'ng225' }).exec(function (err, user) {
-//       if(err){
-//         console.log('error?'+err);
-//         // var privateEvents = null;
-//       }
-//       else{
-//             console.log(user);
-//             userLikeArray.push(user);
-//              res.json({likeArray:userLikeArray});
-//             // var y = x+1;
-//             // console.log(req.body.watchLikes.length);
-//             // console.log(y)
-//             // var watchIndex = watchList.watchIndex;
-//       }
-//   });
-// }
-      // if(req.body.likes.length==x){
-        // console.log(x);
-        // req.body.likes.length
-                // res.json({likeArray:userLikeArray});
-            // }
-// res.json(200);
+
 });
 
 app.post('/updateCollection', function(req,res){
@@ -441,15 +396,6 @@ app.post('/updateCollection', function(req,res){
       }
   });
 
-
-  // WatchSchema.update({'collections.collectionName': collectionName},{'$push': {'users.$.collections.watches': watch.watchName } },function(err1){
-  //             if(err1){
-  //                   console.log(err1);
-  //             }else{
-  //               console.log('collection updated.');
-  //                res.json(200);
-  //             }
-  //         });
 });
 
 app.post('/liked', function(req,res){
@@ -571,43 +517,6 @@ app.post('/createUser',function(req,res){
 
     }
   });
-
-
-     //   console.log(req.body.userPic);
-
-
-     // console.log(req.headers.userpic);
-     // console.log(req.body);
-      // console.log(req.files);
-        // console.log(req.file);
-     // console.log(req.headers.userlikes);
-     // console.log(req.headers.usercollections);
-     // console.log(req.params);
-     // console.log(req.options.params==true);
-    // console.dir(req.headers['content-type']);
-  // console.log(req.options);
-  // console.log('hrere');
-
-      // User.findOneAndUpdate({userEmail: req.body.userEmail},
-      //       {firstNameLetter: req.body.firstNameLetter,
-      //       userProfId: req.body.userProfId,
-      //       userName: req.body.userName,
-      //       userSchool: req.body.userSchool,
-      //       firstLogin: true,
-      //       watchList:[],
-      //       followers:[],
-      //       following:[],
-      //       // privateEvents: req.body.privateEvents,
-      //       userGender: req.body.userGender,
-      //       entranceEmail: req.body.entranceEmail,
-      //       userEmail: req.body.userEmail},
-      //       {upsert: true},
-      //       function(err,res){
-      //         if(err){console.log(err.message)}
-      //         else{console.log("User Info Updated for: "+req.body.userName);}
-      //       });
-
-      // console.log('stored user data on server, responding');
 
 });
 
@@ -1749,9 +1658,5 @@ app.post('/singleSend', function(req, res){
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-  // eachFriend[friend.id] = oneFriendsEvents;
-
 
 
