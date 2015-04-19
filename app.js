@@ -632,9 +632,14 @@ app.post('/openCount', function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log('app open upCount failed')}
-              else{console.log("upCount success for app open.");}
-            });
+              if(err){
+                console.log('app open upCount failed');
+                res.json(300);
+            }
+              else{
+                console.log("upCount success for app open.");
+                res.json(200);}
+              });
  });
 });
 app.post('/loginCount', function(req,res){
@@ -652,8 +657,8 @@ app.post('/loginCount', function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log('app login upCount failed')}
-              else{console.log("upCount success for app login.");}
+              if(err){console.log('app login upCount failed'); res.json(300);}
+              else{console.log("upCount success for app login."); res.json(200);}
             });
  });
 });
@@ -672,8 +677,8 @@ app.post('/productLinkCount', function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log('app productLink upCount failed')}
-              else{console.log("upCount success for app productLink.");}
+              if(err){console.log('app productLink upCount failed'); res.json(300);}
+              else{console.log("upCount success for app productLink."); res.json(200);}
             });
  });
 });
@@ -692,8 +697,8 @@ app.post('/shareCount', function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log('app share upCount failed')}
-              else{console.log("upCount success for app share.");}
+              if(err){console.log('app share upCount failed'); res.json(300);}
+              else{console.log("upCount success for app share."); res.json(200);}
             });
  });
 });
@@ -711,8 +716,8 @@ app.post('/ticketCount', function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log('upCount failed')}
-              else{console.log("upCount success for : "+incSchoolName);}
+              if(err){console.log('upCount failed'); res.json(300);}
+              else{console.log("upCount success for : "+incSchoolName); res.json(200);}
             });
  });
 });
@@ -722,6 +727,7 @@ app.post('/followCount', function(req,res){
  User.findOne({userProfId: userProfId},function(err,user){
   if(err){
     console.log('error?: '+err);
+    res.json(300);
   }
   else{
     var count = user.following.length;
@@ -735,6 +741,7 @@ app.post('/notifications', function(req,res){
  User.findOne({userProfId: userProfId},function(err,user){
   if(err){
     console.log('error?: '+err);
+    res.json(300);
   }
   else{
     var notifications = user.notifications;
@@ -750,7 +757,9 @@ app.post('/userSchoolPost',function(req,res){
             },
             {upsert: true},
             function(err,res){
-              if(err){console.log(err.message)}
+              if(err){console.log(err.message);
+              res.json(300);
+              }
               else{
 
                   console.log("User School Updated for: "+req.body.userEmail);
