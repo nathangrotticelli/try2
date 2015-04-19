@@ -505,7 +505,7 @@ app.post('/picUpdate',function(req,res){
         console.log('herreer');
         // res.json({worked1: "user pic updated."});
          WatchSchema.update({'watchesIndex.watchLikes.username': req.body.username},
-            {'$set': {'watchesIndex.watchLikes.$.userPic': req.body.userPic}}, function(err,worked2) {
+            {'$set': {'$.userPic': req.body.userPic}}, function(err,worked2) {
               if(err){
                     console.log(err);
               }else{
