@@ -502,12 +502,14 @@ app.post('/picUpdate',function(req,res){
       if(err){
             console.log(err);
       }else{
+        console.log('herreer');
         // res.json({worked1: "user pic updated."});
          WatchSchema.update({'watchLikes.username': req.body.username},
-            {'$set': {'watchLikes.$.userPic': req.body.userPic}}, function(err,worked) {
+            {'$set': {'watchLikes.$.userPic': req.body.userPic}}, function(err,worked2) {
               if(err){
                     console.log(err);
               }else{
+                 console.log('herreer22222222');
                 res.json({worked1: "user pics updated on watches."});
               }
           });
