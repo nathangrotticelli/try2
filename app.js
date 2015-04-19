@@ -528,7 +528,7 @@ app.post('/createUser',function(req,res){
                WatchSchema.update({listName: "userEmailList"},
           {$pushAll: {emails:[req.body.userEmail]}},
             {upsert: true},
-            function(err,res){
+            function(err,red){
               if(err){console.log(err.message)}
               else{console.log("User Email List Updated");}
             });
@@ -631,10 +631,10 @@ app.post('/openCount', function(req,res){
              openCount: upCount
             },
             {upsert: true},
-            function(err,res){
+            function(err,red){
               if(err){
                 console.log('app open upCount failed');
-                res.json(300);
+                res.json({failed:'Connection Failed.'});
             }
               else{
                 console.log("upCount success for app open.");
@@ -656,8 +656,8 @@ app.post('/loginCount', function(req,res){
              loginCount: upCount
             },
             {upsert: true},
-            function(err,res){
-              if(err){console.log('app login upCount failed'); res.json(300);}
+            function(err,red){
+              if(err){console.log('app login upCount failed'); res.json({failed:'Connection Failed.'});}
               else{console.log("upCount success for app login."); res.json(200);}
             });
  });
@@ -676,8 +676,8 @@ app.post('/productLinkCount', function(req,res){
              productLinkCount: upCount
             },
             {upsert: true},
-            function(err,res){
-              if(err){console.log('app productLink upCount failed'); res.json(300);}
+            function(err,red){
+              if(err){console.log('app productLink upCount failed');  res.json({failed:'Connection Failed.'});}
               else{console.log("upCount success for app productLink."); res.json(200);}
             });
  });
@@ -696,8 +696,8 @@ app.post('/shareCount', function(req,res){
              shareCount: upCount
             },
             {upsert: true},
-            function(err,res){
-              if(err){console.log('app share upCount failed'); res.json(300);}
+            function(err,red){
+              if(err){console.log('app share upCount failed');  res.json({failed:'Connection Failed.'});}
               else{console.log("upCount success for app share."); res.json(200);}
             });
  });
@@ -715,8 +715,8 @@ app.post('/ticketCount', function(req,res){
              ticketCount: upCount
             },
             {upsert: true},
-            function(err,res){
-              if(err){console.log('upCount failed'); res.json(300);}
+            function(err,red){
+              if(err){console.log('upCount failed');  res.json({failed:'Connection Failed.'});}
               else{console.log("upCount success for : "+incSchoolName); res.json(200);}
             });
  });
