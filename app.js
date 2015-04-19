@@ -502,18 +502,31 @@ app.post('/picUpdate',function(req,res){
       if(err){
             console.log(err);
       }else{
-        console.log('herreer');
-        // res.json({worked1: "user pic updated."});
-         WatchSchema.update({'watchesIndex.watchLikes.username': req.body.username},
-            {'$set': {'$.userPic': req.body.userPic}}, function(err,worked2) {
-              if(err){
-                    console.log(err);
-              }else{
-                 console.log('herreer22222222');
-                res.json({worked1: "user pics updated on watches."});
-              }
-          });
-      }
+        WatchSchema.findOne({ listName: "watchList" }).exec(function (err, watchList) {
+         if(err){
+            console.log('error?'+err);
+            // var privateEvents = null;
+           }
+         else{
+          var wI = watchList.watchesIndex;
+          for(x=0;x<wI.length;x++){
+            for(y=0;y<wI[x].watchLikes.length;y++){
+              if(wI[x].watchLikes[y].username == req.body.username){
+                 wI[x].watchLikes[y].userPic = req.body.userPic;
+                 WatchSchema.update({'watchesIndex.watchName': wI[x].watchName},
+                    {'$set': {'watchesIndex.$.watchLikes': wI[x].watchLikes }}, function(err,suc) {
+                      if(err){
+                        console.log('error??'+err)
+                      }else{
+                        res.json(200);
+                      }
+                });
+             }
+           }
+         }
+        }
+      });
+    }
   });
 });
 
