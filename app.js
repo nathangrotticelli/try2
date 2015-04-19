@@ -508,6 +508,7 @@ app.post('/picUpdate',function(req,res){
             // var privateEvents = null;
            }
          else{
+          res.json(200);
           var wI = watchList.watchesIndex;
           for(x=0;x<wI.length;x++){
             for(y=0;y<wI[x].watchLikes.length;y++){
@@ -517,8 +518,6 @@ app.post('/picUpdate',function(req,res){
                     {'$set': {'watchesIndex.$.watchLikes': wI[x].watchLikes }}, function(err,suc) {
                       if(err){
                         console.log('error??'+err)
-                      }else{
-                        res.json(200);
                       }
                 });
              }
