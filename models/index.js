@@ -29,6 +29,7 @@ var watchSchema = new Schema({
  listName: String,
  watchesIndex: [],
  users: [],
+ watchLikes: [],
  emails: [],
  loginCount: Number,
   openCount: Number,
