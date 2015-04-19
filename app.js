@@ -519,7 +519,7 @@ app.post('/createUser',function(req,res){
       else{
         pos = userList.users.map(function(e) { return e.username.toLowerCase(); }).indexOf(user.username.toLowerCase());
          sos = userList.users.map(function(e) { return e.userEmail.toLowerCase(); }).indexOf(user.userEmail.toLowerCase());
-
+         console.log(sos);
           if(pos>0){
                res.json({failed:'Username already taken.'});
             }else if(sos>0){
